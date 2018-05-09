@@ -41,15 +41,54 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Admin.cs" />
+    <Compile Include="Entities\Ambito.cs" />
     <Compile Include="Entities\Cargo.cs" />
     <Compile Include="Entities\Foto.cs" />
+    <Compile Include="Entities\Funcionario.cs" />
+    <Compile Include="Entities\Indicador.cs" />
     <Compile Include="Entities\Loja.cs" />
+    <Compile Include="Entities\Meta.cs" />
+    <Compile Include="Entities\Rank.cs" />
+    <Compile Include="Entities\Resposta.cs" />
     <Compile Include="Entities\Usuario.cs" />
+    <Compile Include="Interfaces\Repositories\IAdminRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IAmbitoRepository.cs" />
+    <Compile Include="Interfaces\Repositories\ICargoRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IFotoRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IFuncionarioRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IIndicadorRepository.cs" />
+    <Compile Include="Interfaces\Repositories\ILojaRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IMetaRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IRankRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IRepositoryBase.cs" />
+    <Compile Include="Interfaces\Repositories\IRespostaRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IUsuarioRepository.cs" />
+    <Compile Include="Interfaces\Services\IAdminService.cs" />
+    <Compile Include="Interfaces\Services\IAmbitoService.cs" />
+    <Compile Include="Interfaces\Services\ICargoService.cs" />
+    <Compile Include="Interfaces\Services\IFotoService.cs" />
+    <Compile Include="Interfaces\Services\IFuncionarioService.cs" />
+    <Compile Include="Interfaces\Services\IIndicadorService.cs" />
+    <Compile Include="Interfaces\Services\ILojaService.cs" />
+    <Compile Include="Interfaces\Services\IMetaService.cs" />
+    <Compile Include="Interfaces\Services\IRankService.cs" />
+    <Compile Include="Interfaces\Services\IRespostaService.cs" />
+    <Compile Include="Interfaces\Services\IServiceBase.cs" />
+    <Compile Include="Interfaces\Services\IUsuarioService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AdminService.cs" />
+    <Compile Include="Services\AmbitoService.cs" />
+    <Compile Include="Services\CargoService.cs" />
+    <Compile Include="Services\FotoService.cs" />
+    <Compile Include="Services\FuncionarioService.cs" />
+    <Compile Include="Services\IndicadorService.cs" />
+    <Compile Include="Services\LojaService.cs" />
+    <Compile Include="Services\MetaService.cs" />
+    <Compile Include="Services\RankService.cs" />
+    <Compile Include="Services\RespostaService.cs" />
+    <Compile Include="Services\ServiceBase.cs" />
+    <Compile Include="Services\UsuarioService.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Interfaces\" />
-    <Folder Include="Services\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -40,7 +40,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminAppService.cs" />
+    <Compile Include="AmbitoAppService.cs" />
+    <Compile Include="AppServiceBase.cs" />
+    <Compile Include="CargoAppService.cs" />
+    <Compile Include="FotoAppService.cs" />
+    <Compile Include="FuncionarioAppService.cs" />
+    <Compile Include="IndicadorAppService.cs" />
+    <Compile Include="Interfaces\IAdminAppService.cs" />
+    <Compile Include="Interfaces\IAmbitoAppService.cs" />
+    <Compile Include="Interfaces\IAppServiceBase.cs" />
+    <Compile Include="Interfaces\ICargoAppService.cs" />
+    <Compile Include="Interfaces\IFotoAppService.cs" />
+    <Compile Include="Interfaces\IFuncionarioAppService.cs" />
+    <Compile Include="Interfaces\IIndicadorAppService.cs" />
+    <Compile Include="Interfaces\ILojaAppService.cs" />
+    <Compile Include="Interfaces\IMetaAppService.cs" />
+    <Compile Include="Interfaces\IRankAppService.cs" />
+    <Compile Include="Interfaces\IRespostaAppService.cs" />
+    <Compile Include="Interfaces\IUsuarioAppService.cs" />
+    <Compile Include="LojaAppService.cs" />
+    <Compile Include="MetaAppService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RankAppService.cs" />
+    <Compile Include="RespostaAppService.cs" />
+    <Compile Include="UsuarioAppService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GerenciarEquipe.Domain\GerenciarEquipe.Domain.csproj">
+      <Project>{07f80079-7b55-4a20-8686-360ba6e5c562}</Project>
+      <Name>GerenciarEquipe.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

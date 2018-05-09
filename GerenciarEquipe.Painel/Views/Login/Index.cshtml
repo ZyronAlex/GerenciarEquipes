@@ -1,0 +1,68 @@
+﻿@model GerenciarEquipe.Painel.Models.UsuarioModel
+@{
+    Layout = "";
+    ViewBag.Title = "Login";
+}
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Biblioteca</title>
+    <meta name="description" content="">
+    <!-- Theme initialization -->
+    @Styles.Render("~/Content/ModalAdmincss")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="auth">
+        <div class="auth-container">
+            <div class="card">
+                <header class="auth-header">
+                    <h1 class="auth-title">
+                        @*<div class="logo">
+                            </div>*@
+                        Biblioteca
+                    </h1>
+                </header>
+                <div class="auth-content">
+                    @using (Html.BeginForm("Index", "Login", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <form class="form-horizontal" role="form" id="form">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Email)
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control underlined", @placeholder = "Seu E-mail", @type = "E-mail" } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Senha)
+                                @Html.EditorFor(model => model.Senha, new { htmlAttributes = new { @class = "form-control underlined", @placeholder = "Seu Senha", @type = "password" } })
+                                @Html.ValidationMessageFor(model => model.Senha, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                @if (ViewBag.Mensagem != null)
+                                {
+                                    <label style="color: red;font-size:small">@ViewBag.Mensagem</label>
+                                }
+                            </div>
+                            <div class="form-group"> <button type="submit" class="btn btn-block btn-primary">Login</button> </div>
+                        </form>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Reference block for JS -->
+    <div class="ref" id="ref">
+        <div class="color-primary"></div>
+        <div class="chart">
+            <div class="color-primary"></div>
+            <div class="color-secondary"></div>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/ModalAdminjs")
+</body>
+</html>

@@ -50,16 +50,43 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\GerenciarEquipeModelContext.cs" />
+    <Compile Include="EntityConfig\AdminConfig.cs" />
+    <Compile Include="EntityConfig\AmbitoConfig.cs" />
+    <Compile Include="EntityConfig\CargoConfig.cs" />
+    <Compile Include="EntityConfig\FotoConfig.cs" />
+    <Compile Include="EntityConfig\FuncionarioConfig.cs" />
+    <Compile Include="EntityConfig\IndicadorConfig.cs" />
+    <Compile Include="EntityConfig\LojaConfig.cs" />
+    <Compile Include="EntityConfig\MetaConfig.cs" />
+    <Compile Include="EntityConfig\RankConfig.cs" />
+    <Compile Include="EntityConfig\RespostaConfig.cs" />
+    <Compile Include="EntityConfig\UsuarioConfig.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\AdminRepository.cs" />
+    <Compile Include="Repositories\AmbitoRepository.cs" />
+    <Compile Include="Repositories\CargoRepository.cs" />
+    <Compile Include="Repositories\FotoRepository.cs" />
+    <Compile Include="Repositories\FuncionarioRepository.cs" />
+    <Compile Include="Repositories\IndicadorRepository.cs" />
+    <Compile Include="Repositories\LojaRepository.cs" />
+    <Compile Include="Repositories\MetaRepository.cs" />
+    <Compile Include="Repositories\RankRepository.cs" />
+    <Compile Include="Repositories\RepositoryBase.cs" />
+    <Compile Include="Repositories\RespostaRepository.cs" />
+    <Compile Include="Repositories\UsuarioRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <Compile Include="EntityConfig\CustomSchemaConvention.cs" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Migrations\" />
-    <Folder Include="Repositories\" />
+    <ProjectReference Include="..\GerenciarEquipe.Domain\GerenciarEquipe.Domain.csproj">
+      <Project>{07f80079-7b55-4a20-8686-360ba6e5c562}</Project>
+      <Name>GerenciarEquipe.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
