@@ -15,33 +15,12 @@
         var themeSettings = (localStorage.getItem('themeSettings')) ? JSON.parse(localStorage.getItem('themeSettings')) : {};
         var themeName = themeSettings.themeName || '';
         if (themeName) {
-            switch (themeName) {
-                case "blue":
-                    @Styles.Render("~/Content/ModalAdminAppBlue")
-                    break;
-                 case "green":
-                    @Styles.Render("~/Content/ModalAdminAppGreen")
-                    break;
-                 case "orange":
-                    @Styles.Render("~/Content/ModalAdminAppOrange")
-                    break;
-                 case "purple":
-                    @Styles.Render("~/Content/ModalAdminAppPurple")
-                    break;
-                 case "red":
-                    @Styles.Render("~/Content/ModalAdminAppRed")
-                    break;
-                 case "seagreen":
-                    @Styles.Render("~/Content/ModalAdminAppSeaGreen")
-                    break;
-                default:
-                    @Styles.Render("~/Content/ModalAdminApp")
-                    break;
-            }
+            document.write('<link rel="stylesheet" id="theme-style" href="~Content/app-' +themeName + '.css">');
         } else {
-            @Styles.Render("~/Content/ModalAdminApp")
+            document.write('<link rel="stylesheet" id="theme-style" href="~Content/app.css">');
         }
-    </script>
+    </script>   
+    @Styles.Render("~/Content/ModalAdminApp")
 </head>
 <body>
     @{
@@ -196,11 +175,12 @@
             <div class="sidebar-overlay" id="sidebar-overlay"></div>
             <div class="sidebar-mobile-menu-handle" id="sidebar-mobile-menu-handle"></div>
             <div class="mobile-menu-handle"></div>
+            @RenderBody()
             <footer class="footer">
                 <div class="footer-block buttons">
                 </div>
                 <div class="footer-block author">
-                    Create by 
+                    Create by
                     <ul>
                         <li> created by <a href="https://github.com/Belosoftwares" target="_blank"><b>BeloSoftwares</b><i> ideas que funcionanm</i></a> </li>
                         <li> <p>&copy; @DateTime.Now.Year</p> </li>

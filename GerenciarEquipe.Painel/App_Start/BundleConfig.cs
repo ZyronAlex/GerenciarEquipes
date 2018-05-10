@@ -40,7 +40,7 @@ namespace GerenciarEquipe.Painel
                     "~/Content/site.css",
                     "~/Content/datatables.min.css"));
 
-            bundles.Add(new StyleBundle("~/Content/ModalAdminBlue").Include(
+            bundles.Add(new StyleBundle("~/Content/ModalAdminAppBlue").Include(
                     "~/Content/vendor.css",
                     "~/Content/app-blue.css",
                     "~/Content/site.css",

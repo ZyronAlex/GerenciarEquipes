@@ -27,7 +27,8 @@ namespace GerenciarEquipe.Painel.Controllers
         public ActionResult index([Bind(Include = "Email,Senha")] LoginModel loginModel)
         {
             var funcionario = new FuncionarioModel(loginModel);
-            var usuario = Mapper.Map<FuncionarioModel, Usuario>(funcionario);
+            //var usuario = Mapper.Map<FuncionarioModel, Usuario>(funcionario);
+            UsuarioModel usuario = funcionario;
             Session["usuario"] = usuario;
             return RedirectToAction("index", "Home");
 
