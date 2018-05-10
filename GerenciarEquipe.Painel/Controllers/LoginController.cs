@@ -24,10 +24,11 @@ namespace GerenciarEquipe.Painel.Controllers
         }
 
         [HttpPost]
-        public ActionResult index([Bind(Include = "Email,Senha")] UsuarioModel loginModel)
+        public ActionResult index([Bind(Include = "Email,Senha")] LoginModel loginModel)
         {
-            var usuario = Mapper.Map<UsuarioModel, Usuario>(loginModel);
-            Session["usuario"] = loginModel;
+            var funcionario = new FuncionarioModel(loginModel);
+            var usuario = Mapper.Map<FuncionarioModel, Usuario>(funcionario);
+            Session["usuario"] = usuario;
             return RedirectToAction("index", "Home");
 
             //if (usuarioAppService.Login(usuario))

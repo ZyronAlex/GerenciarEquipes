@@ -18,7 +18,9 @@ namespace GerenciarEquipe.Painel.AutoMapper
             CreateMap<Meta, MetaModel>();
             CreateMap<Rank, RankModel>();
             CreateMap<Resposta, RespostaModel>();
-            CreateMap<Usuario, UsuarioModel>();
+            CreateMap<Usuario, UsuarioModel>()
+                .Include<Usuario,AdminModel>()
+                .Include<Usuario,FuncionarioModel>();
         }
     }
 }

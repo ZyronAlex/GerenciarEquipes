@@ -10,6 +10,14 @@ namespace GerenciarEquipe.Painel.Models
         {
             ranks = new HashSet<RankModel>();
             respostas = new HashSet<RespostaModel>();
+        }  
+
+        public FuncionarioModel(LoginModel loginModel)
+        {
+            this.email = loginModel.email;
+            this.senha = loginModel.senha;
+            ranks = new HashSet<RankModel>();
+            respostas = new HashSet<RespostaModel>();
         }
 
         [Key]

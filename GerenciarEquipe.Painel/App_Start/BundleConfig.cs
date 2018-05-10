@@ -22,7 +22,7 @@ namespace GerenciarEquipe.Painel
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/ModalAdminjs")
+            bundles.Add(new ScriptBundle("~/bundles/ModalAdminJS")
                      .Include("~/Scripts/vendor.js")
                      .Include("~/Scripts/app.js")
                      .Include("~/Scripts/image.js")
@@ -31,12 +31,49 @@ namespace GerenciarEquipe.Painel
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css", 
+                      "~/Content/datatables.min.css"));
 
-            bundles.Add(new StyleBundle("~/Content/ModalAdmincss").Include(
+            bundles.Add(new StyleBundle("~/Content/ModalAdminApp").Include(
                     "~/Content/vendor.css",
                     "~/Content/app.css",
-                    "~/Content/custom.css",
+                    "~/Content/site.css",
+                    "~/Content/datatables.min.css"));
+
+            bundles.Add(new StyleBundle("~/Content/ModalAdminBlue").Include(
+                    "~/Content/vendor.css",
+                    "~/Content/app-blue.css",
+                    "~/Content/site.css",
+                    "~/Content/datatables.min.css"));
+
+            bundles.Add(new StyleBundle("~/Content/ModalAdminAppGreen").Include(
+                    "~/Content/vendor.css",
+                    "~/Content/app-green.css",
+                    "~/Content/site.css",
+                    "~/Content/datatables.min.css"));
+
+            bundles.Add(new StyleBundle("~/Content/ModalAdminAppOrange").Include(
+                    "~/Content/vendor.css",
+                    "~/Content/app-orange.css",
+                    "~/Content/site.css",
+                    "~/Content/datatables.min.css"));
+
+            bundles.Add(new StyleBundle("~/Content/ModalAdminAppPurple").Include(
+                    "~/Content/vendor.css",
+                    "~/Content/app-purple.css",
+                    "~/Content/site.css",
+                    "~/Content/datatables.min.css"));
+
+            bundles.Add(new StyleBundle("~/Content/ModalAdminAppRed").Include(
+                    "~/Content/vendor.css",
+                    "~/Content/app-red.css",
+                    "~/Content/site.css",
+                    "~/Content/datatables.min.css"));
+
+            bundles.Add(new StyleBundle("~/Content/ModalAdminAppSeaGreen").Include(
+                    "~/Content/vendor.css",
+                    "~/Content/app-seagreen.css",
+                    "~/Content/site.css",
                     "~/Content/datatables.min.css"));
         }
     }

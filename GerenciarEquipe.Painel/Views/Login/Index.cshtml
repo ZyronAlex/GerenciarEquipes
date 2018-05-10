@@ -1,29 +1,33 @@
-﻿@model GerenciarEquipe.Painel.Models.UsuarioModel
+﻿@model GerenciarEquipe.Painel.Models.LoginModel
 @{
     Layout = "";
     ViewBag.Title = "Login";
 }
-<html class="no-js" lang="en">
+<!doctype html>
+<html class="no-js" lang="pt-BR">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Biblioteca</title>
+    <title> @ViewBag.Title - @System.Configuration.ConfigurationManager.AppSettings["APP_NAME"] </title>
     <meta name="description" content="">
-    <!-- Theme initialization -->
-    @Styles.Render("~/Content/ModalAdmincss")
-    @Scripts.Render("~/bundles/modernizr")
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    @Styles.Render("~/Content/ModalAdminApp")
 </head>
+
 <body>
     <div class="auth">
         <div class="auth-container">
             <div class="card">
                 <header class="auth-header">
                     <h1 class="auth-title">
-                        @*<div class="logo">
-                            </div>*@
-                        Biblioteca
+                        <div class="logo">
+                            <span class="l l1"></span>
+                            <span class="l l2"></span>
+                            <span class="l l3"></span>
+                            <span class="l l4"></span>
+                            <span class="l l5"></span>
+                        </div> @System.Configuration.ConfigurationManager.AppSettings["APP_NAME"]
                     </h1>
                 </header>
                 <div class="auth-content">
@@ -33,19 +37,19 @@
                         <form class="form-horizontal" role="form" id="form">
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             <div class="form-group">
-                                @Html.LabelFor(model => model.Email)
-                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control underlined", @placeholder = "Seu E-mail", @type = "E-mail" } })
-                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                @Html.LabelFor(model => model.email)
+                                @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control underlined", @placeholder = "Seu E-mail", @type = "E-mail" } })
+                                @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-group">
-                                @Html.LabelFor(model => model.Senha)
-                                @Html.EditorFor(model => model.Senha, new { htmlAttributes = new { @class = "form-control underlined", @placeholder = "Seu Senha", @type = "password" } })
-                                @Html.ValidationMessageFor(model => model.Senha, "", new { @class = "text-danger" })
+                                @Html.LabelFor(model => model.senha)
+                                @Html.EditorFor(model => model.senha, new { htmlAttributes = new { @class = "form-control underlined", @placeholder = "Seu Senha", @type = "password" } })
+                                @Html.ValidationMessageFor(model => model.senha, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-group">
                                 @if (ViewBag.Mensagem != null)
                                 {
-                                    <label style="color: red;font-size:small">@ViewBag.Mensagem</label>
+                                    <span class="fa fa-times form-control-feedback has-error">@ViewBag.Mensagem</span>
                                 }
                             </div>
                             <div class="form-group"> <button type="submit" class="btn btn-block btn-primary">Login</button> </div>
@@ -63,6 +67,6 @@
             <div class="color-secondary"></div>
         </div>
     </div>
-    @Scripts.Render("~/bundles/ModalAdminjs")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/ModalAdminJS")
 </body>
-</html>
