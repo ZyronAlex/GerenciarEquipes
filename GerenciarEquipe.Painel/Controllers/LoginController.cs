@@ -18,8 +18,7 @@ namespace GerenciarEquipe.Painel.Controllers
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult Index()
         {
-            Session.Abandon();
-            Session.Clear();
+            Session["Usuario"] = null;
             return View();
         }
 

@@ -15,5 +15,11 @@ namespace GerenciarEquipe.Painel.Controllers
                 return RedirectToAction("index", "login");
             return View();
         }
+
+        public ActionResult SetColor(string themeName)
+        {
+            Session["ThemeName"] = themeName;
+            return View("index");
+        }
     }
 }

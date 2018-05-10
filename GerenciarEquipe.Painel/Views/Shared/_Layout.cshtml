@@ -2,7 +2,6 @@
 
 <!doctype html>
 <html class="no-js" lang="pt-BR">
-<base href="@Url.Content("~/")" />
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -11,16 +10,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <!-- Place favicon.ico in the root directory -->
-    <script>
-        var themeSettings = (localStorage.getItem('themeSettings')) ? JSON.parse(localStorage.getItem('themeSettings')) : {};
-        var themeName = themeSettings.themeName || '';
-        if (themeName) {
-            document.write('<link rel="stylesheet" id="theme-style" href="~Content/app-' +themeName + '.css">');
-        } else {
-            document.write('<link rel="stylesheet" id="theme-style" href="~Content/app.css">');
+    @*<script>
+            var themeSettings = (localStorage.getItem('themeSettings')) ? JSON.parse(localStorage.getItem('themeSettings')) : {};
+            var themeName = themeSettings.themeName || '';
+            if (themeName) {
+                document.write('<link rel="stylesheet" id="theme-style" href="~/Content/app-' +themeName + '.css">');
+            } else {
+                document.write('<link rel="stylesheet" id="theme-style" href="~/Content/app.css">');
+            }
+        </script>*@
+    @{
+        var themeName = Session["ThemeName"];
+
+        if (themeName != null)
+        {
+            @Styles.Render("~/Content/ModalAdminApp" + themeName)
         }
-    </script>   
-    @Styles.Render("~/Content/ModalAdminApp")
+        else
+        {
+
+            @Styles.Render("~/Content/ModalAdminApp")
+        }
+
+    }
+
 </head>
 <body>
     @{
@@ -90,7 +103,7 @@
                     <nav class="menu">
                         <ul class="sidebar-menu metismenu" id="sidebar-menu">
                             <li class="active">
-                                <a href="@Url.Action("Index", "Login")">
+                                <a href="@Url.Action("Index", "Home")">
                                     <i class="fa fa-home"></i> Dashboard
                                 </a>
                             </li>
@@ -144,22 +157,22 @@
                                     <div class="customize-item">
                                         <ul class="customize-colors">
                                             <li>
-                                                <span class="color-item color-red" data-theme="red"></span>
+                                                <span class="color-item color-red" data-theme="red" data-themeName="Red"></span>
                                             </li>
                                             <li>
-                                                <span class="color-item color-orange" data-theme="orange"></span>
+                                                <span class="color-item color-orange" data-theme="orange" data-themeName="Orange"></span>
                                             </li>
                                             <li>
-                                                <span class="color-item color-green active" data-theme=""></span>
+                                                <span class="color-item color-green active" data-theme="" data-themeName="Green"></span>
                                             </li>
                                             <li>
-                                                <span class="color-item color-seagreen" data-theme="seagreen"></span>
+                                                <span class="color-item color-seagreen" data-theme="seagreen" data-themeName="SeaGreen"></span>
                                             </li>
                                             <li>
-                                                <span class="color-item color-blue" data-theme="blue"></span>
+                                                <span class="color-item color-blue" data-theme="blue" data-themeName="Blue"></span>
                                             </li>
                                             <li>
-                                                <span class="color-item color-purple" data-theme="purple"></span>
+                                                <span class="color-item color-purple" data-theme="purple" data-themeName="Purple"></span>
                                             </li>
                                         </ul>
                                     </div>
@@ -180,7 +193,6 @@
                 <div class="footer-block buttons">
                 </div>
                 <div class="footer-block author">
-                    Create by
                     <ul>
                         <li> created by <a href="https://github.com/Belosoftwares" target="_blank"><b>BeloSoftwares</b><i> ideas que funcionanm</i></a> </li>
                         <li> <p>&copy; @DateTime.Now.Year</p> </li>
@@ -271,5 +283,13 @@
     </div>
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/ModalAdminJS")
+    <script>
+            $(document).ready(function () {
+                $(".color-item").click(function () {
+                    $.post('@Url.Action("SetColor", "Home")', { themeName: $(this).data('themename') });
+                    location.reload();
+                });
+            });
+    </script>
 </body>
 </html>

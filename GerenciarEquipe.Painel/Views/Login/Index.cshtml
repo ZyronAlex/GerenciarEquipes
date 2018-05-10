@@ -12,9 +12,20 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    @Styles.Render("~/Content/ModalAdminApp")
-</head>
+    @{
+        var themeName = Session["ThemeName"];
 
+        if (themeName != null)
+        {
+            @Styles.Render("~/Content/ModalAdminApp" + themeName)
+        }
+        else
+        {
+
+            @Styles.Render("~/Content/ModalAdminApp")
+        }
+    }
+</head>
 <body>
     <div class="auth">
         <div class="auth-container">
@@ -70,3 +81,4 @@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/ModalAdminJS")
 </body>
+</html>

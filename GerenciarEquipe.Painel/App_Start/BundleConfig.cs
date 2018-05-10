@@ -25,7 +25,6 @@ namespace GerenciarEquipe.Painel
             bundles.Add(new ScriptBundle("~/bundles/ModalAdminJS")
                      .Include("~/Scripts/vendor.js")
                      .Include("~/Scripts/app.js")
-                     .Include("~/Scripts/image.js")
                      .Include("~/Scripts/modal.js")
                      .Include("~/Scripts/datatables.min.js"));
 
@@ -33,7 +32,11 @@ namespace GerenciarEquipe.Painel
                       "~/Content/bootstrap.css",
                       "~/Content/site.css", 
                       "~/Content/datatables.min.css"));
-
+            
+                 bundles.Add(new StyleBundle("~/Content/ModalAdminCustom").Include(
+                    "~/Content/vendor.css",
+                    "~/Content/site.css",
+                    "~/Content/datatables.min.css"));
             bundles.Add(new StyleBundle("~/Content/ModalAdminApp").Include(
                     "~/Content/vendor.css",
                     "~/Content/app.css",
