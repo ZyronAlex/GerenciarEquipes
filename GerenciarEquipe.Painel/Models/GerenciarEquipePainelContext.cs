@@ -19,6 +19,6 @@ namespace GerenciarEquipe.Painel.Models
         {
         }
 
-        public System.Data.Entity.DbSet<GerenciarEquipe.Painel.Models.AdminModel> UsuarioModels { get; set; }
+        public System.Data.Entity.DbSet<GerenciarEquipe.Painel.Models.FuncionarioModel> UsuarioModels { get; set; }
     }
 }

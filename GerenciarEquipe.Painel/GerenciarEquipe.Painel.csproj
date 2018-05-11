@@ -167,9 +167,13 @@
     <Compile Include="AutoMapper\DomainToViewModelMappingProfile.cs" />
     <Compile Include="AutoMapper\ViewModelToDomainMappingProfile.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\CargoController.cs" />
     <Compile Include="Controllers\EquipeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IndicadorController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\LojaController.cs" />
+    <Compile Include="Controllers\MetaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -462,6 +466,27 @@
     <Content Include="Views\Equipe\Delete.cshtml" />
     <Content Include="Views\Equipe\Edit.cshtml" />
     <Content Include="Views\Equipe\Index.cshtml" />
+    <Content Include="Views\Cargo\Create.cshtml" />
+    <Content Include="Views\Cargo\Delete.cshtml" />
+    <Content Include="Views\Cargo\Details.cshtml" />
+    <Content Include="Views\Cargo\Edit.cshtml" />
+    <Content Include="Views\Cargo\Index.cshtml" />
+    <Content Include="Views\Meta\Create.cshtml" />
+    <Content Include="Views\Meta\Delete.cshtml" />
+    <Content Include="Views\Meta\Details.cshtml" />
+    <Content Include="Views\Meta\Edit.cshtml" />
+    <Content Include="Views\Meta\Index.cshtml" />
+    <Content Include="Views\Indicador\Create.cshtml" />
+    <Content Include="Views\Indicador\Delete.cshtml" />
+    <Content Include="Views\Indicador\Details.cshtml" />
+    <Content Include="Views\Indicador\Edit.cshtml" />
+    <Content Include="Views\Indicador\Index.cshtml" />
+    <Content Include="Views\Loja\Create.cshtml" />
+    <Content Include="Views\Loja\Delete.cshtml" />
+    <Content Include="Views\Loja\Details.cshtml" />
+    <Content Include="Views\Loja\Edit.cshtml" />
+    <Content Include="Views\Loja\Index.cshtml" />
+    <Content Include="Views\Equipe\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

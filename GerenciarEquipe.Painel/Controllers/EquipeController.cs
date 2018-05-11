@@ -1,9 +1,13 @@
-﻿using GerenciarEquipe.Application.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using GerenciarEquipe.Application.Interfaces;
+using GerenciarEquipe.Painel.Models;
 
 namespace GerenciarEquipe.Painel.Controllers
 {
@@ -19,79 +23,110 @@ namespace GerenciarEquipe.Painel.Controllers
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult Index()
         {
-            return View();
+            if (Session["usuario"] == null)
+                return RedirectToAction("index", "login");
+            return View(new List<FuncionarioModel>());
         }
 
         // GET: Equipe/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(long? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            FuncionarioModel funcionarioModel = null;
+            if (funcionarioModel == null)
+            {
+                return HttpNotFound();
+            }
+            return View(funcionarioModel);
         }
 
         // GET: Equipe/Create
         public ActionResult Create()
         {
+            ViewBag.Genero = new SelectList(new List<string>(new string[]{"Masculino","Femninio"}));
+            ViewBag.Turno = new SelectList(new List<string>(new string[] {"Matutino","Vespertino","Noturno","Sembrol"}));
+            ViewBag.Incicador = new SelectList(new List<IndicadorModel>(), "id", "nome");
+
             return View();
         }
 
         // POST: Equipe/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "id,nome,email,senha,ativo,create_at,update_at,matricula,nascimento,genero,cidade,estado,turno,id_cargo,id_loja")] FuncionarioModel funcionarioModel)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
-
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+
+            return View(funcionarioModel);
         }
 
         // GET: Equipe/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(long? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            FuncionarioModel funcionarioModel = null;
+            if (funcionarioModel == null)
+            {
+                return HttpNotFound();
+            }
+            return View(funcionarioModel);
         }
 
         // POST: Equipe/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "id,nome,email,senha,ativo,create_at,update_at,matricula,nascimento,genero,cidade,estado,turno,id_cargo,id_loja")] FuncionarioModel funcionarioModel)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
-
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return View(funcionarioModel);
         }
 
         // GET: Equipe/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(long? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            FuncionarioModel funcionarioModel = null;
+            if (funcionarioModel == null)
+            {
+                return HttpNotFound();
+            }
+            return View(funcionarioModel);
         }
 
         // POST: Equipe/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(long id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            FuncionarioModel funcionarioModel = null;
+            return RedirectToAction("Index");
+        }
 
-                return RedirectToAction("Index");
-            }
-            catch
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
             {
-                return View();
             }
+            base.Dispose(disposing);
         }
     }
 }

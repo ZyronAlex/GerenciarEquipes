@@ -11,110 +11,109 @@ using GerenciarEquipe.Painel.Models;
 
 namespace GerenciarEquipe.Painel.Controllers
 {
-    public class AdminController : Controller
+    public class CargoController : Controller
     {
-        private readonly IAdminAppService adminAppService;
-        public AdminController(IAdminAppService adminAppService)
+        private readonly ICargoAppService cargoAppService;
+        public CargoController(ICargoAppService cargoAppService)
         {
-            this.adminAppService = adminAppService;
+            this.cargoAppService = cargoAppService;
         }
 
-        // GET: Admin
+        // GET: Cargo
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult Index()
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("index", "login");
-            return View(new List<AdminModel>());
+            return View(new List<CargoModel>());
         }
 
-        // GET: Admin/Details/5
+        // GET: Cargo/Details/5
         public ActionResult Details(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AdminModel adminModel = null;
-            if (adminModel == null)
+            CargoModel cargoModel = null;
+            if (cargoModel == null)
             {
                 return HttpNotFound();
             }
-            return View(adminModel);
+            return View(cargoModel);
         }
 
-        // GET: Admin/Create
+        // GET: Cargo/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Admin/Create
+        // POST: Cargo/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,nome,email,senha,ativo,create_at,update_at,permissoes")] AdminModel adminModel)
+        public ActionResult Create([Bind(Include = "id,nome,descicao,permissoes")] CargoModel cargoModel)
         {
             if (ModelState.IsValid)
             {
-                
                 return RedirectToAction("Index");
             }
 
-            return View(adminModel);
+            return View(cargoModel);
         }
 
-        // GET: Admin/Edit/5
+        // GET: Cargo/Edit/5
         public ActionResult Edit(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AdminModel adminModel = null;
-            if (adminModel == null)
+            CargoModel cargoModel = null;
+            if (cargoModel == null)
             {
                 return HttpNotFound();
             }
-            return View(adminModel);
+            return View(cargoModel);
         }
 
-        // POST: Admin/Edit/5
+        // POST: Cargo/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,nome,email,senha,ativo,create_at,update_at,permissoes")] AdminModel adminModel)
+        public ActionResult Edit([Bind(Include = "id,nome,descicao,permissoes")] CargoModel cargoModel)
         {
             if (ModelState.IsValid)
             {
                 return RedirectToAction("Index");
             }
-            return View(adminModel);
+            return View(cargoModel);
         }
 
-        // GET: Admin/Delete/5
+        // GET: Cargo/Delete/5
         public ActionResult Delete(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AdminModel adminModel = null;
-            if (adminModel == null)
+            CargoModel cargoModel = null;
+            if (cargoModel == null)
             {
                 return HttpNotFound();
             }
-            return View(adminModel);
+            return View(cargoModel);
         }
 
-        // POST: Admin/Delete/5
+        // POST: Cargo/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(long id)
         {
-            AdminModel adminModel = null;
+            CargoModel cargoModel = null;
             return RedirectToAction("Index");
         }
 

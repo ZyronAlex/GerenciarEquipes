@@ -21,7 +21,7 @@ namespace GerenciarEquipe.Painel.Models
         }
 
         [Key]
-        public long id { get; set; }
+        public long id { get; set; }        
 
         [Required(ErrorMessage = "Preencha o campo Matricula")]
         [Display(Name = "Matricula")]

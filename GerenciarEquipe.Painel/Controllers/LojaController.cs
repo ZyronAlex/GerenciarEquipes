@@ -11,110 +11,109 @@ using GerenciarEquipe.Painel.Models;
 
 namespace GerenciarEquipe.Painel.Controllers
 {
-    public class AdminController : Controller
+    public class LojaController : Controller
     {
-        private readonly IAdminAppService adminAppService;
-        public AdminController(IAdminAppService adminAppService)
+        private readonly ILojaAppService lojaAppService;
+        public LojaController(ILojaAppService lojaAppService)
         {
-            this.adminAppService = adminAppService;
+            this.lojaAppService = lojaAppService;
         }
 
-        // GET: Admin
+        // GET: Loja
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult Index()
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("index", "login");
-            return View(new List<AdminModel>());
+            return View(new List<LojaModel>());
         }
 
-        // GET: Admin/Details/5
+        // GET: Loja/Details/5
         public ActionResult Details(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AdminModel adminModel = null;
-            if (adminModel == null)
+            LojaModel lojaModel = null;
+            if (lojaModel == null)
             {
                 return HttpNotFound();
             }
-            return View(adminModel);
+            return View(lojaModel);
         }
 
-        // GET: Admin/Create
+        // GET: Loja/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Admin/Create
+        // POST: Loja/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,nome,email,senha,ativo,create_at,update_at,permissoes")] AdminModel adminModel)
+        public ActionResult Create([Bind(Include = "id,nome,email,endereco,telefone,create_at,update_at")] LojaModel lojaModel)
         {
             if (ModelState.IsValid)
             {
-                
                 return RedirectToAction("Index");
             }
 
-            return View(adminModel);
+            return View(lojaModel);
         }
 
-        // GET: Admin/Edit/5
+        // GET: Loja/Edit/5
         public ActionResult Edit(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AdminModel adminModel = null;
-            if (adminModel == null)
+            LojaModel lojaModel = null;
+            if (lojaModel == null)
             {
                 return HttpNotFound();
             }
-            return View(adminModel);
+            return View(lojaModel);
         }
 
-        // POST: Admin/Edit/5
+        // POST: Loja/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,nome,email,senha,ativo,create_at,update_at,permissoes")] AdminModel adminModel)
+        public ActionResult Edit([Bind(Include = "id,nome,email,endereco,telefone,create_at,update_at")] LojaModel lojaModel)
         {
             if (ModelState.IsValid)
             {
                 return RedirectToAction("Index");
             }
-            return View(adminModel);
+            return View(lojaModel);
         }
 
-        // GET: Admin/Delete/5
+        // GET: Loja/Delete/5
         public ActionResult Delete(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AdminModel adminModel = null;
-            if (adminModel == null)
+            LojaModel lojaModel = null;
+            if (lojaModel == null)
             {
                 return HttpNotFound();
             }
-            return View(adminModel);
+            return View(lojaModel);
         }
 
-        // POST: Admin/Delete/5
+        // POST: Loja/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(long id)
         {
-            AdminModel adminModel = null;
+            LojaModel lojaModel = null;
             return RedirectToAction("Index");
         }
 

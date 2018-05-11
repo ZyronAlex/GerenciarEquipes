@@ -1,70 +1,86 @@
 ﻿@model IEnumerable<GerenciarEquipe.Painel.Models.AdminModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Admin";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<article class="content items-list-page">
+    <div class="title-search-block">
+        <div class="title-block">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3 class="title">
+                        Admin
+                        @Html.ActionLink("Adicionar", "Create", new object { }, new { @class = "btn btn-primary btn-sm rounded-s" })
+                    </h3>
+                    <p class="title-description"> Lista de Admin </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card items">
+        <ul class="item-list striped tabela">
+            <li class="item item-list-header ">
+                <div class="item-row">
+                    <div class="item-col fixed item-col-check">
+                        <label class="item-check" id="select-all-items">
+                            <span></span>
+                        </label>
+                    </div>
+                    <div class="item-col item-col-header item-col-title">
+                        <div>
+                            <span>@Html.DisplayNameFor(model => model.nome)</span>
+                        </div>
+                    </div>
+                    <div class="item-col item-col-header item-col-title">
+                        <div>
+                            <span>@Html.DisplayNameFor(model => model.email)</span>
+                        </div>
+                    </div>
+                    <div class="item-col item-col-header fixed item-col-actions-dropdown"></div>
+                </div>
+            </li>
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.nome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.senha)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ativo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.create_at)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.update_at)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.permissoes)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.senha)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ativo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.create_at)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.update_at)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.permissoes)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
-}
-
-</table>
+            @foreach (var item in Model)
+            {
+                <li class='item'>
+                    <div class='item-row'>
+                        <div class='item-col fixed item-col-check'>
+                            <label class='item-check' id='select-all-items'>
+                                <span></span>
+                            </label>
+                        </div>
+                        <div class="item-col fixed pull-left item-col-title">
+                            <div class="item-heading">@Html.DisplayNameFor(model => model.nome)</div>
+                            <div>
+                                <a href="" class="">
+                                    <h4 class="item-title">@Html.DisplayNameFor(model => model.email)</h4>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="item-col fixed pull-left item-col-title">
+                            <div class="item-heading">@Html.DisplayNameFor(model => model.nome)</div>
+                            <div>
+                                <a href="" class="">
+                                    <h4 class="item-title">@Html.DisplayNameFor(model => model.nome)</h4>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="item-col fixed item-col-actions-dropdown">
+                            <div class="item-actions-dropdown">
+                                <a class="remove" href="@Url.Action("Delete", new { id = item.id})" data-id="" data-toggle="modal" data-target="#confirm-modal">
+                                    <i class="fa fa-trash-o"></i>
+                                </a>
+                            </div>
+                            <div class="item-actions-dropdown">
+                                <a class="edit" href="@Url.Action("Edit", new { id = item.id })">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+</article>

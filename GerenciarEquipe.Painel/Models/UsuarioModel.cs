@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
 namespace GerenciarEquipe.Painel.Models
 {
@@ -16,6 +14,10 @@ namespace GerenciarEquipe.Painel.Models
 
         [Key]
         public long id { get; set; }
+
+        [DataType(DataType.Upload)]
+        [ScaffoldColumn(true)]
+        public HttpPostedFileBase foto { get; set; }
 
         [Required(ErrorMessage = "Preencha o campo Nome")]
         [MaxLength(300, ErrorMessage = "Máximo caracteres")]

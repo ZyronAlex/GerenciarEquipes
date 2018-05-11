@@ -1,7 +1,7 @@
-﻿@model IEnumerable<GerenciarEquipe.Painel.Models.FuncionarioModel>
+﻿@model IEnumerable<GerenciarEquipe.Painel.Models.IndicadorModel>
 
 @{
-    ViewBag.Title = "Funcionario";
+    ViewBag.Title = "Indicador";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -11,10 +11,10 @@
             <div class="row">
                 <div class="col-md-6">
                     <h3 class="title">
-                        Funcionario
+                        Indicador
                         @Html.ActionLink("Adicionar", "Create", new object { }, new { @class = "btn btn-primary btn-sm rounded-s" })
                     </h3>
-                    <p class="title-description"> Lista de Funcionarios </p>
+                    <p class="title-description"> Lista de Indicador </p>
                 </div>
             </div>
         </div>
@@ -35,22 +35,7 @@
                     </div>
                     <div class="item-col item-col-header item-col-title">
                         <div>
-                            <span> @Html.DisplayNameFor(model => model.email)</span>
-                        </div>
-                    </div>
-                    <div class="item-col item-col-header item-col-title">
-                        <div>
-                            <span> @Html.DisplayNameFor(model => model.matricula)</span>
-                        </div>
-                    </div>
-                    <div class="item-col item-col-header item-col-title">
-                        <div>
-                            <span>@Html.DisplayNameFor(model => model.turno)</span>
-                        </div>
-                    </div>
-                    <div class="item-col item-col-header item-col-title">
-                        <div>
-                            <span>@Html.DisplayNameFor(model => model.nascimento)</span>
+                            <span> @Html.DisplayNameFor(model => model.indicativa)</span>
                         </div>
                     </div>
                     <div class="item-col item-col-header fixed item-col-actions-dropdown"></div>
@@ -75,34 +60,10 @@
                             </div>
                         </div>
                         <div class="item-col fixed pull-left item-col-title">
-                            <div class="item-heading"> @Html.DisplayNameFor(model => model.email)</div>
+                            <div class="item-heading"> @Html.DisplayNameFor(model => model.indicativa)</div>
                             <div>
                                 <a href="" class="">
-                                    <h4 class="item-title">@Html.DisplayNameFor(model => model.email)</h4>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="item-col fixed pull-left item-col-title">
-                            <div class="item-heading"> @Html.DisplayNameFor(model => model.matricula)</div>
-                            <div>
-                                <a href="" class="">
-                                    <h4 class="item-title">@Html.DisplayNameFor(model => model.matricula)</h4>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="item-col fixed pull-left item-col-title">
-                            <div class="item-heading"> @Html.DisplayNameFor(model => model.turno)</div>
-                            <div>
-                                <a href="" class="">
-                                    <h4 class="item-title">@Html.DisplayNameFor(model => model.turno)</h4>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="item-col fixed pull-left item-col-title">
-                            <div class="item-heading"> @Html.DisplayNameFor(model => model.nascimento)</div>
-                            <div>
-                                <a href="" class="">
-                                    <h4 class="item-title">@Html.DisplayNameFor(model => model.nascimento)</h4>
+                                    <h4 class="item-title">@Html.DisplayNameFor(model => model.indicativa)</h4>
                                 </a>
                             </div>
                         </div>

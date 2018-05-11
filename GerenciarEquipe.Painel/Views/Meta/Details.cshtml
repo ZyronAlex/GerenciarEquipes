@@ -1,0 +1,139 @@
+﻿@model GerenciarEquipe.Painel.Models.MetaModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MetaModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.descicao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descicao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.objetivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.objetivo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.objetivo_parcial)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.objetivo_parcial)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.objetivo_parcial_dia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.objetivo_parcial_dia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.unidade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.unidade)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.referencia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.referencia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fonte)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fonte)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.grupo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.grupo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.peso)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.peso)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.data_inicio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.data_inicio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.data_fim)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.data_fim)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.id_cargo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.id_cargo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.id_indicador)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.id_indicador)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.create_at)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.create_at)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.update_at)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.update_at)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

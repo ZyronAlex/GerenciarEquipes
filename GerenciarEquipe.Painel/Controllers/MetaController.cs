@@ -11,110 +11,113 @@ using GerenciarEquipe.Painel.Models;
 
 namespace GerenciarEquipe.Painel.Controllers
 {
-    public class AdminController : Controller
+    public class MetaController : Controller
     {
-        private readonly IAdminAppService adminAppService;
-        public AdminController(IAdminAppService adminAppService)
+        private readonly IMetaAppService metaAppService;
+        public MetaController(IMetaAppService metaAppService)
         {
-            this.adminAppService = adminAppService;
+            this.metaAppService = metaAppService;
         }
 
-        // GET: Admin
+        // GET: Meta
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult Index()
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("index", "login");
-            return View(new List<AdminModel>());
+
+            return View(new List<MetaModel>());            
         }
 
-        // GET: Admin/Details/5
+        // GET: Meta/Details/5
         public ActionResult Details(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AdminModel adminModel = null;
-            if (adminModel == null)
+            MetaModel metaModel = null;
+            if (metaModel == null)
             {
                 return HttpNotFound();
             }
-            return View(adminModel);
+            return View(metaModel);
         }
 
-        // GET: Admin/Create
+        // GET: Meta/Create
         public ActionResult Create()
         {
+
+            ViewBag.Cargo = new SelectList(new List<CargoModel>(), "id", "nome");
             return View();
         }
 
-        // POST: Admin/Create
+        // POST: Meta/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,nome,email,senha,ativo,create_at,update_at,permissoes")] AdminModel adminModel)
+        public ActionResult Create([Bind(Include = "id,descicao,objetivo,objetivo_parcial,objetivo_parcial_dia,unidade,referencia,fonte,grupo,peso,data_inicio,data_fim,id_cargo,id_indicador,create_at,update_at")] MetaModel metaModel)
         {
             if (ModelState.IsValid)
             {
-                
+               
                 return RedirectToAction("Index");
             }
 
-            return View(adminModel);
+            return View(metaModel);
         }
 
-        // GET: Admin/Edit/5
+        // GET: Meta/Edit/5
         public ActionResult Edit(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AdminModel adminModel = null;
-            if (adminModel == null)
+            MetaModel metaModel = null;
+            if (metaModel == null)
             {
                 return HttpNotFound();
             }
-            return View(adminModel);
+            return View(metaModel);
         }
 
-        // POST: Admin/Edit/5
+        // POST: Meta/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,nome,email,senha,ativo,create_at,update_at,permissoes")] AdminModel adminModel)
+        public ActionResult Edit([Bind(Include = "id,descicao,objetivo,objetivo_parcial,objetivo_parcial_dia,unidade,referencia,fonte,grupo,peso,data_inicio,data_fim,id_cargo,id_indicador,create_at,update_at")] MetaModel metaModel)
         {
             if (ModelState.IsValid)
             {
                 return RedirectToAction("Index");
             }
-            return View(adminModel);
+            return View(metaModel);
         }
 
-        // GET: Admin/Delete/5
+        // GET: Meta/Delete/5
         public ActionResult Delete(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AdminModel adminModel = null;
-            if (adminModel == null)
+            MetaModel metaModel = null;
+            if (metaModel == null)
             {
                 return HttpNotFound();
             }
-            return View(adminModel);
+            return View(metaModel);
         }
 
-        // POST: Admin/Delete/5
+        // POST: Meta/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(long id)
         {
-            AdminModel adminModel = null;
+            MetaModel metaModel = null;
             return RedirectToAction("Index");
         }
 
