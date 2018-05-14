@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
@@ -29,6 +30,18 @@ namespace GerenciarEquipe.Painel.Models
         [Required(ErrorMessage = "Preencha o campo Permissões")]
         [Display(Name = "Permissões")]
         public string permissoes { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Data Cadastro")]
+        [ScaffoldColumn(false)]
+        public DateTime create_at { set; get; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Data Ultima Alteração")]
+        [ScaffoldColumn(false)]
+        public DateTime update_at { set; get; }
 
         public virtual ICollection<FuncionarioModel> funcionarios { get; set; }
         public virtual ICollection<MetaModel> metas { get; set; }

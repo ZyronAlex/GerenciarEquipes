@@ -1,4 +1,4 @@
-﻿$(window).load(function () {
+﻿$(window).on('load', function () {
     $('.input-file, input[type="file"]').each(function () {
         var $input = $(this),
         $label = $input.next('label'),

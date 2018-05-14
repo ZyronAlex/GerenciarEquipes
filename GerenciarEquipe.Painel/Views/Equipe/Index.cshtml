@@ -38,17 +38,17 @@
                             <span> @Html.DisplayNameFor(model => model.email)</span>
                         </div>
                     </div>
-                    <div class="item-col item-col-header item-col-title">
+                    <div class="item-col item-col-header item-col-sales">
                         <div>
                             <span> @Html.DisplayNameFor(model => model.matricula)</span>
                         </div>
                     </div>
-                    <div class="item-col item-col-header item-col-title">
+                    <div class="item-col item-col-header item-col-sales">
                         <div>
                             <span>@Html.DisplayNameFor(model => model.turno)</span>
                         </div>
                     </div>
-                    <div class="item-col item-col-header item-col-title">
+                    <div class="item-col item-col-header item-col-date">
                         <div>
                             <span>@Html.DisplayNameFor(model => model.nascimento)</span>
                         </div>
@@ -70,7 +70,7 @@
                             <div class="item-heading"> @Html.DisplayNameFor(model => model.nome)</div>
                             <div>
                                 <a href="" class="">
-                                    <h4 class="item-title">@Html.DisplayNameFor(model => model.nome)</h4>
+                                    <h4 class="item-title">@Html.DisplayFor(model => item.nome)</h4>
                                 </a>
                             </div>
                         </div>
@@ -78,37 +78,37 @@
                             <div class="item-heading"> @Html.DisplayNameFor(model => model.email)</div>
                             <div>
                                 <a href="" class="">
-                                    <h4 class="item-title">@Html.DisplayNameFor(model => model.email)</h4>
+                                    <h4 class="item-title">@Html.DisplayFor(model => item.email)</h4>
                                 </a>
                             </div>
                         </div>
-                        <div class="item-col fixed pull-left item-col-title">
+                        <div class="item-col fixed pull-left item-col-sales">
                             <div class="item-heading"> @Html.DisplayNameFor(model => model.matricula)</div>
                             <div>
                                 <a href="" class="">
-                                    <h4 class="item-title">@Html.DisplayNameFor(model => model.matricula)</h4>
+                                    <h4 class="item-title">@Html.DisplayFor(model => item.matricula)</h4>
                                 </a>
                             </div>
                         </div>
-                        <div class="item-col fixed pull-left item-col-title">
+                        <div class="item-col fixed pull-left item-col-sales">
                             <div class="item-heading"> @Html.DisplayNameFor(model => model.turno)</div>
                             <div>
                                 <a href="" class="">
-                                    <h4 class="item-title">@Html.DisplayNameFor(model => model.turno)</h4>
+                                    <h4 class="item-title">@Html.DisplayFor(model => item.turno)</h4>
                                 </a>
                             </div>
                         </div>
-                        <div class="item-col fixed pull-left item-col-title">
+                        <div class="item-col fixed pull-left item-col-date">
                             <div class="item-heading"> @Html.DisplayNameFor(model => model.nascimento)</div>
                             <div>
                                 <a href="" class="">
-                                    <h4 class="item-title">@Html.DisplayNameFor(model => model.nascimento)</h4>
+                                    <h4 class="item-title">@Html.DisplayFor(model => item.nascimento)</h4>
                                 </a>
                             </div>
                         </div>
                         <div class="item-col fixed item-col-actions-dropdown">
                             <div class="item-actions-dropdown">
-                                <a class="remove" href="@Url.Action("Delete", new { id = item.id})" data-id="" data-toggle="modal" data-target="#confirm-modal">
+                                <a class="remove" href="@Url.Action("Delete", new { id = item.id})">
                                     <i class="fa fa-trash-o"></i>
                                 </a>
                             </div>

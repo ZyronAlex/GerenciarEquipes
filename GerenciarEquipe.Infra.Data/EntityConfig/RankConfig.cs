@@ -10,8 +10,9 @@ namespace GerenciarEquipe.Infra.Data.EntityConfig
             HasKey(r => r.id);
 
             HasRequired(r => r.funcionario)
-                 .WithMany()
+                 .WithMany(f => f.ranks)
                  .HasForeignKey(r => r.id_funcionairo);
+           
         }
     }
 }

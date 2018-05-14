@@ -49,26 +49,30 @@ namespace GerenciarEquipe.Painel.Models
         [Display(Name = "Peso")]
         public int? peso { get; set; }
 
-        [Display(Name = "Data Início")]
-        public DateTime data_inicio { get; set; }
-
-        [Display(Name = "Data Final")]
-        public DateTime data_fim { get; set; }
-
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MMM}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Mes")]
+        [ScaffoldColumn(false)]
+        public DateTime mes { get; set; }
+        
         [Display(Name = "Cargo")]
-        [ScaffoldColumn(true)]
+        [ScaffoldColumn(false)]
         public long id_cargo { get; set; }
 
         [Display(Name = "Indicador")]
-        [ScaffoldColumn(true)]
+        [ScaffoldColumn(false)]
         public long id_indicador { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Data Cadastro")]
-        [ScaffoldColumn(true)]
+        [ScaffoldColumn(false)]
         public DateTime create_at { set; get; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Data Ultima Alteração")]
-        [ScaffoldColumn(true)]
+        [ScaffoldColumn(false)]
         public DateTime update_at { set; get; }
 
         public virtual CargoModel cargo { get; set; }

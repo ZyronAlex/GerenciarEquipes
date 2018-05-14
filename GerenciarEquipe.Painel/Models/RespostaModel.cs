@@ -22,18 +22,22 @@ namespace GerenciarEquipe.Painel.Models
         public string justificativa { get; set; }
 
         [Display(Name = "Funcionario")]
-        [ScaffoldColumn(true)]
+        [ScaffoldColumn(false)]
         public long id_funcionario { get; set; }
 
-        [ScaffoldColumn(true)]
+        [ScaffoldColumn(false)]
         public long id_meta { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Data Cadastro")]
-        [ScaffoldColumn(true)]
+        [ScaffoldColumn(false)]
         public DateTime create_at { set; get; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Data Ultima Alteração")]
-        [ScaffoldColumn(true)]
+        [ScaffoldColumn(false)]
         public DateTime update_at { set; get; }
 
         public virtual FuncionarioModel funcionario { get; set; }

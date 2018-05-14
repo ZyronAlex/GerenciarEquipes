@@ -24,6 +24,8 @@ namespace GerenciarEquipe.Painel.Models
         [Display(Name = "Matricula")]
         public long matricula { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Data de Nascimento")]
         public DateTime nascimento { get; set; }
 
@@ -40,11 +42,11 @@ namespace GerenciarEquipe.Painel.Models
         public string turno { get; set; }
 
         [Display(Name = "Cargo")]
-        [ScaffoldColumn(true)]
+        [ScaffoldColumn(false)]
         public long id_cargo { get; set; }
 
         [Display(Name = "Loja")]
-        [ScaffoldColumn(true)]
+        [ScaffoldColumn(false)]
         public long id_loja {get; set;}
 
         public virtual LojaModel loja { get; set; }

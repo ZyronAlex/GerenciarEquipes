@@ -51,7 +51,7 @@ namespace GerenciarEquipe.Domain.Services
 
         public void Dispose()
         {
-
+            repository.Dispose();
         }        
     }
 }

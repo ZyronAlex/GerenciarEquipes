@@ -18,7 +18,6 @@ namespace GerenciarEquipe.Infra.Data.Context
         public virtual DbSet<Admin> Admin { get; set; }
         public virtual DbSet<Ambito> Ambito { get; set; }
         public virtual DbSet<Cargo> Cargo { get; set; }
-        public virtual DbSet<Foto> Foto { get; set; }
         public virtual DbSet<Funcionario> Funcionario { get; set; }
         public virtual DbSet<Indicador> Indicador { get; set; }
         public virtual DbSet<Loja> Loja { get; set; }
@@ -40,15 +39,15 @@ namespace GerenciarEquipe.Infra.Data.Context
             modelBuilder.Properties()
                 .Where(p => p.Name == "id")
                 .Configure(p => p.IsKey());
+            
             modelBuilder.Properties<string>()
                 .Configure(p => p.HasColumnType("varchar"));
             modelBuilder.Properties<string>()
-                .Configure(p => p.HasMaxLength(300));
+                .Configure(p => p.HasMaxLength(800));
 
             modelBuilder.Configurations.Add(new AdminConfig());
             modelBuilder.Configurations.Add(new AmbitoConfig());
             modelBuilder.Configurations.Add(new CargoConfig());
-            modelBuilder.Configurations.Add(new FotoConfig());
             modelBuilder.Configurations.Add(new FuncionarioConfig());
             modelBuilder.Configurations.Add(new IndicadorConfig());
             modelBuilder.Configurations.Add(new LojaConfig());

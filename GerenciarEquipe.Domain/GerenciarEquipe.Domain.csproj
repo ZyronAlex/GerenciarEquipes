@@ -43,7 +43,6 @@
     <Compile Include="Entities\Admin.cs" />
     <Compile Include="Entities\Ambito.cs" />
     <Compile Include="Entities\Cargo.cs" />
-    <Compile Include="Entities\Foto.cs" />
     <Compile Include="Entities\Funcionario.cs" />
     <Compile Include="Entities\Indicador.cs" />
     <Compile Include="Entities\Loja.cs" />
@@ -54,7 +53,6 @@
     <Compile Include="Interfaces\Repositories\IAdminRepository.cs" />
     <Compile Include="Interfaces\Repositories\IAmbitoRepository.cs" />
     <Compile Include="Interfaces\Repositories\ICargoRepository.cs" />
-    <Compile Include="Interfaces\Repositories\IFotoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IFuncionarioRepository.cs" />
     <Compile Include="Interfaces\Repositories\IIndicadorRepository.cs" />
     <Compile Include="Interfaces\Repositories\ILojaRepository.cs" />
@@ -66,7 +64,6 @@
     <Compile Include="Interfaces\Services\IAdminService.cs" />
     <Compile Include="Interfaces\Services\IAmbitoService.cs" />
     <Compile Include="Interfaces\Services\ICargoService.cs" />
-    <Compile Include="Interfaces\Services\IFotoService.cs" />
     <Compile Include="Interfaces\Services\IFuncionarioService.cs" />
     <Compile Include="Interfaces\Services\IIndicadorService.cs" />
     <Compile Include="Interfaces\Services\ILojaService.cs" />
@@ -79,7 +76,6 @@
     <Compile Include="Services\AdminService.cs" />
     <Compile Include="Services\AmbitoService.cs" />
     <Compile Include="Services\CargoService.cs" />
-    <Compile Include="Services\FotoService.cs" />
     <Compile Include="Services\FuncionarioService.cs" />
     <Compile Include="Services\IndicadorService.cs" />
     <Compile Include="Services\LojaService.cs" />

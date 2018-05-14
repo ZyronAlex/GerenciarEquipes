@@ -50,7 +50,7 @@ namespace GerenciarEquipe.Application
 
         public void Dispose()
         {
-
+            serviceBase.Dispose();
         }
     }
 }

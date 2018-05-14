@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Hosting;
 using System.Web.Mvc;
 using AutoMapper;
 using GerenciarEquipe.Application.Interfaces;
@@ -56,10 +58,24 @@ namespace GerenciarEquipe.Painel.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,nome,email,senha,ativo,create_at,update_at,permissoes")] AdminModel adminModel)
+        public ActionResult Create([Bind(Include = "id,nome,email,senha,ativo,fotoFile,permissoes")] AdminModel adminModel)
         {
             if (ModelState.IsValid)
             {
+                if (adminModel.fotoFile != null && adminModel.fotoFile.ContentLength != 0)
+                {
+                    var extencao = adminModel.fotoFile.FileName.Split('.').Last();
+                    string fileName = ((long)DateTime.Now.Subtract(DateTime.MinValue.AddYears(1969)).TotalMilliseconds).ToString() + "." + extencao[extencao.Length - 1];
+                    string savedFileName = Path.Combine(
+                        HostingEnvironment.MapPath("~/AdminFotos/"),
+                       Path.GetFileName(fileName));
+
+                    FileInfo Local = new FileInfo(savedFileName);
+                    Local.Directory.Create(); // If the directory
+
+                    adminModel.fotoFile.SaveAs(savedFileName);
+                    adminModel.foto = GetBaseUrl() + "/AdminFotos/" + fileName;
+                }
                 adminAppService.Add(Mapper.Map<AdminModel, Admin>(adminModel));
                 return RedirectToAction("Index");
             }
@@ -87,10 +103,33 @@ namespace GerenciarEquipe.Painel.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,nome,email,senha,ativo,create_at,update_at,permissoes")] AdminModel adminModel)
+        public ActionResult Edit([Bind(Include = "id,nome,email,senha,ativo,fotoFile,permissoes")] AdminModel adminModel)
         {
             if (ModelState.IsValid)
             {
+                if (adminModel.fotoFile != null && adminModel.fotoFile.ContentLength != 0)
+                {
+                    string fileName;
+                    FileInfo Local;
+                    if (adminModel.foto != null)
+                    {
+                        fileName = Path.Combine(HostingEnvironment.MapPath("~/AdminFotos/"), Path.GetFileName(adminModel.foto.Split('/').Last()));
+                        Local = new FileInfo(fileName);
+                        if (Local.Exists)
+                            Local.Delete();
+                    }
+                    var extencao = adminModel.fotoFile.FileName.Split('.').Last();
+                    fileName = ((long)DateTime.Now.Subtract(DateTime.MinValue.AddYears(1969)).TotalMilliseconds).ToString() + "." + extencao[extencao.Length - 1];
+                    string savedFileName = Path.Combine(
+                        HostingEnvironment.MapPath("~/AdminFotos/"),
+                       Path.GetFileName(fileName));
+
+                    Local = new FileInfo(savedFileName);
+                    Local.Directory.Create(); // If the directory
+
+                    adminModel.fotoFile.SaveAs(savedFileName);
+                    adminModel.foto = GetBaseUrl() + "/AdminFotos/" + fileName;
+                }
                 adminAppService.Update(Mapper.Map<AdminModel, Admin>(adminModel));
                 return RedirectToAction("Index");
             }
@@ -128,6 +167,19 @@ namespace GerenciarEquipe.Painel.Controllers
                 adminAppService.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private string GetBaseUrl()
+        {
+            var request = HttpContext.Request;
+            var appUrl = HttpRuntime.AppDomainAppVirtualPath;
+
+            if (appUrl != "/")
+                appUrl = "/" + appUrl;
+
+            var baseUrl = string.Format("{0}://{1}{2}", request.Url.Scheme, request.Url.Authority, appUrl);
+
+            return baseUrl;
         }
     }
 }

@@ -7,17 +7,8 @@ namespace GerenciarEquipe.Painel.Models
 {
     public abstract class UsuarioModel
     {
-        public UsuarioModel()
-        {
-            fotos = new HashSet<FotoModel>();
-        }
-
         [Key]
-        public long id { get; set; }
-
-        [DataType(DataType.Upload)]
-        [ScaffoldColumn(true)]
-        public HttpPostedFileBase foto { get; set; }
+        public long id { get; set; }       
 
         [Required(ErrorMessage = "Preencha o campo Nome")]
         [MaxLength(300, ErrorMessage = "Máximo caracteres")]
@@ -37,18 +28,28 @@ namespace GerenciarEquipe.Painel.Models
         [Display(Name = "Senha")]
         public string senha { get; set; }
 
-        [ScaffoldColumn(true)]
+        [ScaffoldColumn(false)]
         public bool ativo { get; set; }
 
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Data Cadastro")]
-        [ScaffoldColumn(true)]
+        [ScaffoldColumn(false)]
         public DateTime create_at { set; get; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Data Ultima Alteração")]
-        [ScaffoldColumn(true)]
+        [ScaffoldColumn(false)]
         public DateTime update_at { set; get; }
 
-        public virtual ICollection<FotoModel> fotos { get; set; }
+        [DataType(DataType.Upload)]
+        [ScaffoldColumn(false)]
+        public HttpPostedFileBase fotoFile { get; set; }
+
+        [Display(Name ="Foto")]
+        public string foto { get; set; }
 
         public bool Login(UsuarioModel usuario)
         {

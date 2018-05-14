@@ -27,9 +27,16 @@
                             <div class="image-container new">
                                 <div class="image">
                                     <div class="file-upload-img" style="cursor: pointer;" title="Clique para inserir uma imagem">
-                                        @Html.TextBoxFor(model => model.foto, new { type = "file", accept = ".jpg,.jpeg,.png" })
-                                        <label class="input-file-produto wrap-badge" for="ThumbnailFile">
-                                            <img class="img-responsive img-toggle" src="~/Image/plus-icon-33363.png" alt="updatefile" style="cursor: pointer;" title="Clique para inserir uma imagem">
+                                        @Html.TextBoxFor(model => model.fotoFile, new { type = "file", accept = ".jpg,.jpeg,.png" })
+                                        <label class="input-file wrap-badge" for="fotoFile">
+                                            @if (Model.foto != null)
+                                            {
+                                                <img class="img-responsive img-toggle" src="@Html.DisplayFor(model => model.foto)" alt="updatefile" style="cursor: pointer;" title="Clique para inserir uma imagem">
+                                            }
+                                            else
+                                            {
+                                                <img class="img-responsive img-toggle" src="~/Image/plus-icon-33363.png" alt="updatefile" style="cursor: pointer;" title="Clique para inserir uma imagem">
+                                            }
                                             <span class="upload-ok"></span>
                                         </label>
                                     </div>
@@ -37,9 +44,9 @@
                             </div>
                             <label for="upload">
                                 <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
-                                @Html.TextBoxFor(model => model.foto, new { type = "file", nome = "ThumbnailFile", style = "display:none" })
+                                @Html.TextBoxFor(model => model.fotoFile, new { type = "file", style = "display:none" })
                             </label>
-                            @Html.ValidationMessageFor(model => model.foto, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.fotoFile, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
@@ -81,7 +88,7 @@
                         <button type="submit" class="btn btn-primary">
                             Salvar
                         </button>
-                        @Html.ActionLink("Cancelar", "Index", "Funcionario", new { }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Cancelar", "Index", "Admin", new { }, new { @class = "btn btn-primary" })
                     </div>
                 </div>
             </div>

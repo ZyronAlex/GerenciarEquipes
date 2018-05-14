@@ -13,11 +13,11 @@ namespace GerenciarEquipe.Infra.Data.EntityConfig
              .IsRequired();
 
             HasRequired(r => r.funcionario)
-                 .WithMany()
+                 .WithMany(f => f.respostas)
                  .HasForeignKey(r => r.id_funcionario);
 
             HasRequired(r => r.meta)
-                 .WithMany()
+                 .WithMany(m => m.respostas)
                  .HasForeignKey(r => r.id_meta);
         }
     }

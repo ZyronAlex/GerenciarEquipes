@@ -28,7 +28,6 @@ namespace GerenciarEquipe.Painel
             container.Register<IAdminAppService, AdminAppService>(Lifestyle.Scoped);
             container.Register<IAmbitoAppService, AmbitoAppService>(Lifestyle.Scoped);
             container.Register<ICargoAppService, CargoAppService>(Lifestyle.Scoped);
-            container.Register<IFotoAppService, FotoAppService>(Lifestyle.Scoped);
             container.Register<IFuncionarioAppService, FuncionarioAppService>(Lifestyle.Scoped);
             container.Register<IIndicadorAppService, IndicadorAppService>(Lifestyle.Scoped);
             container.Register<ILojaAppService, LojaAppService>(Lifestyle.Scoped);
@@ -41,7 +40,6 @@ namespace GerenciarEquipe.Painel
             container.Register<IAdminService, AdminService>(Lifestyle.Scoped);
             container.Register<IAmbitoService, AmbitoService>(Lifestyle.Scoped);
             container.Register<ICargoService, CargoService>(Lifestyle.Scoped);
-            container.Register<IFotoService, FotoService>(Lifestyle.Scoped);
             container.Register<IFuncionarioService, FuncionarioService>(Lifestyle.Scoped);
             container.Register<IIndicadorService, IndicadorService>(Lifestyle.Scoped);
             container.Register<ILojaService, LojaService>(Lifestyle.Scoped);
@@ -54,7 +52,6 @@ namespace GerenciarEquipe.Painel
             container.Register<IAdminRepository, AdminRepository>(Lifestyle.Scoped);
             container.Register<IAmbitoRepository, AmbitoRepository>(Lifestyle.Scoped);
             container.Register<ICargoRepository, CargoRepository>(Lifestyle.Scoped);
-            container.Register<IFotoRepository, FotoRepository>(Lifestyle.Scoped);
             container.Register<IFuncionarioRepository, FuncionarioRepository>(Lifestyle.Scoped);
             container.Register<IIndicadorRepository, IndicadorRepository>(Lifestyle.Scoped);
             container.Register<ILojaRepository, LojaRepository>(Lifestyle.Scoped);

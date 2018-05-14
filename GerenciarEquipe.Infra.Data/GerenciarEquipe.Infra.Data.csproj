@@ -53,7 +53,6 @@
     <Compile Include="EntityConfig\AdminConfig.cs" />
     <Compile Include="EntityConfig\AmbitoConfig.cs" />
     <Compile Include="EntityConfig\CargoConfig.cs" />
-    <Compile Include="EntityConfig\FotoConfig.cs" />
     <Compile Include="EntityConfig\FuncionarioConfig.cs" />
     <Compile Include="EntityConfig\IndicadorConfig.cs" />
     <Compile Include="EntityConfig\LojaConfig.cs" />
@@ -66,7 +65,6 @@
     <Compile Include="Repositories\AdminRepository.cs" />
     <Compile Include="Repositories\AmbitoRepository.cs" />
     <Compile Include="Repositories\CargoRepository.cs" />
-    <Compile Include="Repositories\FotoRepository.cs" />
     <Compile Include="Repositories\FuncionarioRepository.cs" />
     <Compile Include="Repositories\IndicadorRepository.cs" />
     <Compile Include="Repositories\LojaRepository.cs" />

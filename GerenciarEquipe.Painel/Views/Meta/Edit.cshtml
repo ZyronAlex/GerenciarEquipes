@@ -76,23 +76,6 @@
                 </div>
 
                 <div class="form-group row">
-                    <div class="col-md-6">
-                        @Html.LabelFor(model => model.data_inicio, htmlAttributes: new { @class = "control-label col-md-2 text-xs-right" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.data_inicio, new { htmlAttributes = new { @class = "form-control box", @type = "date" } })
-                            @Html.ValidationMessageFor(model => model.data_inicio, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        @Html.LabelFor(model => model.data_fim, htmlAttributes: new { @class = "control-label col-md-2 text-xs-right" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.data_fim, new { htmlAttributes = new { @class = "form-control box", @type = "date" } })
-                            @Html.ValidationMessageFor(model => model.data_fim, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group row">
                     @Html.LabelFor(model => model.id_cargo, htmlAttributes: new { @class = "control-label col-md-2 text-xs-right" })
                     <div class="col-md-10">
                         @Html.DropDownList("id_cargo", (IEnumerable<SelectListItem>)ViewBag.Cargo, "Selecione um Cargo", new { @class = "form-control box" })

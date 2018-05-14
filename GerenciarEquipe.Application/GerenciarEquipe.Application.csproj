@@ -44,14 +44,12 @@
     <Compile Include="AmbitoAppService.cs" />
     <Compile Include="AppServiceBase.cs" />
     <Compile Include="CargoAppService.cs" />
-    <Compile Include="FotoAppService.cs" />
     <Compile Include="FuncionarioAppService.cs" />
     <Compile Include="IndicadorAppService.cs" />
     <Compile Include="Interfaces\IAdminAppService.cs" />
     <Compile Include="Interfaces\IAmbitoAppService.cs" />
     <Compile Include="Interfaces\IAppServiceBase.cs" />
     <Compile Include="Interfaces\ICargoAppService.cs" />
-    <Compile Include="Interfaces\IFotoAppService.cs" />
     <Compile Include="Interfaces\IFuncionarioAppService.cs" />
     <Compile Include="Interfaces\IIndicadorAppService.cs" />
     <Compile Include="Interfaces\ILojaAppService.cs" />

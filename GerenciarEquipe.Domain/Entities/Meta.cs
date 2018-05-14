@@ -23,8 +23,7 @@ namespace GerenciarEquipe.Domain.Entities
         public string fonte { get; set; }
         public string grupo { get; set; }
         public int? peso { get; set; }
-        public DateTime data_inicio { get; set; }
-        public DateTime data_fim { get; set; }
+        public DateTime mes { get; set; }
         public long id_cargo { get; set; }
         public long id_indicador { get; set; }
         public DateTime create_at { set; get; }

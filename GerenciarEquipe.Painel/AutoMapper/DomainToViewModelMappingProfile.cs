@@ -11,7 +11,6 @@ namespace GerenciarEquipe.Painel.AutoMapper
             CreateMap<Admin, AdminModel>();
             CreateMap<Ambito, AmbitoModel>();
             CreateMap<Cargo, CargoModel>();
-            CreateMap<Foto, FotoModel>();
             CreateMap<Funcionario, FuncionarioModel>();
             CreateMap<Indicador, IndicadorModel>();
             CreateMap<Loja, LojaModel>();

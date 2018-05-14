@@ -13,11 +13,11 @@ namespace GerenciarEquipe.Infra.Data.EntityConfig
              .IsRequired();
 
             HasRequired(f => f.loja)
-                 .WithMany()
+                 .WithMany(l => l.funcionarios)
                  .HasForeignKey(f => f.id_loja);
 
             HasRequired(f => f.cargo)
-                 .WithMany()
+                 .WithMany(c => c.funcionarios)
                  .HasForeignKey(f => f.id_cargo);
         }
     }

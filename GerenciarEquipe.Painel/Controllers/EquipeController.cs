@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Hosting;
 using System.Web.Mvc;
 using AutoMapper;
 using GerenciarEquipe.Application.Interfaces;
@@ -52,8 +54,8 @@ namespace GerenciarEquipe.Painel.Controllers
         // GET: Equipe/Create
         public ActionResult Create()
         {
-            ViewBag.Genero = new SelectList(new List<string>(new string[]{"Masculino","Femninio"}));
-            ViewBag.Turno = new SelectList(new List<string>(new string[] {"Matutino","Vespertino","Noturno","Sembrol"}));
+            ViewBag.Genero = new SelectList(new List<string>(new string[] { "Masculino", "Femninio" }), funcionarioModel.genero);
+            ViewBag.Turno = new SelectList(new List<string>(new string[] { "Matutino", "Vespertino", "Noturno", "Sembrol" }), funcionarioModel.turno);
             ViewBag.Cargo = new SelectList(Mapper.Map<ICollection<Cargo>, ICollection<CargoModel>>(cargoAppService.Getall()), "id", "nome");
             ViewBag.Loja = new SelectList(Mapper.Map<ICollection<Loja>, ICollection<LojaModel>>(lojaAppService.Getall()), "id", "nome");
             return View();
@@ -64,15 +66,31 @@ namespace GerenciarEquipe.Painel.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,nome,email,senha,ativo,create_at,update_at,matricula,nascimento,genero,cidade,estado,turno,id_cargo,id_loja")] FuncionarioModel funcionarioModel)
+        public ActionResult Create([Bind(Include = "id,nome,email,senha,ativo,fotoFile,matricula,nascimento,genero,cidade,estado,turno,id_cargo,id_loja")] FuncionarioModel funcionarioModel)
         {
             if (ModelState.IsValid)
             {
+                if (funcionarioModel.fotoFile != null && funcionarioModel.fotoFile.ContentLength != 0)
+                {
+                    var extencao = funcionarioModel.fotoFile.FileName.Split('.').Last();
+                    var fileName = ((long)DateTime.Now.Subtract(DateTime.MinValue.AddYears(1969)).TotalMilliseconds).ToString() + "." + extencao[extencao.Length - 1];
+                    string savedFileName = Path.Combine(
+                        HostingEnvironment.MapPath("~/FuncionarioFotos/"),
+                       Path.GetFileName(fileName));
+
+                    FileInfo Local = new FileInfo(savedFileName);
+                    Local.Directory.Create(); // If the directory
+
+                    funcionarioModel.fotoFile.SaveAs(savedFileName);
+                    funcionarioModel.foto = GetBaseUrl() + "FuncionarioFotos/" + fileName;
+                }
+
                 funcionarioAppService.Add(Mapper.Map<FuncionarioModel, Funcionario>(funcionarioModel));
                 return RedirectToAction("Index");
+
             }
-            ViewBag.Genero = new SelectList(new List<string>(new string[] { "Masculino", "Femninio" }));
-            ViewBag.Turno = new SelectList(new List<string>(new string[] { "Matutino", "Vespertino", "Noturno", "Sembrol" }));
+            ViewBag.Genero = new SelectList(new List<string>(new string[] { "Masculino", "Femninio" }),funcionarioModel.genero);
+            ViewBag.Turno = new SelectList(new List<string>(new string[] { "Matutino", "Vespertino", "Noturno", "Sembrol" }),funcionarioModel.turno);
             ViewBag.Cargo = new SelectList(Mapper.Map<ICollection<Cargo>, ICollection<CargoModel>>(cargoAppService.Getall()), "id", "nome");
             ViewBag.Loja = new SelectList(Mapper.Map<ICollection<Loja>, ICollection<LojaModel>>(lojaAppService.Getall()), "id", "nome");
             return View(funcionarioModel);
@@ -90,8 +108,8 @@ namespace GerenciarEquipe.Painel.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Genero = new SelectList(new List<string>(new string[] { "Masculino", "Femninio" }));
-            ViewBag.Turno = new SelectList(new List<string>(new string[] { "Matutino", "Vespertino", "Noturno", "Sembrol" }));
+            ViewBag.Genero = new SelectList(new List<string>(new string[] { "Masculino", "Femninio" }), funcionarioModel.genero);
+            ViewBag.Turno = new SelectList(new List<string>(new string[] { "Matutino", "Vespertino", "Noturno", "Sembrol" }), funcionarioModel.turno);
             ViewBag.Cargo = new SelectList(Mapper.Map<ICollection<Cargo>, ICollection<CargoModel>>(cargoAppService.Getall()), "id", "nome");
             ViewBag.Loja = new SelectList(Mapper.Map<ICollection<Loja>, ICollection<LojaModel>>(lojaAppService.Getall()), "id", "nome");
             return View(funcionarioModel);
@@ -102,16 +120,39 @@ namespace GerenciarEquipe.Painel.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,nome,email,senha,ativo,create_at,update_at,matricula,nascimento,genero,cidade,estado,turno,id_cargo,id_loja")] FuncionarioModel funcionarioModel)
+        public ActionResult Edit([Bind(Include = "id,nome,email,senha,ativo,fotoFile,matricula,nascimento,genero,cidade,estado,turno,id_cargo,id_loja")] FuncionarioModel funcionarioModel)
         {
             if (ModelState.IsValid)
             {
+                if (funcionarioModel.fotoFile != null && funcionarioModel.fotoFile.ContentLength != 0)
+                {
+                    string fileName;
+                    FileInfo Local;
+                    if (funcionarioModel.foto != null)
+                    {
+                        fileName = Path.Combine(HostingEnvironment.MapPath("~/FuncionarioFotos/"), Path.GetFileName(funcionarioModel.foto.Split('/').Last()));
+                        Local = new FileInfo(fileName);
+                        if (Local.Exists)
+                            Local.Delete();
+                    }
+                    var extencao = funcionarioModel.fotoFile.FileName.Split('.').Last();
+                    fileName = ((long)DateTime.Now.Subtract(DateTime.MinValue.AddYears(1969)).TotalMilliseconds).ToString() + "." + extencao[extencao.Length - 1];
+                    string savedFileName = Path.Combine(
+                        HostingEnvironment.MapPath("~/FuncionarioFotos/"),
+                       Path.GetFileName(fileName));
+
+                    Local = new FileInfo(savedFileName);
+                    Local.Directory.Create(); // If the directory
+
+                    funcionarioModel.fotoFile.SaveAs(savedFileName);
+                    funcionarioModel.foto = GetBaseUrl() + "FuncionarioFotos/" + fileName;
+                }
 
                 funcionarioAppService.Update(Mapper.Map<FuncionarioModel, Funcionario>(funcionarioModel));
                 return RedirectToAction("Index");
             }
-            ViewBag.Genero = new SelectList(new List<string>(new string[] { "Masculino", "Femninio" }));
-            ViewBag.Turno = new SelectList(new List<string>(new string[] { "Matutino", "Vespertino", "Noturno", "Sembrol" }));
+            ViewBag.Genero = new SelectList(new List<string>(new string[] { "Masculino", "Femninio" }), funcionarioModel.genero);
+            ViewBag.Turno = new SelectList(new List<string>(new string[] { "Matutino", "Vespertino", "Noturno", "Sembrol" }), funcionarioModel.turno);
             ViewBag.Cargo = new SelectList(Mapper.Map<ICollection<Cargo>, ICollection<CargoModel>>(cargoAppService.Getall()), "id", "nome");
             ViewBag.Loja = new SelectList(Mapper.Map<ICollection<Loja>, ICollection<LojaModel>>(lojaAppService.Getall()), "id", "nome");
             return View(funcionarioModel);
@@ -129,15 +170,15 @@ namespace GerenciarEquipe.Painel.Controllers
             {
                 return HttpNotFound();
             }
-            return View(funcionarioModel);
+            return PartialView(funcionarioModel);
         }
 
         // POST: Equipe/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(long id)
-        {
-            funcionarioAppService.Remove(funcionarioAppService.GetById(id));
+        {           
+            funcionarioAppService.Disdisable(funcionarioAppService.GetById(id));
             return RedirectToAction("Index");
         }
 
@@ -148,6 +189,19 @@ namespace GerenciarEquipe.Painel.Controllers
                 funcionarioAppService.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private string GetBaseUrl()
+        {
+            var request = HttpContext.Request;
+            var appUrl = HttpRuntime.AppDomainAppVirtualPath;
+
+            if (appUrl != "/")
+                appUrl = "/" + appUrl;
+
+            var baseUrl = string.Format("{0}://{1}{2}", request.Url.Scheme, request.Url.Authority, appUrl);
+
+            return baseUrl;
         }
     }
 }

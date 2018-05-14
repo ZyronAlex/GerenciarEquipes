@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Criptografia.cs" />
+    <Compile Include="GetUrlBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringMethod.cs" />
   </ItemGroup>
