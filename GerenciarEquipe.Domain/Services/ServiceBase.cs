@@ -14,7 +14,7 @@ namespace GerenciarEquipe.Domain.Services
             this.repository = repository;
         }
 
-        public TEntity GetById(int id)
+        public TEntity GetById(long? id)
         {
             return repository.GetById(id);
         }

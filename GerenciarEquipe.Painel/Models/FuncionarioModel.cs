@@ -18,10 +18,7 @@ namespace GerenciarEquipe.Painel.Models
             this.senha = loginModel.senha;
             ranks = new HashSet<RankModel>();
             respostas = new HashSet<RespostaModel>();
-        }
-
-        [Key]
-        public long id { get; set; }        
+        }      
 
         [Required(ErrorMessage = "Preencha o campo Matricula")]
         [Display(Name = "Matricula")]
@@ -42,9 +39,11 @@ namespace GerenciarEquipe.Painel.Models
         [Display(Name = "Turno")]
         public string turno { get; set; }
 
+        [Display(Name = "Cargo")]
         [ScaffoldColumn(true)]
         public long id_cargo { get; set; }
 
+        [Display(Name = "Loja")]
         [ScaffoldColumn(true)]
         public long id_loja {get; set;}
 

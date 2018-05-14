@@ -6,7 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 using GerenciarEquipe.Application.Interfaces;
+using GerenciarEquipe.Domain.Entities;
 using GerenciarEquipe.Painel.Models;
 
 namespace GerenciarEquipe.Painel.Controllers
@@ -14,9 +16,11 @@ namespace GerenciarEquipe.Painel.Controllers
     public class MetaController : Controller
     {
         private readonly IMetaAppService metaAppService;
-        public MetaController(IMetaAppService metaAppService)
+        private readonly ICargoAppService cargoAppService;
+        public MetaController(IMetaAppService metaAppService, ICargoAppService cargoAppService)
         {
             this.metaAppService = metaAppService;
+            this.cargoAppService = cargoAppService;
         }
 
         // GET: Meta
@@ -26,7 +30,7 @@ namespace GerenciarEquipe.Painel.Controllers
             if (Session["usuario"] == null)
                 return RedirectToAction("index", "login");
 
-            return View(new List<MetaModel>());            
+            return View(Mapper.Map<ICollection<Meta>, ICollection<MetaModel>>(metaAppService.Getall()));            
         }
 
         // GET: Meta/Details/5
@@ -36,7 +40,7 @@ namespace GerenciarEquipe.Painel.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MetaModel metaModel = null;
+            MetaModel metaModel = Mapper.Map<Meta, MetaModel>(metaAppService.GetById(id));
             if (metaModel == null)
             {
                 return HttpNotFound();
@@ -47,8 +51,7 @@ namespace GerenciarEquipe.Painel.Controllers
         // GET: Meta/Create
         public ActionResult Create()
         {
-
-            ViewBag.Cargo = new SelectList(new List<CargoModel>(), "id", "nome");
+            ViewBag.Cargo = new SelectList(Mapper.Map<ICollection<Cargo>, ICollection<CargoModel>>(cargoAppService.Getall()), "id", "nome");
             return View();
         }
 
@@ -61,10 +64,10 @@ namespace GerenciarEquipe.Painel.Controllers
         {
             if (ModelState.IsValid)
             {
-               
+                metaAppService.Add(Mapper.Map<MetaModel, Meta>(metaModel));
                 return RedirectToAction("Index");
             }
-
+            ViewBag.Cargo = new SelectList(Mapper.Map<ICollection<Cargo>, ICollection<CargoModel>>(cargoAppService.Getall()), "id", "nome");
             return View(metaModel);
         }
 
@@ -75,11 +78,12 @@ namespace GerenciarEquipe.Painel.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MetaModel metaModel = null;
+            MetaModel metaModel = Mapper.Map<Meta, MetaModel>(metaAppService.GetById(id));
             if (metaModel == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.Cargo = new SelectList(Mapper.Map<ICollection<Cargo>, ICollection<CargoModel>>(cargoAppService.Getall()), "id", "nome");
             return View(metaModel);
         }
 
@@ -92,8 +96,10 @@ namespace GerenciarEquipe.Painel.Controllers
         {
             if (ModelState.IsValid)
             {
+                metaAppService.Update(Mapper.Map<MetaModel, Meta>(metaModel));
                 return RedirectToAction("Index");
             }
+            ViewBag.Cargo = new SelectList(Mapper.Map<ICollection<Cargo>, ICollection<CargoModel>>(cargoAppService.Getall()), "id", "nome");
             return View(metaModel);
         }
 
@@ -104,7 +110,7 @@ namespace GerenciarEquipe.Painel.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MetaModel metaModel = null;
+            MetaModel metaModel = Mapper.Map<Meta, MetaModel>(metaAppService.GetById(id));
             if (metaModel == null)
             {
                 return HttpNotFound();
@@ -117,7 +123,7 @@ namespace GerenciarEquipe.Painel.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(long id)
         {
-            MetaModel metaModel = null;
+            metaAppService.Remove(metaAppService.GetById(id));
             return RedirectToAction("Index");
         }
 
@@ -125,6 +131,7 @@ namespace GerenciarEquipe.Painel.Controllers
         {
             if (disposing)
             {
+                metaAppService.Dispose();
             }
             base.Dispose(disposing);
         }

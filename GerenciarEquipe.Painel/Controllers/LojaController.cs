@@ -6,7 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 using GerenciarEquipe.Application.Interfaces;
+using GerenciarEquipe.Domain.Entities;
 using GerenciarEquipe.Painel.Models;
 
 namespace GerenciarEquipe.Painel.Controllers
@@ -25,7 +27,8 @@ namespace GerenciarEquipe.Painel.Controllers
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("index", "login");
-            return View(new List<LojaModel>());
+            
+            return View(Mapper.Map<ICollection<Loja>, ICollection<LojaModel>>(lojaAppService.Getall()));
         }
 
         // GET: Loja/Details/5
@@ -35,7 +38,7 @@ namespace GerenciarEquipe.Painel.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            LojaModel lojaModel = null;
+            LojaModel lojaModel = Mapper.Map<Loja, LojaModel>(lojaAppService.GetById(id));
             if (lojaModel == null)
             {
                 return HttpNotFound();
@@ -58,6 +61,7 @@ namespace GerenciarEquipe.Painel.Controllers
         {
             if (ModelState.IsValid)
             {
+                lojaAppService.Add(Mapper.Map<LojaModel, Loja>(lojaModel));
                 return RedirectToAction("Index");
             }
 
@@ -71,7 +75,7 @@ namespace GerenciarEquipe.Painel.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            LojaModel lojaModel = null;
+            LojaModel lojaModel = Mapper.Map<Loja, LojaModel>(lojaAppService.GetById(id));
             if (lojaModel == null)
             {
                 return HttpNotFound();
@@ -88,6 +92,7 @@ namespace GerenciarEquipe.Painel.Controllers
         {
             if (ModelState.IsValid)
             {
+                lojaAppService.Update(Mapper.Map<LojaModel, Loja>(lojaModel));
                 return RedirectToAction("Index");
             }
             return View(lojaModel);
@@ -100,7 +105,7 @@ namespace GerenciarEquipe.Painel.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            LojaModel lojaModel = null;
+            LojaModel lojaModel = Mapper.Map<Loja, LojaModel>(lojaAppService.GetById(id));
             if (lojaModel == null)
             {
                 return HttpNotFound();
@@ -113,7 +118,7 @@ namespace GerenciarEquipe.Painel.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(long id)
         {
-            LojaModel lojaModel = null;
+            lojaAppService.Remove(lojaAppService.GetById(id));
             return RedirectToAction("Index");
         }
 
@@ -121,6 +126,7 @@ namespace GerenciarEquipe.Painel.Controllers
         {
             if (disposing)
             {
+                lojaAppService.Dispose();
             }
             base.Dispose(disposing);
         }

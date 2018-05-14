@@ -13,7 +13,7 @@ namespace GerenciarEquipe.Domain.Entities
             ranks = new HashSet<Rank>();
             respostas = new HashSet<Resposta>();
         }
-        public long id { get; set; }
+
         public long matricula { get; set; }
         public DateTime nascimento { get; set; }
         public string genero { get; set; }

@@ -13,7 +13,7 @@ namespace GerenciarEquipe.Application
             this.serviceBase = serviceBase;
         }
 
-        public TEntity GetById(int id)
+        public TEntity GetById(long? id)
         {
             return serviceBase.GetById(id);
         }

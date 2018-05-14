@@ -6,7 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 using GerenciarEquipe.Application.Interfaces;
+using GerenciarEquipe.Domain.Entities;
 using GerenciarEquipe.Painel.Models;
 
 namespace GerenciarEquipe.Painel.Controllers
@@ -25,7 +27,7 @@ namespace GerenciarEquipe.Painel.Controllers
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("index", "login");
-            return View(new List<AdminModel>());
+            return View(Mapper.Map<ICollection<Admin>, ICollection<AdminModel>>(adminAppService.Getall()));
         }
 
         // GET: Admin/Details/5
@@ -35,7 +37,7 @@ namespace GerenciarEquipe.Painel.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AdminModel adminModel = null;
+            AdminModel adminModel = Mapper.Map<Admin, AdminModel>(adminAppService.GetById(id));
             if (adminModel == null)
             {
                 return HttpNotFound();
@@ -58,7 +60,7 @@ namespace GerenciarEquipe.Painel.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+                adminAppService.Add(Mapper.Map<AdminModel, Admin>(adminModel));
                 return RedirectToAction("Index");
             }
 
@@ -72,7 +74,7 @@ namespace GerenciarEquipe.Painel.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AdminModel adminModel = null;
+            AdminModel adminModel = Mapper.Map<Admin, AdminModel>(adminAppService.GetById(id)); ;
             if (adminModel == null)
             {
                 return HttpNotFound();
@@ -89,6 +91,7 @@ namespace GerenciarEquipe.Painel.Controllers
         {
             if (ModelState.IsValid)
             {
+                adminAppService.Update(Mapper.Map<AdminModel, Admin>(adminModel));
                 return RedirectToAction("Index");
             }
             return View(adminModel);
@@ -101,7 +104,7 @@ namespace GerenciarEquipe.Painel.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AdminModel adminModel = null;
+            AdminModel adminModel = Mapper.Map<Admin, AdminModel>(adminAppService.GetById(id)); ; ;
             if (adminModel == null)
             {
                 return HttpNotFound();
@@ -114,7 +117,7 @@ namespace GerenciarEquipe.Painel.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(long id)
         {
-            AdminModel adminModel = null;
+            adminAppService.Remove(adminAppService.GetById(id));
             return RedirectToAction("Index");
         }
 
@@ -122,6 +125,7 @@ namespace GerenciarEquipe.Painel.Controllers
         {
             if (disposing)
             {
+                adminAppService.Dispose();
             }
             base.Dispose(disposing);
         }

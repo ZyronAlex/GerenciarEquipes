@@ -8,7 +8,7 @@ namespace GerenciarEquipe.Application.Interfaces
 {
     public interface IAppServiceBase<TEntity> where TEntity : class
     {
-        TEntity GetById(int id);
+        TEntity GetById(long? id);
         ICollection<TEntity> Getall();
         void Add(TEntity obj);
         void Update(TEntity obj);

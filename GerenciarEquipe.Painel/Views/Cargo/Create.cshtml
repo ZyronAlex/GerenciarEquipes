@@ -29,7 +29,7 @@
                 <div class="form-group row">
                     @Html.LabelFor(model => model.descicao, htmlAttributes: new { @class = "control-label col-md-2 text-xs-right" })
                     <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.descicao, new { @class = "form-control box tinymce_basic" })
+                        @Html.TextAreaFor(model => model.descicao, new { @class = "form-control box" })
                         @Html.ValidationMessageFor(model => model.descicao, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -54,9 +54,4 @@
         </div>
     }
 </article>
-@section Scripts
-{
-    <script src="@Url.Content("~/Scripts/tinymce/tinymce.min.js")"></script>
-    <script src="@Url.Content("~/Scripts/editor.js")"></script>
-}
 

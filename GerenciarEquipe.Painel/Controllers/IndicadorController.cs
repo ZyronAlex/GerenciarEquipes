@@ -6,7 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 using GerenciarEquipe.Application.Interfaces;
+using GerenciarEquipe.Domain.Entities;
 using GerenciarEquipe.Painel.Models;
 
 namespace GerenciarEquipe.Painel.Controllers
@@ -25,7 +27,7 @@ namespace GerenciarEquipe.Painel.Controllers
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("index", "login");
-            return View(new List<IndicadorModel>());
+            return View(Mapper.Map<ICollection<Indicador>, ICollection<IndicadorModel>>(indicadorAppService.Getall()));
         }
 
         // GET: Indicador/Details/5
@@ -35,7 +37,7 @@ namespace GerenciarEquipe.Painel.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            IndicadorModel indicadorModel = null;
+            IndicadorModel indicadorModel = Mapper.Map<Indicador,IndicadorModel>(indicadorAppService.GetById(id));
             if (indicadorModel == null)
             {
                 return HttpNotFound();
@@ -58,6 +60,7 @@ namespace GerenciarEquipe.Painel.Controllers
         {
             if (ModelState.IsValid)
             {
+                indicadorAppService.Add(Mapper.Map<IndicadorModel, Indicador>(indicadorModel));
                 return RedirectToAction("Index");
             }
 
@@ -71,7 +74,7 @@ namespace GerenciarEquipe.Painel.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            IndicadorModel indicadorModel = null;
+            IndicadorModel indicadorModel = Mapper.Map<Indicador, IndicadorModel>(indicadorAppService.GetById(id));
             if (indicadorModel == null)
             {
                 return HttpNotFound();
@@ -88,6 +91,7 @@ namespace GerenciarEquipe.Painel.Controllers
         {
             if (ModelState.IsValid)
             {
+                indicadorAppService.Update(Mapper.Map<IndicadorModel, Indicador>(indicadorModel));
                 return RedirectToAction("Index");
             }
             return View(indicadorModel);
@@ -100,7 +104,7 @@ namespace GerenciarEquipe.Painel.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            IndicadorModel indicadorModel = null;
+            IndicadorModel indicadorModel = Mapper.Map<Indicador, IndicadorModel>(indicadorAppService.GetById(id)); ;
             if (indicadorModel == null)
             {
                 return HttpNotFound();
@@ -113,7 +117,7 @@ namespace GerenciarEquipe.Painel.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(long id)
         {
-            IndicadorModel indicadorModel = null;
+            indicadorAppService.Remove(indicadorAppService.GetById(id)); ;
             return RedirectToAction("Index");
         }
 
@@ -121,6 +125,7 @@ namespace GerenciarEquipe.Painel.Controllers
         {
             if (disposing)
             {
+                indicadorAppService.Dispose();
             }
             base.Dispose(disposing);
         }

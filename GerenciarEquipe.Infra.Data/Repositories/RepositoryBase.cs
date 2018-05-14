@@ -14,7 +14,7 @@ namespace GerenciarEquipe.Infra.Data.Repositories
     {
         protected GerenciarEquipeModelContext Db = new GerenciarEquipeModelContext();
         
-        public TEntity GetById(int id)
+        public TEntity GetById(long? id)
         {
             return Db.Set<TEntity>().Find(id);
         }
@@ -60,7 +60,7 @@ namespace GerenciarEquipe.Infra.Data.Repositories
 
         public void Dispose()
         {
-
+            Db.Dispose();
         }
         
     }

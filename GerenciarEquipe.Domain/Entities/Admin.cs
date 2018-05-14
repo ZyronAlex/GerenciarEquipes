@@ -8,7 +8,6 @@ namespace GerenciarEquipe.Domain.Entities
 {
     public partial class Admin : Usuario
     {
-        public long id { get; set; }
         public string permissoes { get; set; }
     }
 }

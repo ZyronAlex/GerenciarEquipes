@@ -21,6 +21,7 @@ namespace GerenciarEquipe.Painel.Models
         [Display(Name = "Tamanho")]
         public int tamanho { get; set; }
 
+        [Display(Name = "Usuario")]
         [ScaffoldColumn(true)]
         public long id_usuario { get; set; }
 

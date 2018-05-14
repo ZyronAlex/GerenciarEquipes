@@ -64,6 +64,7 @@ namespace GerenciarEquipe.Infra.Data.Context
                 if (entry.State == EntityState.Added)
                 {
                     entry.Property("create_at").CurrentValue = DateTime.Now;
+                    entry.Property("update_at").CurrentValue = DateTime.Now;
                 }
                 if (entry.State == EntityState.Modified)
                 {

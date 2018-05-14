@@ -8,9 +8,11 @@ namespace GerenciarEquipe.Painel.Models
         [Key]
         public long id { get; set; }
 
+        [Display(Name = "Cargo")]
         [ScaffoldColumn(true)]
         public long id_cargo { get; set; }
 
+        [Display(Name = "Meta")]
         [ScaffoldColumn(true)]
         public long id_meta { get; set; }
 

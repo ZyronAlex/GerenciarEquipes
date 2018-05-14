@@ -21,6 +21,7 @@ namespace GerenciarEquipe.Painel.Models
         [Display(Name = "Justificativa")]
         public string justificativa { get; set; }
 
+        [Display(Name = "Funcionario")]
         [ScaffoldColumn(true)]
         public long id_funcionario { get; set; }
 

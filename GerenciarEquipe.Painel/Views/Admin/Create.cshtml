@@ -11,7 +11,7 @@
             Adicionando <span class="sparkline bar" data-type="bar"></span>
         </h3>
     </div>
-    @using (Html.BeginForm("Create", "Funcionario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("Create", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
         <div class="form-horizontal">
@@ -86,3 +86,7 @@
         </div>
     }
 </article>
+@section Scripts
+{
+    <script src="~/Scripts/image.js"></script>
+}

@@ -6,7 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 using GerenciarEquipe.Application.Interfaces;
+using GerenciarEquipe.Domain.Entities;
 using GerenciarEquipe.Painel.Models;
 
 namespace GerenciarEquipe.Painel.Controllers
@@ -14,9 +16,13 @@ namespace GerenciarEquipe.Painel.Controllers
     public class EquipeController : Controller
     {
         private readonly IFuncionarioAppService funcionarioAppService;
-        public EquipeController(IFuncionarioAppService funcionarioAppService)
+        private readonly ICargoAppService cargoAppService;
+        private readonly ILojaAppService lojaAppService;
+        public EquipeController(IFuncionarioAppService funcionarioAppService, ICargoAppService cargoAppService, ILojaAppService lojaAppService)
         {
             this.funcionarioAppService = funcionarioAppService;
+            this.cargoAppService = cargoAppService;
+            this.lojaAppService = lojaAppService;
         }
 
         // GET: Equipe
@@ -25,7 +31,7 @@ namespace GerenciarEquipe.Painel.Controllers
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("index", "login");
-            return View(new List<FuncionarioModel>());
+            return View(Mapper.Map<ICollection<Funcionario>, ICollection<FuncionarioModel>>(funcionarioAppService.Getall()));
         }
 
         // GET: Equipe/Details/5
@@ -35,7 +41,7 @@ namespace GerenciarEquipe.Painel.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            FuncionarioModel funcionarioModel = null;
+            FuncionarioModel funcionarioModel = Mapper.Map<Funcionario, FuncionarioModel>(funcionarioAppService.GetById(id));
             if (funcionarioModel == null)
             {
                 return HttpNotFound();
@@ -48,8 +54,8 @@ namespace GerenciarEquipe.Painel.Controllers
         {
             ViewBag.Genero = new SelectList(new List<string>(new string[]{"Masculino","Femninio"}));
             ViewBag.Turno = new SelectList(new List<string>(new string[] {"Matutino","Vespertino","Noturno","Sembrol"}));
-            ViewBag.Incicador = new SelectList(new List<IndicadorModel>(), "id", "nome");
-
+            ViewBag.Cargo = new SelectList(Mapper.Map<ICollection<Cargo>, ICollection<CargoModel>>(cargoAppService.Getall()), "id", "nome");
+            ViewBag.Loja = new SelectList(Mapper.Map<ICollection<Loja>, ICollection<LojaModel>>(lojaAppService.Getall()), "id", "nome");
             return View();
         }
 
@@ -62,9 +68,13 @@ namespace GerenciarEquipe.Painel.Controllers
         {
             if (ModelState.IsValid)
             {
+                funcionarioAppService.Add(Mapper.Map<FuncionarioModel, Funcionario>(funcionarioModel));
                 return RedirectToAction("Index");
             }
-
+            ViewBag.Genero = new SelectList(new List<string>(new string[] { "Masculino", "Femninio" }));
+            ViewBag.Turno = new SelectList(new List<string>(new string[] { "Matutino", "Vespertino", "Noturno", "Sembrol" }));
+            ViewBag.Cargo = new SelectList(Mapper.Map<ICollection<Cargo>, ICollection<CargoModel>>(cargoAppService.Getall()), "id", "nome");
+            ViewBag.Loja = new SelectList(Mapper.Map<ICollection<Loja>, ICollection<LojaModel>>(lojaAppService.Getall()), "id", "nome");
             return View(funcionarioModel);
         }
 
@@ -75,11 +85,15 @@ namespace GerenciarEquipe.Painel.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            FuncionarioModel funcionarioModel = null;
+            FuncionarioModel funcionarioModel = Mapper.Map<Funcionario, FuncionarioModel>(funcionarioAppService.GetById(id));
             if (funcionarioModel == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.Genero = new SelectList(new List<string>(new string[] { "Masculino", "Femninio" }));
+            ViewBag.Turno = new SelectList(new List<string>(new string[] { "Matutino", "Vespertino", "Noturno", "Sembrol" }));
+            ViewBag.Cargo = new SelectList(Mapper.Map<ICollection<Cargo>, ICollection<CargoModel>>(cargoAppService.Getall()), "id", "nome");
+            ViewBag.Loja = new SelectList(Mapper.Map<ICollection<Loja>, ICollection<LojaModel>>(lojaAppService.Getall()), "id", "nome");
             return View(funcionarioModel);
         }
 
@@ -92,8 +106,14 @@ namespace GerenciarEquipe.Painel.Controllers
         {
             if (ModelState.IsValid)
             {
+
+                funcionarioAppService.Update(Mapper.Map<FuncionarioModel, Funcionario>(funcionarioModel));
                 return RedirectToAction("Index");
             }
+            ViewBag.Genero = new SelectList(new List<string>(new string[] { "Masculino", "Femninio" }));
+            ViewBag.Turno = new SelectList(new List<string>(new string[] { "Matutino", "Vespertino", "Noturno", "Sembrol" }));
+            ViewBag.Cargo = new SelectList(Mapper.Map<ICollection<Cargo>, ICollection<CargoModel>>(cargoAppService.Getall()), "id", "nome");
+            ViewBag.Loja = new SelectList(Mapper.Map<ICollection<Loja>, ICollection<LojaModel>>(lojaAppService.Getall()), "id", "nome");
             return View(funcionarioModel);
         }
 
@@ -104,7 +124,7 @@ namespace GerenciarEquipe.Painel.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            FuncionarioModel funcionarioModel = null;
+            FuncionarioModel funcionarioModel = Mapper.Map<Funcionario, FuncionarioModel>(funcionarioAppService.GetById(id));
             if (funcionarioModel == null)
             {
                 return HttpNotFound();
@@ -117,7 +137,7 @@ namespace GerenciarEquipe.Painel.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(long id)
         {
-            FuncionarioModel funcionarioModel = null;
+            funcionarioAppService.Remove(funcionarioAppService.GetById(id));
             return RedirectToAction("Index");
         }
 
@@ -125,6 +145,7 @@ namespace GerenciarEquipe.Painel.Controllers
         {
             if (disposing)
             {
+                funcionarioAppService.Dispose();
             }
             base.Dispose(disposing);
         }

@@ -22,7 +22,7 @@ namespace GerenciarEquipe.Painel.Models
         public string nome { get; set; }
 
         [Required(ErrorMessage = "Preencha o campo Descrição")]
-        [AllowHtml]
+        [UIHint("tinymce_jquery_full"), AllowHtml]
         [Display(Name = "Descrição")]
         public string descicao { get; set; }
 

@@ -55,9 +55,11 @@ namespace GerenciarEquipe.Painel.Models
         [Display(Name = "Data Final")]
         public DateTime data_fim { get; set; }
 
+        [Display(Name = "Cargo")]
         [ScaffoldColumn(true)]
         public long id_cargo { get; set; }
 
+        [Display(Name = "Indicador")]
         [ScaffoldColumn(true)]
         public long id_indicador { get; set; }
 

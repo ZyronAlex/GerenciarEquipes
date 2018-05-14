@@ -25,7 +25,6 @@ namespace GerenciarEquipe.Painel
             bundles.Add(new ScriptBundle("~/bundles/ModalAdminJS")
                      .Include("~/Scripts/vendor.js")
                      .Include("~/Scripts/app.js")
-                     .Include("~/Scripts/image.js")
                      .Include("~/Scripts/modal.js")
                      .Include("~/Scripts/datatables.min.js"));
 

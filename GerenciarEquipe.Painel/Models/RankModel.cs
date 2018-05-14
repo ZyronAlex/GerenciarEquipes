@@ -21,6 +21,7 @@ namespace GerenciarEquipe.Painel.Models
         [Display(Name = "Mês")]
         public DateTime mes { get; set; }
 
+        [Display(Name = "Funcionario")]
         [ScaffoldColumn(true)]
         public long id_funcionairo { get; set; }
 

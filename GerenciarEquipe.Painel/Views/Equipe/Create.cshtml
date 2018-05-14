@@ -1,7 +1,7 @@
 ﻿@model GerenciarEquipe.Painel.Models.FuncionarioModel
 
 @{
-    ViewBag.Title = "Fucionario";
+    ViewBag.Title = "Equipe";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -11,7 +11,7 @@
             Adicionando <span class="sparkline bar" data-type="bar"></span>
         </h3>
     </div>
-    @using (Html.BeginForm("Create", "Funcionario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("Create", "Equipe", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
         <div class="form-horizontal">
@@ -27,7 +27,7 @@
                                     <div class="file-upload-img" style="cursor: pointer;" title="Clique para inserir uma imagem">
                                         @Html.TextBoxFor(model => model.foto, new { type = "file", accept = ".jpg,.jpeg,.png" })
                                         <label class="input-file-produto wrap-badge" for="ThumbnailFile">
-                                            <img class="img-responsive img-toggle" src="~/Imagem/plus-icon-33363.png" alt="updatefile" style="cursor: pointer;" title="Clique para inserir uma imagem">
+                                            <img class="img-responsive img-toggle" src="~/Image/plus-icon-33363.png" alt="updatefile" style="cursor: pointer;" title="Clique para inserir uma imagem">
                                             <span class="upload-ok"></span>
                                         </label>
                                     </div>
@@ -85,7 +85,7 @@
                 <div class="form-group row">
                     @Html.LabelFor(model => model.genero, htmlAttributes: new { @class = "control-label col-md-2 text-xs-right" })
                     <div class="col-md-10">
-                        @Html.DropDownList("genero", (IEnumerable<SelectListItem>)ViewBag.Genero, "Selecione um Gênero")
+                        @Html.DropDownList("genero", (IEnumerable<SelectListItem>)ViewBag.Genero, "Selecione um Gênero", new { @class = "form-control box" })
                         @Html.ValidationMessageFor(model => model.genero, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -109,7 +109,7 @@
                 <div class="form-group row">
                     @Html.LabelFor(model => model.turno, htmlAttributes: new { @class = "control-label col-md-2 text-xs-right" })
                     <div class="col-md-10">
-                        @Html.DropDownList("turno", (IEnumerable<SelectListItem>)ViewBag.Turno, "Selecione um Turno")
+                        @Html.DropDownList("turno", (IEnumerable<SelectListItem>)ViewBag.Turno, "Selecione um Turno", new { @class = "form-control box" })
                         @Html.ValidationMessageFor(model => model.turno, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -117,7 +117,7 @@
                 <div class="form-group row">
                     @Html.LabelFor(model => model.id_cargo, htmlAttributes: new { @class = "control-label col-md-2 text-xs-right" })
                     <div class="col-md-10">
-                        @Html.DropDownList("id_cargo", (IEnumerable<SelectListItem>)ViewBag.Cargo, "Selecione um Cargo")
+                        @Html.DropDownList("id_cargo", (IEnumerable<SelectListItem>)ViewBag.Cargo, "Selecione um Cargo", new { @class = "form-control box" } )
                         @Html.ValidationMessageFor(model => model.id_cargo, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -125,7 +125,7 @@
                 <div class="form-group row">
                     @Html.LabelFor(model => model.id_loja, htmlAttributes: new { @class = "control-label col-md-2 text-xs-right" })
                     <div class="col-md-10">
-                        @Html.DropDownList("id_loja", (IEnumerable<SelectListItem>)ViewBag.Loja, "Selecione um Loja")
+                        @Html.DropDownList("id_loja", (IEnumerable<SelectListItem>)ViewBag.Loja, "Selecione um Loja", new { @class = "form-control box" } )
                         @Html.ValidationMessageFor(model => model.id_loja, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -135,10 +135,14 @@
                         <button type="submit" class="btn btn-primary">
                             Salvar
                         </button>
-                        @Html.ActionLink("Cancelar", "Index", "Funcionario", new { }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Cancelar", "Index", "Equipe", new { }, new { @class = "btn btn-primary" })
                     </div>
                 </div>
             </div>
         </div>
     }
 </article>
+@section Scripts
+{
+    <script src="@Url.Content("~/Scripts/image.js")"></script>
+}
