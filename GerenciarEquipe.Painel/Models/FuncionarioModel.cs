@@ -4,6 +4,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace GerenciarEquipe.Painel.Models
 {
+    public enum turnos { Matutino, Vespertino, Noturno, Sembrol };
+    public enum generos { Masculino, Feminino };
     public partial class FuncionarioModel : UsuarioModel
     {
         public FuncionarioModel()
@@ -30,7 +32,7 @@ namespace GerenciarEquipe.Painel.Models
         public DateTime nascimento { get; set; }
 
         [Display(Name = "Genero")]
-        public string genero { get; set; }
+        public generos? genero { get; set; }
 
         [Display(Name = "Cidade")]
         public string cidade { get; set; }
@@ -39,7 +41,7 @@ namespace GerenciarEquipe.Painel.Models
         public string estado { get; set; }
 
         [Display(Name = "Turno")]
-        public string turno { get; set; }
+        public turnos? turno { get; set; }
 
         [Display(Name = "Cargo")]
         [ScaffoldColumn(false)]
@@ -53,6 +55,5 @@ namespace GerenciarEquipe.Painel.Models
         public virtual CargoModel cargo { get; set; }
         public virtual ICollection<RankModel> ranks { get; set; }
         public virtual ICollection<RespostaModel> respostas { get; set;}
-
     }
 }

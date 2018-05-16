@@ -54,8 +54,6 @@ namespace GerenciarEquipe.Painel.Controllers
         // GET: Equipe/Create
         public ActionResult Create()
         {
-            ViewBag.Genero = new SelectList(new List<string>(new string[] { "Masculino", "Femninio" }));
-            ViewBag.Turno = new SelectList(new List<string>(new string[] { "Matutino", "Vespertino", "Noturno", "Sembrol" }));
             ViewBag.Cargo = new SelectList(Mapper.Map<ICollection<Cargo>, ICollection<CargoModel>>(cargoAppService.Getall()), "id", "nome");
             ViewBag.Loja = new SelectList(Mapper.Map<ICollection<Loja>, ICollection<LojaModel>>(lojaAppService.Getall()), "id", "nome");
             return View();
@@ -73,7 +71,7 @@ namespace GerenciarEquipe.Painel.Controllers
                 if (funcionarioModel.fotoFile != null && funcionarioModel.fotoFile.ContentLength != 0)
                 {
                     var extencao = funcionarioModel.fotoFile.FileName.Split('.').Last();
-                    var fileName = ((long)DateTime.Now.Subtract(DateTime.MinValue.AddYears(1969)).TotalMilliseconds).ToString() + "." + extencao[extencao.Length - 1];
+                    var fileName = ((long)DateTime.Now.Subtract(DateTime.MinValue.AddYears(1969)).TotalMilliseconds).ToString() + "." + extencao;
                     string savedFileName = Path.Combine(
                         HostingEnvironment.MapPath("~/FuncionarioFotos/"),
                        Path.GetFileName(fileName));
@@ -89,8 +87,7 @@ namespace GerenciarEquipe.Painel.Controllers
                 return RedirectToAction("Index");
 
             }
-            ViewBag.Genero = new SelectList(new List<string>(new string[] { "Masculino", "Femninio" }),funcionarioModel.genero);
-            ViewBag.Turno = new SelectList(new List<string>(new string[] { "Matutino", "Vespertino", "Noturno", "Sembrol" }),funcionarioModel.turno);
+
             ViewBag.Cargo = new SelectList(Mapper.Map<ICollection<Cargo>, ICollection<CargoModel>>(cargoAppService.Getall()), "id", "nome");
             ViewBag.Loja = new SelectList(Mapper.Map<ICollection<Loja>, ICollection<LojaModel>>(lojaAppService.Getall()), "id", "nome");
             return View(funcionarioModel);
@@ -108,8 +105,7 @@ namespace GerenciarEquipe.Painel.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Genero = new SelectList(new List<string>(new string[] { "Masculino", "Femninio" }), funcionarioModel.genero);
-            ViewBag.Turno = new SelectList(new List<string>(new string[] { "Matutino", "Vespertino", "Noturno", "Sembrol" }), funcionarioModel.turno);
+
             ViewBag.Cargo = new SelectList(Mapper.Map<ICollection<Cargo>, ICollection<CargoModel>>(cargoAppService.Getall()), "id", "nome");
             ViewBag.Loja = new SelectList(Mapper.Map<ICollection<Loja>, ICollection<LojaModel>>(lojaAppService.Getall()), "id", "nome");
             return View(funcionarioModel);
@@ -136,7 +132,7 @@ namespace GerenciarEquipe.Painel.Controllers
                             Local.Delete();
                     }
                     var extencao = funcionarioModel.fotoFile.FileName.Split('.').Last();
-                    fileName = ((long)DateTime.Now.Subtract(DateTime.MinValue.AddYears(1969)).TotalMilliseconds).ToString() + "." + extencao[extencao.Length - 1];
+                    fileName = ((long)DateTime.Now.Subtract(DateTime.MinValue.AddYears(1969)).TotalMilliseconds).ToString() + "." + extencao;
                     string savedFileName = Path.Combine(
                         HostingEnvironment.MapPath("~/FuncionarioFotos/"),
                        Path.GetFileName(fileName));
@@ -151,8 +147,6 @@ namespace GerenciarEquipe.Painel.Controllers
                 funcionarioAppService.Update(Mapper.Map<FuncionarioModel, Funcionario>(funcionarioModel));
                 return RedirectToAction("Index");
             }
-            ViewBag.Genero = new SelectList(new List<string>(new string[] { "Masculino", "Femninio" }), funcionarioModel.genero);
-            ViewBag.Turno = new SelectList(new List<string>(new string[] { "Matutino", "Vespertino", "Noturno", "Sembrol" }), funcionarioModel.turno);
             ViewBag.Cargo = new SelectList(Mapper.Map<ICollection<Cargo>, ICollection<CargoModel>>(cargoAppService.Getall()), "id", "nome");
             ViewBag.Loja = new SelectList(Mapper.Map<ICollection<Loja>, ICollection<LojaModel>>(lojaAppService.Getall()), "id", "nome");
             return View(funcionarioModel);

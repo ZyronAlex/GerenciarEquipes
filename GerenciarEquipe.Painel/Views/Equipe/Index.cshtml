@@ -23,27 +23,27 @@
         <ul class="item-list striped tabela">
             <li class="item item-list-header ">
                 <div class="item-row">
-                    <div class="item-col fixed item-col-check">
-                        <label class="item-check" id="select-all-items">
-                            <span></span>
-                        </label>
+                    <div class="item-col item-col-header fixed item-col-img md">
+                        <div>
+                            <span>@Html.DisplayNameFor(model => model.foto)</span>
+                        </div>
                     </div>
                     <div class="item-col item-col-header item-col-title">
                         <div>
                             <span> @Html.DisplayNameFor(model => model.nome)</span>
                         </div>
                     </div>
-                    <div class="item-col item-col-header item-col-title">
+                    <div class="item-col item-col-header item-col-author">
                         <div>
                             <span> @Html.DisplayNameFor(model => model.email)</span>
                         </div>
                     </div>
-                    <div class="item-col item-col-header item-col-sales">
+                    <div class="item-col item-col-header item-col-stats">
                         <div>
                             <span> @Html.DisplayNameFor(model => model.matricula)</span>
                         </div>
                     </div>
-                    <div class="item-col item-col-header item-col-sales">
+                    <div class="item-col item-col-header item-col-author">
                         <div>
                             <span>@Html.DisplayNameFor(model => model.turno)</span>
                         </div>
@@ -61,61 +61,65 @@
             {
                 <li class='item'>
                     <div class='item-row'>
-                        <div class='item-col fixed item-col-check'>
-                            <label class='item-check' id='select-all-items'>
-                                <span></span>
-                            </label>
+                        <div class="item-col fixed item-col-img md">
+                            <a href="">
+                                <div class="item-img rounded" style="background-image: url(@Html.DisplayFor(model => item.foto))"></div>
+                            </a>
                         </div>
-                        <div class="item-col fixed pull-left item-col-title">
+                        <div class="item-col fixed item-col-title">
                             <div class="item-heading"> @Html.DisplayNameFor(model => model.nome)</div>
                             <div>
-                                <a href="" class="">
-                                    <h4 class="item-title">@Html.DisplayFor(model => item.nome)</h4>
-                                </a>
+                                <h4 class="item-title">@Html.DisplayFor(model => item.nome)</h4>
                             </div>
                         </div>
-                        <div class="item-col fixed pull-left item-col-title">
+                        <div class="item-col fixed item-col-author">
                             <div class="item-heading"> @Html.DisplayNameFor(model => model.email)</div>
-                            <div>
-                                <a href="" class="">
-                                    <h4 class="item-title">@Html.DisplayFor(model => item.email)</h4>
-                                </a>
+                            <div class="no-overflow">
+                                @Html.DisplayFor(model => item.email)
                             </div>
                         </div>
-                        <div class="item-col fixed pull-left item-col-sales">
+                        <div class="item-col fixed item-col-stats">
                             <div class="item-heading"> @Html.DisplayNameFor(model => model.matricula)</div>
-                            <div>
-                                <a href="" class="">
-                                    <h4 class="item-title">@Html.DisplayFor(model => item.matricula)</h4>
-                                </a>
+                            <div class="no-overflow">
+                                @Html.DisplayFor(model => item.matricula)
                             </div>
                         </div>
-                        <div class="item-col fixed pull-left item-col-sales">
+                        <div class="item-col fixed item-col-author">
                             <div class="item-heading"> @Html.DisplayNameFor(model => model.turno)</div>
-                            <div>
-                                <a href="" class="">
-                                    <h4 class="item-title">@Html.DisplayFor(model => item.turno)</h4>
-                                </a>
+                            <div class="no-overflow">
+                                @Html.DisplayFor(model => item.turno)
                             </div>
                         </div>
-                        <div class="item-col fixed pull-left item-col-date">
+                        <div class="item-col fixed item-col-date">
                             <div class="item-heading"> @Html.DisplayNameFor(model => model.nascimento)</div>
                             <div>
-                                <a href="" class="">
-                                    <h4 class="item-title">@Html.DisplayFor(model => item.nascimento)</h4>
-                                </a>
+                                @Html.DisplayFor(model => item.nascimento)
                             </div>
                         </div>
                         <div class="item-col fixed item-col-actions-dropdown">
                             <div class="item-actions-dropdown">
-                                <a class="remove" href="@Url.Action("Delete", new { id = item.id})">
-                                    <i class="fa fa-trash-o"></i>
+                                <a class="item-actions-toggle-btn">
+                                    <span class="inactive">
+                                        <i class="fa fa-cog"></i>
+                                    </span>
+                                    <span class="active">
+                                        <i class="fa fa-chevron-circle-right"></i>
+                                    </span>
                                 </a>
-                            </div>
-                            <div class="item-actions-dropdown">
-                                <a class="edit" href="@Url.Action("Edit", new { id = item.id })">
-                                    <i class="fa fa-pencil"></i>
-                                </a>
+                                <div class="item-actions-block">
+                                    <ul class="item-actions-list">
+                                        <li>
+                                            <a class="remove" href="@Url.Action("Delete", new { id = item.id})">
+                                                <i class="fa fa-trash-o "></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="edit" href="@Url.Action("Edit", new { id = item.id })">
+                                                <i class="fa fa-pencil"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>

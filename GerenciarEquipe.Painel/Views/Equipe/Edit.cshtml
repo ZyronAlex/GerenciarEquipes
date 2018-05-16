@@ -94,16 +94,8 @@
                 <div class="form-group row">
                     @Html.LabelFor(model => model.genero, htmlAttributes: new { @class = "control-label col-md-2 text-xs-right" })
                     <div class="col-md-10">
-                        @Html.DropDownList("genero", (IEnumerable<SelectListItem>)ViewBag.Genero, "Selecione um Gênero", new { @class = "form-control box" } )
+                        @Html.EnumDropDownListFor(model => model.genero, "Selecione um Genero", new { @class = "form-control box" })
                         @Html.ValidationMessageFor(model => model.genero, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    @Html.LabelFor(model => model.cidade, htmlAttributes: new { @class = "control-label col-md-2 text-xs-right" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.cidade, new { htmlAttributes = new { @class = "form-control box" } })
-                        @Html.ValidationMessageFor(model => model.cidade, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
@@ -116,9 +108,17 @@
                 </div>
 
                 <div class="form-group row">
+                    @Html.LabelFor(model => model.cidade, htmlAttributes: new { @class = "control-label col-md-2 text-xs-right" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.cidade, new { htmlAttributes = new { @class = "form-control text-xs-right" } })
+                        @Html.ValidationMessageFor(model => model.cidade, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
                     @Html.LabelFor(model => model.turno, htmlAttributes: new { @class = "control-label col-md-2 text-xs-right" })
                     <div class="col-md-10">
-                        @Html.DropDownList("turno", (IEnumerable<SelectListItem>)ViewBag.Turno, "Selecione um Turno", new { @class = "form-control box" })
+                        @Html.EnumDropDownListFor(model => model.turno, "Selecione um Truno", new { @class = "form-control box" })
                         @Html.ValidationMessageFor(model => model.turno, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -126,7 +126,7 @@
                 <div class="form-group row">
                     @Html.LabelFor(model => model.id_cargo, htmlAttributes: new { @class = "control-label col-md-2 text-xs-right" })
                     <div class="col-md-10">
-                        @Html.DropDownList("id_cargo", (IEnumerable<SelectListItem>)ViewBag.Cargo, "Selecione um Cargo", new { @class = "form-control box" } )
+                        @Html.DropDownListFor(model => model.id_cargo, (IEnumerable<SelectListItem>)ViewBag.Cargo, "Selecione um Cargo", new { @class = "form-control box" })
                         @Html.ValidationMessageFor(model => model.id_cargo, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -134,7 +134,7 @@
                 <div class="form-group row">
                     @Html.LabelFor(model => model.id_loja, htmlAttributes: new { @class = "control-label col-md-2 text-xs-right" })
                     <div class="col-md-10">
-                        @Html.DropDownList("id_loja", (IEnumerable<SelectListItem>)ViewBag.Loja, "Selecione um Loja", new { @class = "form-control box" })
+                        @Html.DropDownListFor(model => model.id_loja, (IEnumerable<SelectListItem>)ViewBag.Loja, "Selecione um Loja", new { @class = "form-control box" })
                         @Html.ValidationMessageFor(model => model.id_loja, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -153,5 +153,13 @@
 </article>
 @section Scripts
 {
+    <script src="@Url.Content("~/Scripts/cidades-estados-1.4.js")"></script>
+    <script language="JavaScript" type="text/javascript" charset="utf-8">
+        new dgCidadesEstados({
+            cidade: document.getElementById('cidade'),
+            estado: document.getElementById('estado'),
+            change: true
+        })
+    </script>
     <script src="@Url.Content("~/Scripts/image.js")"></script>
 }

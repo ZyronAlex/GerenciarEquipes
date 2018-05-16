@@ -103,20 +103,6 @@
                                     <i class="fa fa-users"></i> Equipe
                                 </a>
                             </li>
-                            @*<li @if (currentpage.Equals("Formulario")) { Write("class=open active"); }>
-                                    <a href="#">
-                                        <i class="fa fa-pencil-square-o"></i> Formulário
-                                        <i class="fa arrow"></i>
-                                    </a>
-                                    <ul class="sidebar-nav">
-                                        <li>
-                                            <a href="@Url.Action("Index", "Formulario")"> Editar Formulário</a>
-                                        </li>
-                                        <li>
-                                            <a href="@Url.Action("Index", "Formulario")"> Responder Formulário</a>
-                                        </li>
-                                    </ul>
-                                </li>*@
                             <li @if (currentpage.Equals("Cargo")) { Write("class=active"); }>
                                 <a href="@Url.Action("Index", "Cargo")">
                                     <i class="fa fa-suitcase"></i> Cargos
@@ -124,22 +110,37 @@
                             </li>
                             <li @if (currentpage.Equals("Loja")) { Write("class=active"); }>
                                 <a href="@Url.Action("Index", "Loja")">
-                                    <i class="fa fa-medkit"></i> Lojas
+                                    <i class="fa fa-building-o"></i> Lojas
                                 </a>
                             </li>
                             <li @if (currentpage.Equals("Indicador")) { Write("class=active"); }>
                                 <a href="@Url.Action("Index", "Indicador")">
-                                    <i class="fa fa-medkit"></i> Indicadores
+                                    <i class="fa fa-tags"></i> Indicadores
                                 </a>
                             </li>
                             <li @if (currentpage.Equals("Meta")) { Write("class=active"); }>
                                 <a href="@Url.Action("Index", "Meta")">
-                                    <i class="fa fa-bar-chart-o"></i> Metas
+                                    <i class="fa fa-bullseye"></i> Metas
                                 </a>
                             </li>
                             <li @if (currentpage.Equals("Admin")) { Write("class=active"); }>
                                 <a href="@Url.Action("Index", "Admin")">
-                                    <i class="fa fa-bar-chart-o"></i> Admin
+                                    <i class="fa fa-user-circle-o"></i> Admin
+                                </a>
+                            </li>
+                            <li @if (currentpage.Equals("Relatorio")) { Write("class=active"); }>
+                                <a href="@Url.Action("Index", "Relatorio")">
+                                    <i class="fa fa-area-chart"></i> Relatórios
+                                </a>
+                            </li>
+                            <li @if (currentpage.Equals("Rank")) { Write("class=active"); }>
+                                <a href="@Url.Action("Index", "Rank")">
+                                    <i class="fa fa-trophy"></i> Classificação Geral
+                                </a>
+                            </li>
+                            <li @if (currentpage.Equals("Formulario")) { Write("class=open active"); }>
+                                <a href="@Url.Action("Index", "Formulario")">
+                                    <i class="fa fa-pencil-square-o"></i> Formulário
                                 </a>
                             </li>
                         </ul>

@@ -230,6 +230,7 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Scripts\cidades-estados-1.4.js" />
     <Content Include="Scripts\datatables.min.js" />
     <Content Include="Scripts\editor.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
