@@ -54,8 +54,8 @@ namespace GerenciarEquipe.Painel.Controllers
         // GET: Equipe/Create
         public ActionResult Create()
         {
-            ViewBag.Genero = new SelectList(new List<string>(new string[] { "Masculino", "Femninio" }), funcionarioModel.genero);
-            ViewBag.Turno = new SelectList(new List<string>(new string[] { "Matutino", "Vespertino", "Noturno", "Sembrol" }), funcionarioModel.turno);
+            ViewBag.Genero = new SelectList(new List<string>(new string[] { "Masculino", "Femninio" }));
+            ViewBag.Turno = new SelectList(new List<string>(new string[] { "Matutino", "Vespertino", "Noturno", "Sembrol" }));
             ViewBag.Cargo = new SelectList(Mapper.Map<ICollection<Cargo>, ICollection<CargoModel>>(cargoAppService.Getall()), "id", "nome");
             ViewBag.Loja = new SelectList(Mapper.Map<ICollection<Loja>, ICollection<LojaModel>>(lojaAppService.Getall()), "id", "nome");
             return View();
