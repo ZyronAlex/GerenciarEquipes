@@ -33,6 +33,7 @@ namespace GerenciarEquipe.Painel.Controllers
         {
             if (Session["usuario"] == null)
                 return RedirectToAction("index", "login");
+
             return View(Mapper.Map<ICollection<Funcionario>, ICollection<FuncionarioModel>>(funcionarioAppService.Getall()));
         }
 
@@ -164,7 +165,7 @@ namespace GerenciarEquipe.Painel.Controllers
             {
                 return HttpNotFound();
             }
-            return PartialView(funcionarioModel);
+            return View(funcionarioModel);
         }
 
         // POST: Equipe/Delete/5

@@ -38,7 +38,7 @@
                             <span> @Html.DisplayNameFor(model => model.email)</span>
                         </div>
                     </div>
-                    <div class="item-col item-col-header item-col-stats">
+                    <div class="item-col item-col-header item-col-author">
                         <div>
                             <span> @Html.DisplayNameFor(model => model.matricula)</span>
                         </div>
@@ -62,38 +62,36 @@
                 <li class='item'>
                     <div class='item-row'>
                         <div class="item-col fixed item-col-img md">
-                            <a href="">
                                 <div class="item-img rounded" style="background-image: url(@Html.DisplayFor(model => item.foto))"></div>
-                            </a>
                         </div>
-                        <div class="item-col fixed item-col-title">
+                        <div class="item-col item-col-title">
                             <div class="item-heading"> @Html.DisplayNameFor(model => model.nome)</div>
                             <div>
                                 <h4 class="item-title">@Html.DisplayFor(model => item.nome)</h4>
                             </div>
                         </div>
-                        <div class="item-col fixed item-col-author">
+                        <div class="item-col item-col-author">
                             <div class="item-heading"> @Html.DisplayNameFor(model => model.email)</div>
                             <div class="no-overflow">
                                 @Html.DisplayFor(model => item.email)
                             </div>
                         </div>
-                        <div class="item-col fixed item-col-stats">
+                        <div class="item-col item-col-author">
                             <div class="item-heading"> @Html.DisplayNameFor(model => model.matricula)</div>
                             <div class="no-overflow">
                                 @Html.DisplayFor(model => item.matricula)
                             </div>
                         </div>
-                        <div class="item-col fixed item-col-author">
+                        <div class="item-col item-col-author">
                             <div class="item-heading"> @Html.DisplayNameFor(model => model.turno)</div>
                             <div class="no-overflow">
                                 @Html.DisplayFor(model => item.turno)
                             </div>
                         </div>
-                        <div class="item-col fixed item-col-date">
+                        <div class="item-col item-col-date">
                             <div class="item-heading"> @Html.DisplayNameFor(model => model.nascimento)</div>
                             <div>
-                                @Html.DisplayFor(model => item.nascimento)
+                                @Html.ValueFor(model => item.nascimento, "{0:dd/MM/yyyy}")
                             </div>
                         </div>
                         <div class="item-col fixed item-col-actions-dropdown">

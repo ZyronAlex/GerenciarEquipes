@@ -50,7 +50,7 @@ namespace GerenciarEquipe.Painel.Models
         public int? peso { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:MMM}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Mes")]
         [ScaffoldColumn(false)]
         public DateTime mes { get; set; }
@@ -64,13 +64,13 @@ namespace GerenciarEquipe.Painel.Models
         public long id_indicador { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Data Cadastro")]
         [ScaffoldColumn(false)]
         public DateTime create_at { set; get; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Data Ultima Alteração")]
         [ScaffoldColumn(false)]
         public DateTime update_at { set; get; }

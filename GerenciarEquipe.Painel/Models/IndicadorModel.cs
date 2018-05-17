@@ -27,13 +27,13 @@ namespace GerenciarEquipe.Painel.Models
         public string indicativa { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Data Cadastro")]
         [ScaffoldColumn(false)]
         public DateTime create_at { set; get; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Data Ultima Alteração")]
         [ScaffoldColumn(false)]
         public DateTime update_at { set; get; }
