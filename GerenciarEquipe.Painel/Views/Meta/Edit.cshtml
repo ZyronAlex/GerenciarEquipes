@@ -76,10 +76,26 @@
                 </div>
 
                 <div class="form-group row">
-                    @Html.LabelFor(model => model.id_cargo, htmlAttributes: new { @class = "control-label col-md-2 text-xs-right" })
+                    @Html.LabelFor(model => model.id_indicador, htmlAttributes: new { @class = "control-label col-md-2 text-xs-right" })
                     <div class="col-md-10">
-                        @Html.DropDownList("id_cargo", (IEnumerable<SelectListItem>)ViewBag.Cargo, "Selecione um Cargo", new { @class = "form-control box" })
-                        @Html.ValidationMessageFor(model => model.id_cargo, "", new { @class = "text-danger" })
+                        @Html.DropDownListFor(model => model.id_indicador, (IEnumerable<SelectListItem>)ViewBag.Indicador, "Selecione um Indicador", new { @class = "form-control box" })
+                        @Html.ValidationMessageFor(model => model.id_indicador, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.ambitos, htmlAttributes: new { @class = "control-label col-md-2 text-xs-right" })
+                    <div class="col-md-10">
+                        @Html.ListBoxFor(model => model.ambitos, (IEnumerable<SelectListItem>)ViewBag.Cargo, new { @class = "form-control box" })
+                        @Html.ValidationMessageFor(model => model.id_indicador, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.inquiridos, htmlAttributes: new { @class = "control-label col-md-2 text-xs-right" })
+                    <div class="col-md-10">
+                        @Html.ListBoxFor(model => model.inquiridos, (IEnumerable<SelectListItem>)ViewBag.Cargo, new { @class = "form-control box" })
+                        @Html.ValidationMessageFor(model => model.id_indicador, "", new { @class = "text-danger" })
                     </div>
                 </div>
 

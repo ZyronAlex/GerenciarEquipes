@@ -17,11 +17,7 @@ namespace GerenciarEquipe.Infra.Data.EntityConfig
 
             Property(m => m.unidade)
              .IsRequired();
-
-            HasRequired(m => m.cargo)
-                 .WithMany(c => c.metas)
-                 .HasForeignKey(m => m.id_cargo);
-
+            
             HasRequired(m => m.indicador)
                  .WithMany(i => i.metas)
                  .HasForeignKey(m => m.id_indicador);

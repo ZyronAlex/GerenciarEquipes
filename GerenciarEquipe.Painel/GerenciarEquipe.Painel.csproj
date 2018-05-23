@@ -179,6 +179,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AdminModel.cs" />
+    <Compile Include="Models\InquiridoModel.cs" />
     <Compile Include="Models\AmbitoModel.cs" />
     <Compile Include="Models\CargoModel.cs" />
     <Compile Include="Models\FuncionarioModel.cs" />

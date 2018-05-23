@@ -10,8 +10,9 @@ namespace GerenciarEquipe.Domain.Entities
     {
         public Meta()
         {
-            ambitos = new HashSet<Ambito>();
+            ambitos = new HashSet<Cargo>();
             respostas = new HashSet<Resposta>();
+            inquridos = new HashSet<Cargo>();
         }
         public long id { get; set; }
         public string descicao { get; set; }
@@ -23,14 +24,12 @@ namespace GerenciarEquipe.Domain.Entities
         public string fonte { get; set; }
         public string grupo { get; set; }
         public int? peso { get; set; }
-        public DateTime mes { get; set; }
-        public long id_cargo { get; set; }
         public long id_indicador { get; set; }
         public DateTime create_at { set; get; }
         public DateTime update_at { set; get; }
-        public virtual Cargo cargo { get; set; }
         public virtual Indicador indicador { get; set; }
-        public virtual ICollection<Ambito> ambitos { get; set; }
+        public virtual ICollection<Cargo> ambitos { get; set; }
+        public virtual ICollection<Cargo> inquridos { get; set; }
         public virtual ICollection<Resposta> respostas { get; set; }
     }
 }

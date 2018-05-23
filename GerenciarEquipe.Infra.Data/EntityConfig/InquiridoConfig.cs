@@ -5,18 +5,18 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace GerenciarEquipe.Infra.Data.EntityConfig
 {
-    class AmbitoConfig : EntityTypeConfiguration<Ambito>
+    class InquiridoConfig : EntityTypeConfiguration<Inquirido>
     {
-        public AmbitoConfig()
+        public InquiridoConfig()
         {
             HasKey(a => a.id);
 
             //HasRequired(a => a.cargo)
-            //  .WithMany(c => c.ambitos)
+            //  .WithMany(c => c.inquridos)
             //  .HasForeignKey(e => e.id_cargo);
 
             //HasRequired(a => a.meta)
-            // .WithMany(m => m.ambitos)
+            // .WithMany(m => m.inquridos)
             // .HasForeignKey(a => a.id_meta);
 
             Property(a => a.id_cargo)

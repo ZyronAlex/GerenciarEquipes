@@ -65,7 +65,7 @@ namespace GerenciarEquipe.Painel.Controllers
                 if (adminModel.fotoFile != null && adminModel.fotoFile.ContentLength != 0)
                 {
                     var extencao = adminModel.fotoFile.FileName.Split('.').Last();
-                    string fileName = ((long)DateTime.Now.Subtract(DateTime.MinValue.AddYears(1969)).TotalMilliseconds).ToString() + "." + extencao[extencao.Length - 1];
+                    string fileName = ((long)DateTime.Now.Subtract(DateTime.MinValue.AddYears(1969)).TotalMilliseconds).ToString() + "." + extencao;
                     string savedFileName = Path.Combine(
                         HostingEnvironment.MapPath("~/AdminFotos/"),
                        Path.GetFileName(fileName));
@@ -119,7 +119,7 @@ namespace GerenciarEquipe.Painel.Controllers
                             Local.Delete();
                     }
                     var extencao = adminModel.fotoFile.FileName.Split('.').Last();
-                    fileName = ((long)DateTime.Now.Subtract(DateTime.MinValue.AddYears(1969)).TotalMilliseconds).ToString() + "." + extencao[extencao.Length - 1];
+                    fileName = ((long)DateTime.Now.Subtract(DateTime.MinValue.AddYears(1969)).TotalMilliseconds).ToString() + "." + extencao;
                     string savedFileName = Path.Combine(
                         HostingEnvironment.MapPath("~/AdminFotos/"),
                        Path.GetFileName(fileName));

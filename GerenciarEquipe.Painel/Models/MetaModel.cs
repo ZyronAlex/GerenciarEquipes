@@ -12,8 +12,9 @@ namespace GerenciarEquipe.Painel.Models
     {
         public MetaModel()
         {
-            ambitos = new HashSet<AmbitoModel>();
+            ambitos = new HashSet<CargoModel>();
             respostas = new HashSet<RespostaModel>();
+            inquiridos = new HashSet<CargoModel>();
         }
 
         [Key]
@@ -48,17 +49,7 @@ namespace GerenciarEquipe.Painel.Models
 
         [Display(Name = "Peso")]
         public int? peso { get; set; }
-
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        [Display(Name = "Mes")]
-        [ScaffoldColumn(false)]
-        public DateTime mes { get; set; }
-        
-        [Display(Name = "Cargo")]
-        [ScaffoldColumn(false)]
-        public long id_cargo { get; set; }
-
+                
         [Display(Name = "Indicador")]
         [ScaffoldColumn(false)]
         public long id_indicador { get; set; }
@@ -75,12 +66,12 @@ namespace GerenciarEquipe.Painel.Models
         [ScaffoldColumn(false)]
         public DateTime update_at { set; get; }
 
-        public virtual CargoModel cargo { get; set; }
-
         public virtual IndicadorModel indicador { get; set; }
 
-        public virtual ICollection<AmbitoModel> ambitos { get; set; }
+        public virtual ICollection<CargoModel> ambitos { get; set; }
 
         public virtual ICollection<RespostaModel> respostas { get; set; }
+
+        public virtual ICollection<CargoModel> inquiridos { get; set; }
     }
 }

@@ -9,9 +9,8 @@ namespace GerenciarEquipe.Painel.Models
     {
         public CargoModel()
         {
-            metas = new HashSet<MetaModel>();
-            ambitos = new HashSet<AmbitoModel>();
-
+            ambitos = new HashSet<MetaModel>();
+            inquiridos = new HashSet<MetaModel>();
         }
         [Key]
         public long id { get; set; }
@@ -44,7 +43,7 @@ namespace GerenciarEquipe.Painel.Models
         public DateTime update_at { set; get; }
 
         public virtual ICollection<FuncionarioModel> funcionarios { get; set; }
-        public virtual ICollection<MetaModel> metas { get; set; }
-        public virtual ICollection<AmbitoModel> ambitos { get; set; }
+        public virtual ICollection<MetaModel> ambitos { get; set; }
+        public virtual ICollection<MetaModel> inquiridos { get; set; }
     }
 }

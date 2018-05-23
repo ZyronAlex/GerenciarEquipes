@@ -41,12 +41,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminAppService.cs" />
+    <Compile Include="InquiridoAppService.cs" />
     <Compile Include="AmbitoAppService.cs" />
     <Compile Include="AppServiceBase.cs" />
     <Compile Include="CargoAppService.cs" />
     <Compile Include="FuncionarioAppService.cs" />
     <Compile Include="IndicadorAppService.cs" />
     <Compile Include="Interfaces\IAdminAppService.cs" />
+    <Compile Include="Interfaces\IInquiridoAppService.cs" />
     <Compile Include="Interfaces\IAmbitoAppService.cs" />
     <Compile Include="Interfaces\IAppServiceBase.cs" />
     <Compile Include="Interfaces\ICargoAppService.cs" />

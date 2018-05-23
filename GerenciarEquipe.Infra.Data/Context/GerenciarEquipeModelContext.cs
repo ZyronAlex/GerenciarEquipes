@@ -20,6 +20,7 @@ namespace GerenciarEquipe.Infra.Data.Context
         public virtual DbSet<Cargo> Cargo { get; set; }
         public virtual DbSet<Funcionario> Funcionario { get; set; }
         public virtual DbSet<Indicador> Indicador { get; set; }
+        public virtual DbSet<Inquirido> Inquirido { get; set; }
         public virtual DbSet<Loja> Loja { get; set; }
         public virtual DbSet<Meta> Meta { get; set; }
         public virtual DbSet<Rank> Rank { get; set; }
@@ -46,10 +47,11 @@ namespace GerenciarEquipe.Infra.Data.Context
                 .Configure(p => p.HasMaxLength(800));
 
             modelBuilder.Configurations.Add(new AdminConfig());
-            modelBuilder.Configurations.Add(new AmbitoConfig());
+            //modelBuilder.Configurations.Add(new AmbitoConfig());
             modelBuilder.Configurations.Add(new CargoConfig());
             modelBuilder.Configurations.Add(new FuncionarioConfig());
             modelBuilder.Configurations.Add(new IndicadorConfig());
+            //modelBuilder.Configurations.Add(new InquiridoConfig());
             modelBuilder.Configurations.Add(new LojaConfig());
             modelBuilder.Configurations.Add(new MetaConfig());
             modelBuilder.Configurations.Add(new RankConfig());

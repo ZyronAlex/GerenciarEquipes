@@ -16,11 +16,18 @@ namespace GerenciarEquipe.Painel.Controllers
     public class MetaController : Controller
     {
         private readonly IMetaAppService metaAppService;
+        private readonly IAmbitoAppService ambitoAppService;
+        private readonly IInquiridoAppService inquiridoAppService;
         private readonly ICargoAppService cargoAppService;
-        public MetaController(IMetaAppService metaAppService, ICargoAppService cargoAppService)
+        private readonly IIndicadorAppService indicadorAppService;
+
+        public MetaController(IMetaAppService metaAppService, IAmbitoAppService ambitoAppService, IInquiridoAppService inquiridoAppService, ICargoAppService cargoAppService, IIndicadorAppService indicadorAppService)
         {
             this.metaAppService = metaAppService;
+            this.ambitoAppService = ambitoAppService;
+            this.inquiridoAppService = inquiridoAppService;
             this.cargoAppService = cargoAppService;
+            this.indicadorAppService = indicadorAppService;
         }
 
         // GET: Meta
@@ -51,6 +58,7 @@ namespace GerenciarEquipe.Painel.Controllers
         // GET: Meta/Create
         public ActionResult Create()
         {
+            ViewBag.Indicador = new SelectList(Mapper.Map<ICollection<Indicador>, ICollection<IndicadorModel>>(indicadorAppService.Getall()), "id", "nome");
             ViewBag.Cargo = new SelectList(Mapper.Map<ICollection<Cargo>, ICollection<CargoModel>>(cargoAppService.Getall()), "id", "nome");
             return View();
         }
@@ -60,13 +68,15 @@ namespace GerenciarEquipe.Painel.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,descicao,objetivo,objetivo_parcial,objetivo_parcial_dia,unidade,referencia,fonte,grupo,peso,data_inicio,data_fim,id_cargo,id_indicador,create_at,update_at")] MetaModel metaModel)
+        public ActionResult Create([Bind(Include = "id,descicao,objetivo,objetivo_parcial,objetivo_parcial_dia,unidade,referencia,fonte,grupo,peso,id_indicador,inquiridos,ambitos")] MetaModel metaModel)
         {
             if (ModelState.IsValid)
             {
                 metaAppService.Add(Mapper.Map<MetaModel, Meta>(metaModel));
                 return RedirectToAction("Index");
             }
+
+            ViewBag.Indicador = new SelectList(Mapper.Map<ICollection<Indicador>, ICollection<IndicadorModel>>(indicadorAppService.Getall()), "id", "nome");
             ViewBag.Cargo = new SelectList(Mapper.Map<ICollection<Cargo>, ICollection<CargoModel>>(cargoAppService.Getall()), "id", "nome");
             return View(metaModel);
         }
@@ -83,6 +93,8 @@ namespace GerenciarEquipe.Painel.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.Indicador = new SelectList(Mapper.Map<ICollection<Indicador>, ICollection<IndicadorModel>>(indicadorAppService.Getall()), "id", "nome");
             ViewBag.Cargo = new SelectList(Mapper.Map<ICollection<Cargo>, ICollection<CargoModel>>(cargoAppService.Getall()), "id", "nome");
             return View(metaModel);
         }
@@ -92,13 +104,15 @@ namespace GerenciarEquipe.Painel.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,descicao,objetivo,objetivo_parcial,objetivo_parcial_dia,unidade,referencia,fonte,grupo,peso,data_inicio,data_fim,id_cargo,id_indicador,create_at,update_at")] MetaModel metaModel)
+        public ActionResult Edit([Bind(Include = "id,descicao,objetivo,objetivo_parcial,objetivo_parcial_dia,unidade,referencia,fonte,grupo,peso,id_indicador,create_at,update_at")] MetaModel metaModel)
         {
             if (ModelState.IsValid)
             {
                 metaAppService.Update(Mapper.Map<MetaModel, Meta>(metaModel));
                 return RedirectToAction("Index");
             }
+
+            ViewBag.Indicador = new SelectList(Mapper.Map<ICollection<Indicador>, ICollection<IndicadorModel>>(indicadorAppService.Getall()), "id", "nome");
             ViewBag.Cargo = new SelectList(Mapper.Map<ICollection<Cargo>, ICollection<CargoModel>>(cargoAppService.Getall()), "id", "nome");
             return View(metaModel);
         }
