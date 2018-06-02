@@ -22,14 +22,19 @@
         <ul class="item-list striped tabela">
             <li class="item item-list-header ">
                 <div class="item-row">
-                    <div class="item-col item-col-header item-col-title">
+                    <div class="item-col item-col-header fixed item-col-img md">
                         <div>
-                            <span>@Html.DisplayNameFor(model => model.nome)</span>
+                            <span>@Html.DisplayNameFor(model => model.foto)</span>
                         </div>
                     </div>
                     <div class="item-col item-col-header item-col-title">
                         <div>
-                            <span>@Html.DisplayNameFor(model => model.email)</span>
+                            <span> @Html.DisplayNameFor(model => model.nome)</span>
+                        </div>
+                    </div>
+                    <div class="item-col item-col-header item-col-title">
+                        <div>
+                            <span> @Html.DisplayNameFor(model => model.email)</span>
                         </div>
                     </div>
                     <div class="item-col item-col-header fixed item-col-actions-dropdown"></div>
@@ -40,25 +45,19 @@
             {
                 <li class='item'>
                     <div class='item-row'>
-                        <div class='item-col fixed item-col-check'>
-                            <label class='item-check' id='select-all-items'>
-                                <span></span>
-                            </label>
+                        <div class="item-col fixed item-col-img md">
+                            <div class="item-img rounded" style="background-image: url(@Html.DisplayFor(model => item.foto))"></div>
                         </div>
-                        <div class="item-col fixed pull-left item-col-title">
-                            <div class="item-heading">@Html.DisplayNameFor(model => model.nome)</div>
+                        <div class="item-col item-col-title">
+                            <div class="item-heading"> @Html.DisplayNameFor(model => model.nome)</div>
                             <div>
-                                <a href="" class="">
-                                    <h4 class="item-title">@Html.DisplayFor(model => item.email)</h4>
-                                </a>
+                                <h4 class="item-title">@Html.DisplayFor(model => item.nome)</h4>
                             </div>
                         </div>
-                        <div class="item-col fixed pull-left item-col-title">
-                            <div class="item-heading">@Html.DisplayNameFor(model => model.nome)</div>
-                            <div>
-                                <a href="" class="">
-                                    <h4 class="item-title">@Html.DisplayFor(model => item.nome)</h4>
-                                </a>
+                        <div class="item-col item-col-title">
+                            <div class="item-heading"> @Html.DisplayNameFor(model => model.email)</div>
+                            <div class="no-overflow">
+                                @Html.DisplayFor(model => item.email)
                             </div>
                         </div>
                         <div class="item-col fixed item-col-actions-dropdown">

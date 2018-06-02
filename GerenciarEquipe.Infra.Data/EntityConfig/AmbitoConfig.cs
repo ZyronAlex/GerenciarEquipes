@@ -11,13 +11,13 @@ namespace GerenciarEquipe.Infra.Data.EntityConfig
         {
             HasKey(a => a.id);
 
-            //HasRequired(a => a.cargo)
-            //  .WithMany(c => c.ambitos)
-            //  .HasForeignKey(e => e.id_cargo);
+            HasRequired(a => a.cargo)
+              .WithMany(c => c.ambitos)
+              .HasForeignKey(e => e.id_cargo);
 
-            //HasRequired(a => a.meta)
-            // .WithMany(m => m.ambitos)
-            // .HasForeignKey(a => a.id_meta);
+            HasRequired(a => a.meta)
+             .WithMany(m => m.ambitos)
+             .HasForeignKey(a => a.id_meta);
 
             Property(a => a.id_cargo)
               .HasColumnAnnotation("Index", new IndexAnnotation(new IndexAttribute("Result_Unique", 1) { IsUnique = true }));

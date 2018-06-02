@@ -12,9 +12,9 @@ namespace GerenciarEquipe.Painel.Models
     {
         public MetaModel()
         {
-            ambitos = new HashSet<CargoModel>();
+            ambitos = new HashSet<AmbitoModel>();
             respostas = new HashSet<RespostaModel>();
-            inquiridos = new HashSet<CargoModel>();
+            inquiridos = new HashSet<InquiridoModel>();
         }
 
         [Key]
@@ -68,10 +68,14 @@ namespace GerenciarEquipe.Painel.Models
 
         public virtual IndicadorModel indicador { get; set; }
 
-        public virtual ICollection<CargoModel> ambitos { get; set; }
+        public virtual ICollection<AmbitoModel> ambitos { get; set; }
 
         public virtual ICollection<RespostaModel> respostas { get; set; }
 
-        public virtual ICollection<CargoModel> inquiridos { get; set; }
+        public virtual ICollection<InquiridoModel> inquiridos { get; set; }
+
+        public virtual SelectList cargoAmbitos { get; set; }
+
+        public virtual SelectList cargoInquiridos { get; set; }
     }
 }

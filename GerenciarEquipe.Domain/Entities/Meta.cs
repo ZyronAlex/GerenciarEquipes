@@ -10,9 +10,9 @@ namespace GerenciarEquipe.Domain.Entities
     {
         public Meta()
         {
-            ambitos = new HashSet<Cargo>();
+            ambitos = new HashSet<Ambito>();
             respostas = new HashSet<Resposta>();
-            inquridos = new HashSet<Cargo>();
+            inquridos = new HashSet<Inquirido>();
         }
         public long id { get; set; }
         public string descicao { get; set; }
@@ -28,8 +28,8 @@ namespace GerenciarEquipe.Domain.Entities
         public DateTime create_at { set; get; }
         public DateTime update_at { set; get; }
         public virtual Indicador indicador { get; set; }
-        public virtual ICollection<Cargo> ambitos { get; set; }
-        public virtual ICollection<Cargo> inquridos { get; set; }
+        public virtual ICollection<Ambito> ambitos { get; set; }
+        public virtual ICollection<Inquirido> inquridos { get; set; }
         public virtual ICollection<Resposta> respostas { get; set; }
     }
 }

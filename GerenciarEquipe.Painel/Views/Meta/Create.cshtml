@@ -85,16 +85,17 @@
                 <div class="form-group row">
                     @Html.LabelFor(model => model.ambitos, htmlAttributes: new { @class = "control-label col-md-2 text-xs-right" })
                     <div class="col-md-10">
-                        @Html.ListBoxFor(model => model.ambitos, (IEnumerable<SelectListItem>)ViewBag.Cargo, new { @class = "form-control box" })
-                        @Html.ValidationMessageFor(model => model.id_indicador, "", new { @class = "text-danger" })
+                        @Html.ListBoxFor(m => m.FruitIds, Model.Fruits, new { @class = "listbox" })
+                        @Html.ListBoxFor(model => model.cargoAmbitos, Model.Car, new { @class = "form-control box listbox" })
+                        @Html.ValidationMessageFor(model => model.ambitos, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
                 <div class="form-group row">
                     @Html.LabelFor(model => model.inquiridos, htmlAttributes: new { @class = "control-label col-md-2 text-xs-right" })
                     <div class="col-md-10">
-                        @Html.ListBoxFor(model => model.inquiridos, (IEnumerable<SelectListItem>)ViewBag.Cargo,new { @class = "form-control box" })
-                        @Html.ValidationMessageFor(model => model.id_indicador, "", new { @class = "text-danger" })
+                        @Html.ListBoxFor(model => model.cargoInquiridos, (IEnumerable<SelectListItem>)ViewBag.Cargo, new { @class = "form-control box" })
+                        @Html.ValidationMessageFor(model => model.inquiridos, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
@@ -111,3 +112,13 @@
         </div>
     }
 </article>
+@section Scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $('.listbox').multiselect({
+                includeSelectAllOption: true
+            });
+        });
+    </script>
+}
