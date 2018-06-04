@@ -2,6 +2,7 @@
 using GerenciarEquipe.Domain.Interfaces.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace GerenciarEquipe.Domain.Services
 {
@@ -39,6 +40,11 @@ namespace GerenciarEquipe.Domain.Services
             repository.Update(obj);
         }
 
+        public void AddIfNotExists(TEntity obj, Expression<Func<TEntity, bool>> predicate)
+        {
+            repository.AddIfNotExists(obj, predicate);
+        }
+
         public void Remove(TEntity obj)
         {
             repository.Remove(obj);
@@ -52,7 +58,7 @@ namespace GerenciarEquipe.Domain.Services
         public void Dispose()
         {
             repository.Dispose();
-        }        
+        }
     }
 }
 

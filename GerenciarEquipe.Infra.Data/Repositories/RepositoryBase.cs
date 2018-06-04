@@ -13,7 +13,7 @@ namespace GerenciarEquipe.Infra.Data.Repositories
     public class RepositoryBase<TEntity> : IDisposable, IRepositoryBase<TEntity> where TEntity : class
     {
         protected GerenciarEquipeModelContext Db = new GerenciarEquipeModelContext();
-        
+
         public TEntity GetById(long? id)
         {
             return Db.Set<TEntity>().Find(id);
@@ -36,6 +36,15 @@ namespace GerenciarEquipe.Infra.Data.Repositories
             Db.SaveChanges();
         }
 
+        public void AddIfNotExists(TEntity obj, Expression<Func<TEntity, bool>> predicate = null)
+        {
+            var exists = predicate != null ? Db.Set<TEntity>().Any(predicate) : Db.Set<TEntity>().Any();
+            if (exists)
+                return;
+            Db.Set<TEntity>().Add(obj);
+            Db.SaveChanges();
+        }
+
         public void Update(TEntity obj)
         {
             Db.Entry(obj).State = EntityState.Modified;
@@ -52,17 +61,17 @@ namespace GerenciarEquipe.Infra.Data.Repositories
         {
             if (obj.GetType().GetProperty("ativo") != null)
             {
-                obj.GetType().GetProperty("ativo").SetValue(obj,false);
+                obj.GetType().GetProperty("ativo").SetValue(obj, false);
                 Db.Entry(obj).State = EntityState.Modified;
                 Db.SaveChanges();
-            }           
+            }
         }
 
         public void Dispose()
         {
             Db.Dispose();
         }
-        
+
     }
 }
 

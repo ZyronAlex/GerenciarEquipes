@@ -84,18 +84,43 @@
                 </div>
 
                 <div class="form-group row">
-                    @Html.LabelFor(model => model.ambitos, htmlAttributes: new { @class = "control-label col-md-2 text-xs-right" })
+                    <div class="col-md-2">
+                        @Html.LabelFor(model => model.cargoAmbitos, htmlAttributes: new { @class = "control-label text-xs-right" })
+                        <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="@Html.DisplayNameFor(model => model.cargoAmbitos)" data-content="@ViewData.ModelMetadata.Properties.Where(m => m.PropertyName == "cargoAmbitos").FirstOrDefault().Description"><i class="fa  fa-align-right fa-question-circle"></i></a>
+                    </div>
                     <div class="col-md-10">
-                        @Html.ListBoxFor(model => model.ambitos, (IEnumerable<SelectListItem>)ViewBag.Cargo, new { @class = "form-control box" })
-                        @Html.ValidationMessageFor(model => model.id_indicador, "", new { @class = "text-danger" })
+                        @*@Html.ListBox("cargoAmbitos", (MultiSelectList)ViewBag.Cargo, new { @class = "form-control box" })*@
+
+                        @foreach (var item in ViewBag.CargoAmbitos)
+                        {
+                            <div class="form-check form-check-inline col-md-3">
+                                <label>
+                                    <input type="checkbox" id="@item.Value" name="cargoAmbitos" value="@item.Value" class="form-check-input checkbox" @if (item.Selected) { Write("checked=checked"); }>
+                                    <span class="form-check-label" for="@item.Value"> @item.Text</span>
+                                </label>
+                            </div>
+                        }
+                        @Html.ValidationMessageFor(model => model.cargoAmbitos, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    @Html.LabelFor(model => model.inquiridos, htmlAttributes: new { @class = "control-label col-md-2 text-xs-right" })
-                    <div class="col-md-10">
-                        @Html.ListBoxFor(model => model.inquiridos, (IEnumerable<SelectListItem>)ViewBag.Cargo, new { @class = "form-control box" })
-                        @Html.ValidationMessageFor(model => model.id_indicador, "", new { @class = "text-danger" })
+                    <div class="col-md-2">
+                        @Html.LabelFor(model => model.cargoInquiridos, htmlAttributes: new { @class = "control-label text-xs-right" })
+                        <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="@Html.DisplayNameFor(model => model.cargoInquiridos)" data-content="@ViewData.ModelMetadata.Properties.Where(m => m.PropertyName == "cargoInquiridos").FirstOrDefault().Description"><i class="fa  fa-align-right fa-question-circle"></i></a>
+                    </div>
+                    <div class="col-md-10 ">
+                        @*@Html.ListBoxFor(model => model.inquiridos, ViewBag.Cargo, new { @class = "form-control box" })*@
+                        @foreach (var item in ViewBag.CargoInquiridos)
+                        {
+                            <div class="form-check form-check-inline col-md-3">
+                                <label>
+                                    <input type="checkbox" id="@item.Value" name="cargoInquiridos" value="@item.Value" class="form-check-input checkbox" @if (item.Selected) { Write("checked=checked"); }>
+                                    <span class="form-check-label" for="@item.Value"> @item.Text</span>
+                                </label>
+                            </div>
+                        }
+                        @Html.ValidationMessageFor(model => model.cargoInquiridos, "", new { @class = "text-danger" })
                     </div>
                 </div>
 

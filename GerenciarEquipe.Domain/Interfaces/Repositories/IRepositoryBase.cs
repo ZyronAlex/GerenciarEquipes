@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace GerenciarEquipe.Domain.Interfaces.Repositories
 {
@@ -9,6 +11,7 @@ namespace GerenciarEquipe.Domain.Interfaces.Repositories
         void Add(TEntity obj);
         void Update(TEntity obj);
         void AddOrUpdate(TEntity obj);
+        void AddIfNotExists(TEntity obj, Expression<Func<TEntity, bool>> predicate);
         void Remove(TEntity obj);
         void Disdisable(TEntity obj);
         void Dispose();

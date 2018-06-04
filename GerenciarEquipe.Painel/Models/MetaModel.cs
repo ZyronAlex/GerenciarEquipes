@@ -15,6 +15,8 @@ namespace GerenciarEquipe.Painel.Models
             ambitos = new HashSet<AmbitoModel>();
             respostas = new HashSet<RespostaModel>();
             inquiridos = new HashSet<InquiridoModel>();
+            cargoAmbitos = new List<long>();
+            cargoInquiridos = new List<long>();
         }
 
         [Key]
@@ -49,7 +51,7 @@ namespace GerenciarEquipe.Painel.Models
 
         [Display(Name = "Peso")]
         public int? peso { get; set; }
-                
+
         [Display(Name = "Indicador")]
         [ScaffoldColumn(false)]
         public long id_indicador { get; set; }
@@ -66,16 +68,28 @@ namespace GerenciarEquipe.Painel.Models
         [ScaffoldColumn(false)]
         public DateTime update_at { set; get; }
 
+        [Display(Name = "Indicador")]
+        [ScaffoldColumn(false)]
         public virtual IndicadorModel indicador { get; set; }
 
+        [Display(Name = "Ambitos")]
+        [ScaffoldColumn(false)]
         public virtual ICollection<AmbitoModel> ambitos { get; set; }
 
+        [Display(Name = "Respostas")]
+        [ScaffoldColumn(false)]
         public virtual ICollection<RespostaModel> respostas { get; set; }
 
+        [Display(Name = "Inquiridos")]
+        [ScaffoldColumn(false)]
         public virtual ICollection<InquiridoModel> inquiridos { get; set; }
 
-        public virtual SelectList cargoAmbitos { get; set; }
+        [Display(Name = "Ambitos",Description = "Os cargos  que serão subimetidos à essa meta")]
+        [ScaffoldColumn(false)]
+        public List<long> cargoAmbitos { get; set; }
 
-        public virtual SelectList cargoInquiridos { get; set; }
+        [Display(Name = "Inquiridos",Description = "Os cargos responderão os questionairos dessa meta")]
+        [ScaffoldColumn(false)]
+        public List<long> cargoInquiridos { get; set; }
     }
 }

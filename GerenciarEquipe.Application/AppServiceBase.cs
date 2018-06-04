@@ -2,6 +2,7 @@
 using GerenciarEquipe.Domain.Interfaces.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace GerenciarEquipe.Application
 {
@@ -36,6 +37,11 @@ namespace GerenciarEquipe.Application
         public void AddOrUpdate(TEntity obj)
         {
             serviceBase.AddOrUpdate(obj);
+        }
+
+        public void AddIfNotExists(TEntity obj, Expression<Func<TEntity, bool>> predicate)
+        {
+            serviceBase.AddIfNotExists(obj,predicate);
         }
 
         public void Remove(TEntity obj)
