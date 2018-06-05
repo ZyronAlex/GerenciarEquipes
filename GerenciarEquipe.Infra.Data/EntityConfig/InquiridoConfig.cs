@@ -9,20 +9,20 @@ namespace GerenciarEquipe.Infra.Data.EntityConfig
     {
         public InquiridoConfig()
         {
-            HasKey(a => a.id);
+            HasKey(i => i.id);
 
-            HasRequired(a => a.cargo)
+            HasRequired(i => i.cargo)
               .WithMany(c => c.inquiridos)
-              .HasForeignKey(e => e.id_cargo);
+              .HasForeignKey(i => i.id_cargo);
 
-            HasRequired(a => a.meta)
-             .WithMany(m => m.inquridos)
-             .HasForeignKey(a => a.id_meta);
+            HasRequired(i => i.meta)
+             .WithMany(m => m.inquiridos)
+             .HasForeignKey(i => i.id_meta);
 
-            Property(a => a.id_cargo)
+            Property(i => i.id_cargo)
               .HasColumnAnnotation("Index", new IndexAnnotation(new IndexAttribute("Result_Unique", 1) { IsUnique = true }));
 
-            Property(a => a.id_meta)
+            Property(i => i.id_meta)
                  .HasColumnAnnotation("Index", new IndexAnnotation(new IndexAttribute("Result_Unique", 2) { IsUnique = true }));
         }
     }

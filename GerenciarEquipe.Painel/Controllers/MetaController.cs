@@ -136,14 +136,14 @@ namespace GerenciarEquipe.Painel.Controllers
             {
                 
                 metaAppService.Update(Mapper.Map<MetaModel, Meta>(metaModel));
-                Meta meta = metaAppService.GetById(metaModel.id);
-                foreach (var item in meta.ambitos)
+
+                foreach (var item in ambitoAppService.GetByIdMeta(metaModel.id))
                 {
                     if (!metaModel.cargoAmbitos.Contains(item.id_cargo))
                         ambitoAppService.Remove(item);
                 }
 
-                foreach (var item in meta.inquridos)
+                foreach (var item in inquiridoAppService.GetByIdMeta(metaModel.id))
                 {
                     if (!metaModel.cargoInquiridos.Contains(item.id_cargo))
                         inquiridoAppService.Remove(item);
@@ -164,6 +164,9 @@ namespace GerenciarEquipe.Painel.Controllers
                     inquirido.id_meta = metaModel.id;
                     inquiridoAppService.AddIfNotExists(inquirido, i => i.id_cargo == inquirido.id_cargo && i.id_meta == metaModel.id);
                 }
+
+                
+
                 return RedirectToAction("Index");
             }
 

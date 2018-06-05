@@ -13,7 +13,7 @@ namespace GerenciarEquipe.Infra.Data.EntityConfig
 
             HasRequired(a => a.cargo)
               .WithMany(c => c.ambitos)
-              .HasForeignKey(e => e.id_cargo);
+              .HasForeignKey(a => a.id_cargo);
 
             HasRequired(a => a.meta)
              .WithMany(m => m.ambitos)

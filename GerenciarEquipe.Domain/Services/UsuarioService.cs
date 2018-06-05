@@ -11,5 +11,10 @@ namespace GerenciarEquipe.Domain.Services
         {
             this.usuarioRepository = usuarioRepository;
         }
+
+        public bool Login(Usuario usuario)
+        {
+            return usuario.Login(usuario);
+        }
     }
 }

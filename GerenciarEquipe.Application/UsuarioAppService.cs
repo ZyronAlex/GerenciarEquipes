@@ -11,5 +11,10 @@ namespace GerenciarEquipe.Application
         {
             this.usuarioService = usuarioService;
         }
+
+        public bool Login(Usuario usuario)
+        {
+            return usuarioService.Login(usuario);
+        }
     }
 }
