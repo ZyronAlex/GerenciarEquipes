@@ -6,13 +6,11 @@ using System.Web.Mvc;
 
 namespace GerenciarEquipe.Painel.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
-
         public ActionResult Index()
         {
-            if (Session["usuario"] == null)
-                return RedirectToAction("index", "login");
             return View();
         }
 

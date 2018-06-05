@@ -12,6 +12,11 @@ namespace GerenciarEquipe.Application
             this.usuarioService = usuarioService;
         }
 
+        public Usuario GetByEmail(string email)
+        {
+            return usuarioService.GetByEmail(email);
+        }
+
         public bool Login(Usuario usuario)
         {
             return usuarioService.Login(usuario);

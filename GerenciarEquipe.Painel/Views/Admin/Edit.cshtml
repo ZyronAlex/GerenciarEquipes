@@ -78,7 +78,16 @@
                 <div class="form-group row">
                     @Html.LabelFor(model => model.permissoes, htmlAttributes: new { @class = "control-label col-md-2 text-xs-right" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.permissoes, new { htmlAttributes = new { @class = "form-control box", @type = "number", @pattern = "^\\d+(\\.|\\,)\\d{2}$" } })
+                        @*@Html.EditorFor(model => model.permissoes, new { htmlAttributes = new { @class = "form-control box" } })*@
+                        @foreach (var item in ViewBag.Permissoes)
+                        {
+                            <div class="form-check form-check-inline col-md-3">
+                                <label>
+                                    <input type="checkbox" id="@item.Value" name="permissoes" value="@item.Value" class="form-check-input checkbox" @if (item.Selected) { Write("checked=checked"); }>
+                                    <span class="form-check-label" for="@item.Value"> @item.Text</span>
+                                </label>
+                            </div>
+                        }
                         @Html.ValidationMessageFor(model => model.permissoes, "", new { @class = "text-danger" })
                     </div>
                 </div>

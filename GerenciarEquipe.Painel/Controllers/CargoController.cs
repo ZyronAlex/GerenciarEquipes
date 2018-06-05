@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -10,9 +12,11 @@ using AutoMapper;
 using GerenciarEquipe.Application.Interfaces;
 using GerenciarEquipe.Domain.Entities;
 using GerenciarEquipe.Painel.Models;
+using GerenciarEquipe.Services;
 
 namespace GerenciarEquipe.Painel.Controllers
 {
+    [Authorize]
     public class CargoController : Controller
     {
         private readonly ICargoAppService cargoAppService;
@@ -25,8 +29,6 @@ namespace GerenciarEquipe.Painel.Controllers
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult Index()
         {
-            if (Session["usuario"] == null)
-                return RedirectToAction("index", "login");
             return View(Mapper.Map<ICollection<Cargo>, ICollection<CargoModel>>(cargoAppService.Getall()));
         }
 
@@ -48,6 +50,13 @@ namespace GerenciarEquipe.Painel.Controllers
         // GET: Cargo/Create
         public ActionResult Create()
         {
+            ViewBag.Permissoes = Enum.GetValues(typeof(Permisoes))
+                   .OfType<Permisoes>()
+                   .Select(x => new SelectListItem
+                   {
+                       Text = EnumHelper<Permisoes>.GetDisplayValue(x),
+                       Value = x.ToString()
+                   });
             return View();
         }
 
@@ -60,10 +69,18 @@ namespace GerenciarEquipe.Painel.Controllers
         {
             if (ModelState.IsValid)
             {
+                cargoModel.permissoes = Request["permissoes"];
                 cargoAppService.Add(Mapper.Map<CargoModel, Cargo>(cargoModel));
                 return RedirectToAction("Index");
             }
-
+            ViewBag.Permissoes = Enum.GetValues(typeof(Permisoes))
+                   .OfType<Permisoes>()
+                   .Select(x => new SelectListItem
+                   {
+                       Text = EnumHelper<Permisoes>.GetDisplayValue(x),
+                       Value = x.ToString(),
+                       Selected = Request["permissoes"].Split(',').Contains(x.ToString())
+                   });
             return View(cargoModel);
         }
 
@@ -79,6 +96,14 @@ namespace GerenciarEquipe.Painel.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Permissoes = Enum.GetValues(typeof(Permisoes))
+                  .OfType<Permisoes>()
+                  .Select(x => new SelectListItem
+                  {
+                      Text = EnumHelper<Permisoes>.GetDisplayValue(x),
+                      Value = x.ToString(),
+                      Selected = cargoModel.permissoes.Split(',').Contains(x.ToString())
+                  });
             return View(cargoModel);
         }
 
@@ -91,9 +116,18 @@ namespace GerenciarEquipe.Painel.Controllers
         {
             if (ModelState.IsValid)
             {
+                cargoModel.permissoes = Request["permissoes"];
                 cargoAppService.Update(Mapper.Map<CargoModel, Cargo>(cargoModel));
                 return RedirectToAction("Index");
             }
+            ViewBag.Permissoes = Enum.GetValues(typeof(Permisoes))
+                   .OfType<Permisoes>()
+                   .Select(x => new SelectListItem
+                   {
+                       Text = EnumHelper<Permisoes>.GetDisplayValue(x),
+                       Value = x.ToString(),
+                       Selected = Request["permissoes"].Split(',').Contains(x.ToString())
+                   });
             return View(cargoModel);
         }
 

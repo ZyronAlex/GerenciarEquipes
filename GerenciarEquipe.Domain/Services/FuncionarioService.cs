@@ -11,5 +11,16 @@ namespace GerenciarEquipe.Domain.Services
         {
             this.funcionarioRepository = funcionarioRepository;
         }
+
+        public Funcionario GetByEmail(string email)
+        {
+            return funcionarioRepository.GetByEmail(email);
+        }
+
+        public bool Login(Funcionario funcionario)
+        {
+            var f = GetByEmail(funcionario.email);
+            return f.Login(funcionario);
+        }
     }
 }

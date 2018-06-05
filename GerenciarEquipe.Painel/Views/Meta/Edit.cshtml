@@ -109,7 +109,7 @@
                         @Html.LabelFor(model => model.cargoInquiridos, htmlAttributes: new { @class = "control-label text-xs-right" })
                         <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="@Html.DisplayNameFor(model => model.cargoInquiridos)" data-content="@ViewData.ModelMetadata.Properties.Where(m => m.PropertyName == "cargoInquiridos").FirstOrDefault().Description"><i class="fa  fa-align-right fa-question-circle"></i></a>
                     </div>
-                    <div class="col-md-10 ">
+                    <div class="col-md-10">
                         @*@Html.ListBoxFor(model => model.inquiridos, ViewBag.Cargo, new { @class = "form-control box" })*@
                         @foreach (var item in ViewBag.CargoInquiridos)
                         {

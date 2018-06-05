@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace GerenciarEquipe.Painel.Controllers
 {
+    [Authorize]
     public class ErroController : Controller
     {
         // GET: Erro

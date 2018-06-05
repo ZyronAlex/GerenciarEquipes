@@ -41,7 +41,7 @@ namespace GerenciarEquipe.Painel.Models
         [Display(Name = "Data Ultima Alteração")]
         [ScaffoldColumn(false)]
         public DateTime update_at { set; get; }
-
+        
         public virtual ICollection<FuncionarioModel> funcionarios { get; set; }
         public virtual ICollection<AmbitoModel> ambitos { get; set; }
         public virtual ICollection<InquiridoModel> inquiridos { get; set; }

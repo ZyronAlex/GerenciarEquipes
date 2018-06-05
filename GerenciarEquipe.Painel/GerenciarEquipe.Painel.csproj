@@ -179,7 +179,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AdminModel.cs" />
-    <Compile Include="Models\ChecksBoxesModel.cs" />
+    <Compile Include="Models\Genero.cs" />
     <Compile Include="Models\InquiridoModel.cs" />
     <Compile Include="Models\AmbitoModel.cs" />
     <Compile Include="Models\CargoModel.cs" />
@@ -188,8 +188,10 @@
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\LojaModel.cs" />
     <Compile Include="Models\MetaModel.cs" />
+    <Compile Include="Models\Permisoes.cs" />
     <Compile Include="Models\RankModel.cs" />
     <Compile Include="Models\RespostaModel.cs" />
+    <Compile Include="Models\Turno.cs" />
     <Compile Include="Models\UsuarioModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -517,6 +519,10 @@
     <ProjectReference Include="..\GerenciarEquipe.Infra.Data\GerenciarEquipe.Infra.Data.csproj">
       <Project>{A371EF58-AA0B-4AF6-AE4D-5FEF4333C6E3}</Project>
       <Name>GerenciarEquipe.Infra.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GerenciarEquipe.Services\GerenciarEquipe.Services.csproj">
+      <Project>{4534F5C6-3062-47F1-8C0C-CE4FCA2BB065}</Project>
+      <Name>GerenciarEquipe.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

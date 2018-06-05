@@ -4,5 +4,6 @@ namespace GerenciarEquipe.Domain.Interfaces.Repositories
 {
     public interface IUsuarioRepository:IRepositoryBase<Usuario>
     {
+        Usuario GetByEmail(string email);
     }
 }

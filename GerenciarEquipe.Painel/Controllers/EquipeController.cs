@@ -15,6 +15,7 @@ using GerenciarEquipe.Painel.Models;
 
 namespace GerenciarEquipe.Painel.Controllers
 {
+    [Authorize]
     public class EquipeController : Controller
     {
         private readonly IFuncionarioAppService funcionarioAppService;
@@ -31,9 +32,6 @@ namespace GerenciarEquipe.Painel.Controllers
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult Index()
         {
-            if (Session["usuario"] == null)
-                return RedirectToAction("index", "login");
-
             return View(Mapper.Map<ICollection<Funcionario>, ICollection<FuncionarioModel>>(funcionarioAppService.Getall()));
         }
 

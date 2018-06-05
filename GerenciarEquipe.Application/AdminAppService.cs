@@ -11,5 +11,15 @@ namespace GerenciarEquipe.Application
         {
             this.adminService = adminService;
         }
+
+        public Admin GetByEmail(string email)
+        {
+            return adminService.GetByEmail(email);
+        }
+
+        public bool Login(Admin admin)
+        {
+            return adminService.Login(admin);
+        }
     }
 }

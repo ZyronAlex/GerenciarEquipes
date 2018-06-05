@@ -6,13 +6,10 @@ namespace GerenciarEquipe.Painel.Models
     {
         public AdminModel()
         {
-
         }
 
-        public AdminModel(LoginModel loginModel)
+        public AdminModel(LoginModel loginModel) : base(loginModel)
         {
-            this.email = loginModel.email;
-            this.senha = loginModel.senha;
         }
 
         [Required(ErrorMessage = "Preencha o campo Permissões")]

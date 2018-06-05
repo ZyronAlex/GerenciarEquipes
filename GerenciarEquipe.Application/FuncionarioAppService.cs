@@ -11,5 +11,15 @@ namespace GerenciarEquipe.Application
         {
             this.funcionarioService = funcionarioService;
         }
+
+        public Funcionario GetByEmail(string email)
+        {
+            return funcionarioService.GetByEmail(email);
+        }
+
+        public bool Login(Funcionario funcionario)
+        {
+            return funcionarioService.Login(funcionario);
+        }
     }
 }

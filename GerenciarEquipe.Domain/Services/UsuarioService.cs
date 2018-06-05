@@ -12,9 +12,15 @@ namespace GerenciarEquipe.Domain.Services
             this.usuarioRepository = usuarioRepository;
         }
 
+        public Usuario GetByEmail(string email)
+        {
+            return usuarioRepository.GetByEmail(email);
+        }
+
         public bool Login(Usuario usuario)
         {
-            return usuario.Login(usuario);
+            var u = GetByEmail(usuario.email);
+            return u.Login(usuario);
         }
     }
 }

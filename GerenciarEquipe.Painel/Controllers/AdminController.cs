@@ -12,9 +12,11 @@ using AutoMapper;
 using GerenciarEquipe.Application.Interfaces;
 using GerenciarEquipe.Domain.Entities;
 using GerenciarEquipe.Painel.Models;
+using GerenciarEquipe.Services;
 
 namespace GerenciarEquipe.Painel.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         private readonly IAdminAppService adminAppService;
@@ -27,8 +29,6 @@ namespace GerenciarEquipe.Painel.Controllers
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult Index()
         {
-            if (Session["usuario"] == null)
-                return RedirectToAction("index", "login");
             return View(Mapper.Map<ICollection<Admin>, ICollection<AdminModel>>(adminAppService.Getall()));
         }
 
@@ -50,6 +50,13 @@ namespace GerenciarEquipe.Painel.Controllers
         // GET: Admin/Create
         public ActionResult Create()
         {
+            ViewBag.Permissoes = Enum.GetValues(typeof(Permisoes))
+                   .OfType<Permisoes>()
+                   .Select(x => new SelectListItem
+                   {
+                       Text = EnumHelper<Permisoes>.GetDisplayValue(x),
+                       Value = x.ToString()
+                   });
             return View();
         }
 
@@ -74,12 +81,20 @@ namespace GerenciarEquipe.Painel.Controllers
                     Local.Directory.Create(); // If the directory
 
                     adminModel.fotoFile.SaveAs(savedFileName);
-                    adminModel.foto = GetBaseUrl() + "/AdminFotos/" + fileName;
+                    adminModel.foto = GetUrlBase.UrlBase(HttpContext.Request) + "/AdminFotos/" + fileName;
                 }
+                adminModel.permissoes = Request["permissoes"];
                 adminAppService.Add(Mapper.Map<AdminModel, Admin>(adminModel));
                 return RedirectToAction("Index");
             }
-
+            ViewBag.Permissoes = Enum.GetValues(typeof(Permisoes))
+                  .OfType<Permisoes>()
+                  .Select(x => new SelectListItem
+                  {
+                      Text = EnumHelper<Permisoes>.GetDisplayValue(x),
+                      Value = x.ToString(),
+                      Selected = Request["permissoes"].Split(',').Contains(x.ToString())
+                  });
             return View(adminModel);
         }
 
@@ -95,6 +110,14 @@ namespace GerenciarEquipe.Painel.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Permissoes = Enum.GetValues(typeof(Permisoes))
+                  .OfType<Permisoes>()
+                  .Select(x => new SelectListItem
+                  {
+                      Text = EnumHelper<Permisoes>.GetDisplayValue(x),
+                      Value = x.ToString(),
+                      Selected = adminModel.permissoes.Split(',').Contains(x.ToString())
+                  });
             return View(adminModel);
         }
 
@@ -128,11 +151,20 @@ namespace GerenciarEquipe.Painel.Controllers
                     Local.Directory.Create(); // If the directory
 
                     adminModel.fotoFile.SaveAs(savedFileName);
-                    adminModel.foto = GetBaseUrl() + "/AdminFotos/" + fileName;
+                    adminModel.foto = GetUrlBase.UrlBase(HttpContext.Request) + "/AdminFotos/" + fileName;
                 }
+                adminModel.permissoes = Request["permissoes"];
                 adminAppService.Update(Mapper.Map<AdminModel, Admin>(adminModel));
                 return RedirectToAction("Index");
             }
+            ViewBag.Permissoes = Enum.GetValues(typeof(Permisoes))
+                   .OfType<Permisoes>()
+                   .Select(x => new SelectListItem
+                   {
+                       Text = EnumHelper<Permisoes>.GetDisplayValue(x),
+                       Value = x.ToString(),
+                       Selected = Request["permissoes"].Split(',').Contains(x.ToString())
+                   });
             return View(adminModel);
         }
 
@@ -169,17 +201,6 @@ namespace GerenciarEquipe.Painel.Controllers
             base.Dispose(disposing);
         }
 
-        private string GetBaseUrl()
-        {
-            var request = HttpContext.Request;
-            var appUrl = HttpRuntime.AppDomainAppVirtualPath;
-
-            if (appUrl != "/")
-                appUrl = "/" + appUrl;
-
-            var baseUrl = string.Format("{0}://{1}{2}", request.Url.Scheme, request.Url.Authority, appUrl);
-
-            return baseUrl;
-        }
+        
     }
 }

@@ -7,6 +7,16 @@ namespace GerenciarEquipe.Painel.Models
 {
     public abstract class UsuarioModel
     {
+        public UsuarioModel()
+        {
+                
+        }
+        public UsuarioModel(LoginModel loginModel)
+        {
+            this.email = loginModel.email;
+            this.senha = loginModel.senha;
+        }
+
         [Key]
         public long id { get; set; }       
 
@@ -51,12 +61,5 @@ namespace GerenciarEquipe.Painel.Models
         [Display(Name ="Foto")]
         public string foto { get; set; }
 
-        public bool Login(UsuarioModel usuario)
-        {
-            if ((string.IsNullOrEmpty(usuario.email) && string.IsNullOrEmpty(usuario.senha)) || this.ativo)
-                return false;
-            else
-                return usuario.email.ToUpper().Trim().Equals(this.email.ToUpper().Trim()) && usuario.senha.Equals(this.senha);
-        }
     }
 }
