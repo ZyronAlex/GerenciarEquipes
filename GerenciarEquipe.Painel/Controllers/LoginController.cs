@@ -61,8 +61,6 @@ namespace GerenciarEquipe.Painel.Controllers
             }
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
             //AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
