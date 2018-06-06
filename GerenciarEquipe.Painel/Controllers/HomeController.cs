@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GerenciarEquipe.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,7 +7,7 @@ using System.Web.Mvc;
 
 namespace GerenciarEquipe.Painel.Controllers
 {
-    [Authorize(Roles = "Admin,Dash")]
+    [CustomAuthorize(Roles = "Admin,Dash")]
     public class HomeController : Controller
     {
         public ActionResult Index()

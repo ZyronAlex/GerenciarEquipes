@@ -10,10 +10,11 @@ using AutoMapper;
 using GerenciarEquipe.Application.Interfaces;
 using GerenciarEquipe.Domain.Entities;
 using GerenciarEquipe.Painel.Models;
+using GerenciarEquipe.Services;
 
 namespace GerenciarEquipe.Painel.Controllers
 {
-    [Authorize(Roles = "Admin,Indicador")]
+    [CustomAuthorize(Roles = "Admin,Index")]
     public class IndicadorController : Controller
     {
         private readonly IIndicadorAppService indicadorAppService;

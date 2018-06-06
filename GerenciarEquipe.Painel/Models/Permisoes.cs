@@ -15,12 +15,12 @@ namespace GerenciarEquipe.Painel.Models
         [Display(Name = "Cargos")]
         Office,
         [Display(Name = "Lojas")]
-        Strore,
+        Store,
         [Display(Name = "Indicadores")]
         Index,
         [Display(Name = "Metas")]
         Goal,
-        [Display(Name = "Administradores")]
+        [Display(Name = "Administrador Geral")]
         Admin,
         [Display(Name = "Relatórios")]
         Report,

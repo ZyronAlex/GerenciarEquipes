@@ -10,10 +10,11 @@ using AutoMapper;
 using GerenciarEquipe.Application.Interfaces;
 using GerenciarEquipe.Domain.Entities;
 using GerenciarEquipe.Painel.Models;
+using GerenciarEquipe.Services;
 
 namespace GerenciarEquipe.Painel.Controllers
 {
-    [Authorize(Roles = "Admin,Store")]
+    [CustomAuthorize(Roles = "Admin,Store")]
     public class LojaController : Controller
     {
         private readonly ILojaAppService lojaAppService;

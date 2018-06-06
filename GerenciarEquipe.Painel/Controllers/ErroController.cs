@@ -15,5 +15,10 @@ namespace GerenciarEquipe.Painel.Controllers
             ViewBag.Erro = erro;
             return View();
         }
+
+        public ActionResult Desautorizado()
+        {
+            return View();
+        }
     }
 }

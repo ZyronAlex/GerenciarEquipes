@@ -10,10 +10,11 @@ using AutoMapper;
 using GerenciarEquipe.Application.Interfaces;
 using GerenciarEquipe.Domain.Entities;
 using GerenciarEquipe.Painel.Models;
+using GerenciarEquipe.Services;
 
 namespace GerenciarEquipe.Painel.Controllers
 {
-    [Authorize(Roles = "Admin,Goal")]
+    [CustomAuthorize(Roles = "Admin,Goal")]
     public class MetaController : Controller
     {
         private readonly IMetaAppService metaAppService;

@@ -16,7 +16,7 @@ using GerenciarEquipe.Services;
 
 namespace GerenciarEquipe.Painel.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [CustomAuthorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private readonly IAdminAppService adminAppService;

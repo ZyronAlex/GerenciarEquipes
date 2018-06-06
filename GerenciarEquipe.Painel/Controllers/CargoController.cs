@@ -16,7 +16,7 @@ using GerenciarEquipe.Services;
 
 namespace GerenciarEquipe.Painel.Controllers
 {
-    [Authorize(Roles = "Admin,Office")]
+    [CustomAuthorize(Roles = "Admin,Office")]
     public class CargoController : Controller
     {
         private readonly ICargoAppService cargoAppService;

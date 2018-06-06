@@ -26,6 +26,15 @@ namespace GerenciarEquipe.Painel.Controllers
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult Index()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                UsuarioModel usuarioModel = Mapper.Map<Usuario, UsuarioModel>(usuarioAppService.GetByEmail(User.Identity.Name));
+                Session["Usuario"] = usuarioModel;
+                if (usuarioModel is FuncionarioModel)
+                    return RedirectToNextAuthorizAction(((FuncionarioModel)usuarioModel).cargo.permissoes);
+                else
+                    return RedirectToNextAuthorizAction(((AdminModel)usuarioModel).permissoes);
+            }
             return View();
         }
 
@@ -42,8 +51,8 @@ namespace GerenciarEquipe.Painel.Controllers
                 HttpContext.Response.Cookies.Add(authCookie);
                 adminModel.senha = null;
                 Session["Usuario"] = adminModel;
-                return RedirectToAction("index", "Home");
-            }            
+                return RedirectToNextAuthorizAction(adminModel.permissoes);
+            }
             else if (funcionarioAppService.Login(Mapper.Map<FuncionarioModel, Funcionario>(new FuncionarioModel(loginModel))))
             {
                 FuncionarioModel funcionarioModel = Mapper.Map<Funcionario, FuncionarioModel>(funcionarioAppService.GetByEmail(loginModel.email));
@@ -54,7 +63,7 @@ namespace GerenciarEquipe.Painel.Controllers
                 HttpContext.Response.Cookies.Add(authCookie);
                 funcionarioModel.senha = null;
                 Session["Usuario"] = funcionarioModel;
-                return RedirectToAction("index", "Home");
+                return RedirectToNextAuthorizAction(funcionarioModel.cargo.permissoes);
             }
             else
             {
@@ -75,6 +84,52 @@ namespace GerenciarEquipe.Painel.Controllers
             UsuarioModel usuarioModel = Mapper.Map<Usuario, UsuarioModel>(usuarioAppService.GetByEmail(User.Identity.Name));
             usuarioModel.senha = null;
             Session["Usuario"] = usuarioModel;
+        }
+
+        private ActionResult RedirectToNextAuthorizAction(string Permissoes)
+        {
+            if (Permissoes.Contains(Permisoes.Admin.ToString()))
+            {
+                return RedirectToAction("index", "Home");
+            }
+            else if (Permissoes.Contains(Permisoes.Dash.ToString()))
+            {
+                return RedirectToAction("index", "Home");
+            }
+            else if (Permissoes.Contains(Permisoes.Equip.ToString()))
+            {
+                return RedirectToAction("index", "Equipe");
+            }
+            else if (Permissoes.Contains(Permisoes.Office.ToString()))
+            {
+                return RedirectToAction("index", "Cargo");
+            }
+            else if (Permissoes.Contains(Permisoes.Store.ToString()))
+            {
+                return RedirectToAction("index", "Loja");
+            }
+            else if (Permissoes.Contains(Permisoes.Index.ToString()))
+            {
+                return RedirectToAction("index", "Indicador");
+            }
+            else if (Permissoes.Contains(Permisoes.Goal.ToString()))
+            {
+                return RedirectToAction("index", "Meta");
+            }
+            else if (Permissoes.Contains(Permisoes.Report.ToString()))
+            {
+                return RedirectToAction("index", "Relatorio");
+            }
+            else if (Permissoes.Contains(Permisoes.Rank.ToString()))
+            {
+                return RedirectToAction("index", "Rank");
+            }
+            else if (Permissoes.Contains(Permisoes.Forms.ToString()))
+            {
+                return RedirectToAction("index", "Formulario");
+            }
+            else
+                return RedirectToAction("index");
         }
     }
 }

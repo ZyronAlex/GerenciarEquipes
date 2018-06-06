@@ -131,7 +131,7 @@
                                     </a>
                                 </li>
                             }
-                            @if (Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Models.Permisoes.Strore.ToString()))
+                            @if (Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Models.Permisoes.Store.ToString()))
                             {
                                 <li @if (currentpage.Equals("Loja")) { Write("class=active"); }>
                                     <a href="@Url.Action("Index", "Loja")">

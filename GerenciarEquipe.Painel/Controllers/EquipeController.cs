@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -12,10 +10,11 @@ using AutoMapper;
 using GerenciarEquipe.Application.Interfaces;
 using GerenciarEquipe.Domain.Entities;
 using GerenciarEquipe.Painel.Models;
+using GerenciarEquipe.Services;
 
 namespace GerenciarEquipe.Painel.Controllers
 {
-    [Authorize(Roles = "Admin,Equip")]
+    [CustomAuthorize(Roles = "Admin,Equip")]
     public class EquipeController : Controller
     {
         private readonly IFuncionarioAppService funcionarioAppService;
