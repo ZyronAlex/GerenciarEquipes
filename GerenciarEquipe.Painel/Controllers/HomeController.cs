@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace GerenciarEquipe.Painel.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin,Dash")]
     public class HomeController : Controller
     {
         public ActionResult Index()

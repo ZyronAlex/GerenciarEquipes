@@ -8,7 +8,7 @@ namespace GerenciarEquipe.Infra.Data.Repositories
     {
         public Funcionario GetByEmail(string email)
         {
-            return Getall().First(u => u.email == email);
+            return Getall().FirstOrDefault(u => u.email == email);
         }
     }
 }

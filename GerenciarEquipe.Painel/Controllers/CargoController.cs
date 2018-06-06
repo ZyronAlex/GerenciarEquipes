@@ -16,7 +16,7 @@ using GerenciarEquipe.Services;
 
 namespace GerenciarEquipe.Painel.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin,Office")]
     public class CargoController : Controller
     {
         private readonly ICargoAppService cargoAppService;
@@ -56,7 +56,8 @@ namespace GerenciarEquipe.Painel.Controllers
                    {
                        Text = EnumHelper<Permisoes>.GetDisplayValue(x),
                        Value = x.ToString()
-                   });
+                   }).Where(p => p.Value != Permisoes.Admin.ToString());
+                
             return View();
         }
 
@@ -80,7 +81,7 @@ namespace GerenciarEquipe.Painel.Controllers
                        Text = EnumHelper<Permisoes>.GetDisplayValue(x),
                        Value = x.ToString(),
                        Selected = Request["permissoes"].Split(',').Contains(x.ToString())
-                   });
+                   }).Where(p => p.Value != Permisoes.Admin.ToString());
             return View(cargoModel);
         }
 
@@ -103,7 +104,7 @@ namespace GerenciarEquipe.Painel.Controllers
                       Text = EnumHelper<Permisoes>.GetDisplayValue(x),
                       Value = x.ToString(),
                       Selected = cargoModel.permissoes.Split(',').Contains(x.ToString())
-                  });
+                  }).Where(p => p.Value != Permisoes.Admin.ToString());
             return View(cargoModel);
         }
 
@@ -127,7 +128,7 @@ namespace GerenciarEquipe.Painel.Controllers
                        Text = EnumHelper<Permisoes>.GetDisplayValue(x),
                        Value = x.ToString(),
                        Selected = Request["permissoes"].Split(',').Contains(x.ToString())
-                   });
+                   }).Where(p => p.Value != Permisoes.Admin.ToString());
             return View(cargoModel);
         }
 

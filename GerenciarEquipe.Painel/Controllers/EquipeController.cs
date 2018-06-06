@@ -15,7 +15,7 @@ using GerenciarEquipe.Painel.Models;
 
 namespace GerenciarEquipe.Painel.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin,Equip")]
     public class EquipeController : Controller
     {
         private readonly IFuncionarioAppService funcionarioAppService;

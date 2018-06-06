@@ -8,7 +8,7 @@ namespace GerenciarEquipe.Infra.Data.Repositories
     {
         public Admin GetByEmail(string email)
         {
-            return Getall().First(u => u.email == email);
+            return Getall().FirstOrDefault(a => a.email == email);
         }
     }
 }

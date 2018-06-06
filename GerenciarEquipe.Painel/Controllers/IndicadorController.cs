@@ -13,6 +13,7 @@ using GerenciarEquipe.Painel.Models;
 
 namespace GerenciarEquipe.Painel.Controllers
 {
+    [Authorize(Roles = "Admin,Indicador")]
     public class IndicadorController : Controller
     {
         private readonly IIndicadorAppService indicadorAppService;

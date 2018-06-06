@@ -13,6 +13,7 @@ using GerenciarEquipe.Painel.Models;
 
 namespace GerenciarEquipe.Painel.Controllers
 {
+    [Authorize(Roles = "Admin,Goal")]
     public class MetaController : Controller
     {
         private readonly IMetaAppService metaAppService;

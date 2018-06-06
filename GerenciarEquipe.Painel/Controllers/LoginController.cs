@@ -13,11 +13,13 @@ namespace GerenciarEquipe.Painel.Controllers
     {
         private readonly IAdminAppService adminAppService;
         private readonly IFuncionarioAppService funcionarioAppService;
+        private readonly IUsuarioAppService usuarioAppService;
 
-        public LoginController(IAdminAppService adminAppService, IFuncionarioAppService funcionarioAppService)
+        public LoginController(IAdminAppService adminAppService, IFuncionarioAppService funcionarioAppService, IUsuarioAppService usuarioAppService)
         {
             this.adminAppService = adminAppService;
             this.funcionarioAppService = funcionarioAppService;
+            this.usuarioAppService = usuarioAppService;
         }
 
         // GET: Login
@@ -66,6 +68,13 @@ namespace GerenciarEquipe.Painel.Controllers
             //AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Login");
+        }
+
+        public void GetEmail()
+        {
+            UsuarioModel usuarioModel = Mapper.Map<Usuario, UsuarioModel>(usuarioAppService.GetByEmail(User.Identity.Name));
+            usuarioModel.senha = null;
+            Session["Usuario"] = usuarioModel;
         }
     }
 }

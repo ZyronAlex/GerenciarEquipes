@@ -20,7 +20,7 @@ namespace GerenciarEquipe.Domain.Services
         public bool Login(Funcionario funcionario)
         {
             var f = GetByEmail(funcionario.email);
-            return f.Login(funcionario);
+            return f != null && f.Login(funcionario);
         }
     }
 }

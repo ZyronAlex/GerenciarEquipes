@@ -13,6 +13,7 @@ using GerenciarEquipe.Painel.Models;
 
 namespace GerenciarEquipe.Painel.Controllers
 {
+    [Authorize(Roles = "Admin,Store")]
     public class LojaController : Controller
     {
         private readonly ILojaAppService lojaAppService;

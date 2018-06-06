@@ -28,8 +28,13 @@
 <body>
     @{
         GerenciarEquipe.Painel.Models.UsuarioModel Usuario = null;
-        if (Session["usuario"] != null)
+        if (Session["suario"]!= null)
         {
+            Usuario = (GerenciarEquipe.Painel.Models.UsuarioModel)Session["usuario"];
+        }
+        else
+        {
+            Html.Action("GetEmail","Login",null);
             Usuario = (GerenciarEquipe.Painel.Models.UsuarioModel)Session["usuario"];
         }
     }
@@ -59,13 +64,13 @@
                                 @if (Usuario != null)
                                 {
                                     <div class="img" style="background-image: url('@Usuario.foto')"> </div>
-                                    <span class="name">@Usuario.nome;</span>
+                                    <span class="name">@Usuario.nome</span>
                                 }
                             </a>
                             <div class="dropdown-menu profile-dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fa fa-user icon"></i> Profile
-                                </a>
+                                @*<a class="dropdown-item" href="#">
+                                        <i class="fa fa-user icon"></i> Profile
+                                    </a>*@
                                 <a class="dropdown-item" href="@Url.Action("LogOff", "Login")">
                                     <i class="fa fa-power-off icon"></i> Logout
                                 </a>
@@ -87,59 +92,101 @@
                             </div> @System.Configuration.ConfigurationManager.AppSettings["APP_NAME"]
                         </div>
                     </div>
+                    @{
+                        string Permissoes = "";
+                        if (Usuario is GerenciarEquipe.Painel.Models.FuncionarioModel)
+                        {
+                            Permissoes = ((GerenciarEquipe.Painel.Models.FuncionarioModel)Usuario).cargo.permissoes;
+                        }
+                        if (Usuario is GerenciarEquipe.Painel.Models.AdminModel)
+                        {
+                            Permissoes = ((GerenciarEquipe.Painel.Models.AdminModel)Usuario).permissoes;
+                        }
+                    }
                     <nav class="menu">
                         <ul class="sidebar-menu metismenu" id="sidebar-menu">
                             @{var currentpage = @HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString(); }
-                            <li @if (currentpage.Equals("Home")) { Write("class=active"); }>
-                                <a href="@Url.Action("Index", "Home")">
-                                    <i class="fa fa-home"></i> Dashboard
-                                </a>
-                            </li>
-                            <li @if (currentpage.Equals("Equipe")) { Write("class=active"); }>
-                                <a href="@Url.Action("Index", "Equipe")">
-                                    <i class="fa fa-users"></i> Equipe
-                                </a>
-                            </li>
-                            <li @if (currentpage.Equals("Cargo")) { Write("class=active"); }>
-                                <a href="@Url.Action("Index", "Cargo")">
-                                    <i class="fa fa-suitcase"></i> Cargos
-                                </a>
-                            </li>
-                            <li @if (currentpage.Equals("Loja")) { Write("class=active"); }>
-                                <a href="@Url.Action("Index", "Loja")">
-                                    <i class="fa fa-building-o"></i> Lojas
-                                </a>
-                            </li>
-                            <li @if (currentpage.Equals("Indicador")) { Write("class=active"); }>
-                                <a href="@Url.Action("Index", "Indicador")">
-                                    <i class="fa fa-tags"></i> Indicadores
-                                </a>
-                            </li>
-                            <li @if (currentpage.Equals("Meta")) { Write("class=active"); }>
-                                <a href="@Url.Action("Index", "Meta")">
-                                    <i class="fa fa-bullseye"></i> Metas
-                                </a>
-                            </li>
-                            <li @if (currentpage.Equals("Admin")) { Write("class=active"); }>
-                                <a href="@Url.Action("Index", "Admin")">
-                                    <i class="fa fa-user-circle-o"></i> Admin
-                                </a>
-                            </li>
-                            <li @if (currentpage.Equals("Relatorio")) { Write("class=active"); }>
-                                <a href="@Url.Action("Index", "Relatorio")">
-                                    <i class="fa fa-area-chart"></i> Relatórios
-                                </a>
-                            </li>
-                            <li @if (currentpage.Equals("Rank")) { Write("class=active"); }>
-                                <a href="@Url.Action("Index", "Rank")">
-                                    <i class="fa fa-trophy"></i> Classificação Geral
-                                </a>
-                            </li>
-                            <li @if (currentpage.Equals("Formulario")) { Write("class=open active"); }>
-                                <a href="@Url.Action("Index", "Formulario")">
-                                    <i class="fa fa-pencil-square-o"></i> Formulário
-                                </a>
-                            </li>
+
+                            @if (Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Models.Permisoes.Dash.ToString()))
+                            {
+                                <li @if (currentpage.Equals("Home")) { Write("class=active"); }>
+                                    <a href="@Url.Action("Index", "Home")">
+                                        <i class="fa fa-home"></i> Dashboard
+                                    </a>
+                                </li>
+                            }
+                            @if (Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Models.Permisoes.Equip.ToString()))
+                            {
+                                <li @if (currentpage.Equals("Equipe")) { Write("class=active"); }>
+                                    <a href="@Url.Action("Index", "Equipe")">
+                                        <i class="fa fa-users"></i> Equipe
+                                    </a>
+                                </li>
+                            }
+                            @if (Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Models.Permisoes.Office.ToString()))
+                            {
+                                <li @if (currentpage.Equals("Cargo")) { Write("class=active"); }>
+                                    <a href="@Url.Action("Index", "Cargo")">
+                                        <i class="fa fa-suitcase"></i> Cargos
+                                    </a>
+                                </li>
+                            }
+                            @if (Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Models.Permisoes.Strore.ToString()))
+                            {
+                                <li @if (currentpage.Equals("Loja")) { Write("class=active"); }>
+                                    <a href="@Url.Action("Index", "Loja")">
+                                        <i class="fa fa-building-o"></i> Lojas
+                                    </a>
+                                </li>
+                            }
+                            @if (Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Models.Permisoes.Index.ToString()))
+                            {
+                                <li @if (currentpage.Equals("Indicador")) { Write("class=active"); }>
+                                    <a href="@Url.Action("Index", "Indicador")">
+                                        <i class="fa fa-tags"></i> Indicadores
+                                    </a>
+                                </li>
+                            }
+                            @if (Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Models.Permisoes.Goal.ToString()))
+                            {
+                                <li @if (currentpage.Equals("Meta")) { Write("class=active"); }>
+                                    <a href="@Url.Action("Index", "Meta")">
+                                        <i class="fa fa-bullseye"></i> Metas
+                                    </a>
+                                </li>
+                            }
+                            @if (Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Models.Permisoes.Admin.ToString()))
+                            {
+                                <li @if (currentpage.Equals("Admin")) { Write("class=active"); }>
+                                    <a href="@Url.Action("Index", "Admin")">
+                                        <i class="fa fa-user-circle-o"></i> Admin
+                                    </a>
+                                </li>
+                            }
+                            @if (Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Models.Permisoes.Report.ToString()))
+                            {
+                                <li @if (currentpage.Equals("Relatorio")) { Write("class=active"); }>
+                                    <a href="@Url.Action("Index", "Relatorio")">
+                                        <i class="fa fa-area-chart"></i> Relatórios
+                                    </a>
+                                </li>
+                            }
+                            @if (Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Models.Permisoes.Rank.ToString()))
+                            {
+                                <li @if (currentpage.Equals("Rank")) { Write("class=active"); }>
+                                    <a href="@Url.Action("Index", "Rank")">
+                                        <i class="fa fa-trophy"></i> Classificação Geral
+                                    </a>
+                                </li>
+                            }
+                            @if (Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Models.Permisoes.Forms.ToString()))
+                            {
+                                <li @if (currentpage.Equals("Formulario")) { Write("class=open active"); }>
+                                    <a href="@Url.Action("Index", "Formulario")">
+                                        <i class="fa fa-pencil-square-o"></i> Formulário
+                                    </a>
+                                </li>
+                            }
                         </ul>
                     </nav>
                 </div>
@@ -195,7 +242,7 @@
             </footer>
 
             <div class="modal fade" id="confirm-modal" aria-hidden="true" style="display: none;">
-               
+
             </div>
             <!-- /.modal -->
             <div class="modal fade" id="error-modal" aria-hidden="true" style="display: none;">
@@ -230,7 +277,7 @@
                     $("#confirm-modal").load(md, function () {
                         $("#confirm-modal").modal(options);
                         $("#confirm-modal").show();
-                
+
                     });
                 });
                 if (('@ViewBag.Erro').length != 0) {
