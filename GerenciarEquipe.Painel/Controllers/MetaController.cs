@@ -22,15 +22,18 @@ namespace GerenciarEquipe.Painel.Controllers
         private readonly IInquiridoAppService inquiridoAppService;
         private readonly ICargoAppService cargoAppService;
         private readonly IIndicadorAppService indicadorAppService;
+        private readonly ILojaAppService lojaAppService;
+
         private ICollection<Cargo> cargos;
 
-        public MetaController(IMetaAppService metaAppService, IAmbitoAppService ambitoAppService, IInquiridoAppService inquiridoAppService, ICargoAppService cargoAppService, IIndicadorAppService indicadorAppService)
+        public MetaController(IMetaAppService metaAppService, IAmbitoAppService ambitoAppService, IInquiridoAppService inquiridoAppService, ICargoAppService cargoAppService, IIndicadorAppService indicadorAppService, ILojaAppService lojaAppService)
         {
             this.metaAppService = metaAppService;
             this.ambitoAppService = ambitoAppService;
             this.inquiridoAppService = inquiridoAppService;
             this.cargoAppService = cargoAppService;
             this.indicadorAppService = indicadorAppService;
+            this.lojaAppService = lojaAppService;
             cargos = cargoAppService.Getall();
         }
 
@@ -38,7 +41,13 @@ namespace GerenciarEquipe.Painel.Controllers
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult Index()
         {
-            return View(Mapper.Map<ICollection<Meta>, ICollection<MetaModel>>(metaAppService.Getall()));            
+            UsuarioModel usuarioModel = (UsuarioModel)Session["Usuario"];
+            if (usuarioModel is AdminModel)
+                return View(Mapper.Map<ICollection<Meta>, ICollection<MetaModel>>(metaAppService.Getall()));
+            if (usuarioModel is FuncionarioModel)
+                return View(Mapper.Map<ICollection<Meta>, ICollection<MetaModel>>(metaAppService.GetAllByLoja(((FuncionarioModel) usuarioModel).id_loja)));
+            else
+                return View(new List<MetaModel>());          
         }
 
         // GET: Meta/Details/5
@@ -62,7 +71,20 @@ namespace GerenciarEquipe.Painel.Controllers
             ViewBag.Indicador = new SelectList(Mapper.Map<ICollection<Indicador>, ICollection<IndicadorModel>>(indicadorAppService.Getall()), "id", "nome");
             ViewBag.CargoAmbitos = new MultiSelectList(Mapper.Map<ICollection<Cargo>, ICollection<CargoModel>>(cargos), "id", "nome");
             ViewBag.CargoInquiridos = new MultiSelectList(Mapper.Map<ICollection<Cargo>, ICollection<CargoModel>>(cargos), "id", "nome");
-            return View();
+            UsuarioModel usuarioModel = (UsuarioModel)Session["Usuario"];
+            if (usuarioModel is FuncionarioModel)
+            {
+                MetaModel metaModel = new MetaModel
+                {
+                    id_loja = ((FuncionarioModel)usuarioModel).id_loja
+                };
+                return View(metaModel);
+            }
+            else
+            {
+                ViewBag.Loja = new MultiSelectList(Mapper.Map<ICollection<Loja>, ICollection<LojaModel>>(lojaAppService.Getall()), "id", "nome");
+                return View();
+            }
         }
 
         // POST: Meta/Create
@@ -70,7 +92,7 @@ namespace GerenciarEquipe.Painel.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,descicao,objetivo,objetivo_parcial,objetivo_parcial_dia,unidade,referencia,fonte,grupo,peso,id_indicador,cargoAmbitos,cargoInquiridos")] MetaModel metaModel)
+        public ActionResult Create([Bind(Include = "id,descicao,objetivo,objetivo_parcial,objetivo_parcial_dia,unidade,referencia,fonte,grupo,peso,id_indicador,id_loja,cargoAmbitos,cargoInquiridos")] MetaModel metaModel)
         {
             if (ModelState.IsValid)
             {
@@ -95,6 +117,10 @@ namespace GerenciarEquipe.Painel.Controllers
             ViewBag.Indicador = new SelectList(Mapper.Map<ICollection<Indicador>, ICollection<IndicadorModel>>(indicadorAppService.Getall()), "id", "nome");
             ViewBag.CargoAmbitos = new MultiSelectList(Mapper.Map<ICollection<Cargo>, ICollection<CargoModel>>(cargos), "id", "nome", metaModel.cargoAmbitos);
             ViewBag.CargoInquiridos = new MultiSelectList(Mapper.Map<ICollection<Cargo>, ICollection<CargoModel>>(cargos), "id", "nome", metaModel.cargoInquiridos);
+            UsuarioModel usuarioModel = (UsuarioModel)Session["Usuario"];
+            if (usuarioModel is AdminModel)
+                ViewBag.Loja = new MultiSelectList(Mapper.Map<ICollection<Loja>, ICollection<LojaModel>>(lojaAppService.Getall()), "id", "nome");
+                
             return View(metaModel);
         }
 
@@ -121,6 +147,9 @@ namespace GerenciarEquipe.Painel.Controllers
             ViewBag.Indicador = new SelectList(Mapper.Map<ICollection<Indicador>, ICollection<IndicadorModel>>(indicadorAppService.Getall()), "id", "nome");
             ViewBag.CargoAmbitos = new MultiSelectList(Mapper.Map<ICollection<Cargo>, ICollection<CargoModel>>(cargos), "id", "nome", metaModel.cargoAmbitos);
             ViewBag.CargoInquiridos = new MultiSelectList(Mapper.Map<ICollection<Cargo>, ICollection<CargoModel>>(cargos), "id", "nome", metaModel.cargoInquiridos);
+            UsuarioModel usuarioModel = (UsuarioModel)Session["Usuario"];
+            if (usuarioModel is AdminModel)
+                ViewBag.Loja = new MultiSelectList(Mapper.Map<ICollection<Loja>, ICollection<LojaModel>>(lojaAppService.Getall()), "id", "nome");
             return View(metaModel);
         }
 
@@ -129,7 +158,7 @@ namespace GerenciarEquipe.Painel.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,descicao,objetivo,objetivo_parcial,objetivo_parcial_dia,unidade,referencia,fonte,grupo,peso,id_indicador,cargoAmbitos,cargoInquiridos")] MetaModel metaModel)
+        public ActionResult Edit([Bind(Include = "id,descicao,objetivo,objetivo_parcial,objetivo_parcial_dia,unidade,referencia,fonte,grupo,peso,id_indicador,id_loja,cargoAmbitos,cargoInquiridos")] MetaModel metaModel)
         {
             if (ModelState.IsValid)
             {
@@ -172,6 +201,9 @@ namespace GerenciarEquipe.Painel.Controllers
             ViewBag.Indicador = new SelectList(Mapper.Map<ICollection<Indicador>, ICollection<IndicadorModel>>(indicadorAppService.Getall()), "id", "nome");
             ViewBag.CargoAmbitos = new MultiSelectList(Mapper.Map<ICollection<Cargo>, ICollection<CargoModel>>(cargos), "id", "nome", metaModel.cargoAmbitos);
             ViewBag.CargoInquiridos = new MultiSelectList(Mapper.Map<ICollection<Cargo>, ICollection<CargoModel>>(cargos), "id", "nome", metaModel.cargoInquiridos);
+            UsuarioModel usuarioModel = (UsuarioModel)Session["Usuario"];
+            if (usuarioModel is AdminModel)
+                ViewBag.Loja = new MultiSelectList(Mapper.Map<ICollection<Loja>, ICollection<LojaModel>>(lojaAppService.Getall()), "id", "nome");
             return View(metaModel);
         }
 

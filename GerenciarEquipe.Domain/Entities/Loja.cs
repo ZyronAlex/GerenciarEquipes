@@ -11,6 +11,9 @@ namespace GerenciarEquipe.Domain.Entities
         public Loja()
         {
             funcionarios = new HashSet<Funcionario>();
+            cargos = new HashSet<Cargo>();
+            indicadores = new HashSet<Indicador>();
+            metas = new HashSet<Meta>();
         }
         public long id { get; set; }
         public string nome { get; set; }
@@ -20,5 +23,8 @@ namespace GerenciarEquipe.Domain.Entities
         public DateTime create_at { set; get; }
         public DateTime update_at { set; get; }
         public ICollection<Funcionario> funcionarios { get; set; }
+        public ICollection<Cargo> cargos { get; set; }
+        public ICollection<Indicador> indicadores { get; set; }
+        public ICollection<Meta> metas { get; set; }
     }
 }

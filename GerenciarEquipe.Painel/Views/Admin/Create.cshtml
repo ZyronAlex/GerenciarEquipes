@@ -36,7 +36,7 @@
                             </div>
                             <label for="upload">
                                 <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
-                                @Html.TextBoxFor(model => model.fotoFile, new { type = "file", style = "display:none" })
+                                @Html.TextBoxFor(model => model.fotoFile, new { type = "file", id="upload", style = "display:none" })
                             </label>
                             @Html.ValidationMessageFor(model => model.fotoFile, "", new { @class = "text-danger" })
                         </div>

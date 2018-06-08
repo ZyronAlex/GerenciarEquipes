@@ -1,6 +1,7 @@
 ﻿using GerenciarEquipe.Application.Interfaces;
 using GerenciarEquipe.Domain.Entities;
 using GerenciarEquipe.Domain.Interfaces.Services;
+using System.Collections.Generic;
 
 namespace GerenciarEquipe.Application
 {
@@ -11,5 +12,11 @@ namespace GerenciarEquipe.Application
         {
             this.indicadorService = indicadorService;
         }
+
+        public ICollection<Indicador> GetAllByLoja(long id_loja)
+        {
+            return indicadorService.GetAllByLoja(id_loja);
+        }
+
     }
 }

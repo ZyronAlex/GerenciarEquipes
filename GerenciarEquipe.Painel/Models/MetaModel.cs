@@ -56,6 +56,10 @@ namespace GerenciarEquipe.Painel.Models
         [ScaffoldColumn(false)]
         public long id_indicador { get; set; }
 
+        [Display(Name = "Loja")]
+        [ScaffoldColumn(false)]
+        public long id_loja { get; set; }
+
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Data Cadastro")]
@@ -72,6 +76,10 @@ namespace GerenciarEquipe.Painel.Models
         [ScaffoldColumn(false)]
         public virtual IndicadorModel indicador { get; set; }
 
+        [Display(Name = "Loja")]
+        [ScaffoldColumn(false)]
+        public virtual LojaModel loja { get; set; }
+        
         [Display(Name = "Ambitos")]
         [ScaffoldColumn(false)]
         public virtual ICollection<AmbitoModel> ambitos { get; set; }

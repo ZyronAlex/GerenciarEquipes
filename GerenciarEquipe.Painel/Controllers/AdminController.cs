@@ -65,7 +65,7 @@ namespace GerenciarEquipe.Painel.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,nome,email,senha,ativo,fotoFile,permissoes")] AdminModel adminModel)
+        public ActionResult Create([Bind(Include = "id,nome,email,senha,ativo,foto,fotoFile,permissoes")] AdminModel adminModel)
         {
             if (ModelState.IsValid)
             {
@@ -84,6 +84,9 @@ namespace GerenciarEquipe.Painel.Controllers
                     adminModel.foto = GetUrlBase.UrlBase(HttpContext.Request) + "/AdminFotos/" + fileName;
                 }
                 adminModel.permissoes = Request["permissoes"];
+                if (!Criptografia.IsMD5(adminModel.senha))
+                    adminModel.senha = Criptografia.EncryptMD5(adminModel.senha);
+
                 adminAppService.Add(Mapper.Map<AdminModel, Admin>(adminModel));
                 return RedirectToAction("Index");
             }
@@ -126,7 +129,7 @@ namespace GerenciarEquipe.Painel.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,nome,email,senha,ativo,fotoFile,permissoes")] AdminModel adminModel)
+        public ActionResult Edit([Bind(Include = "id,nome,email,senha,ativo,foto,fotoFile,permissoes")] AdminModel adminModel)
         {
             if (ModelState.IsValid)
             {
@@ -154,6 +157,9 @@ namespace GerenciarEquipe.Painel.Controllers
                     adminModel.foto = GetUrlBase.UrlBase(HttpContext.Request) + "/AdminFotos/" + fileName;
                 }
                 adminModel.permissoes = Request["permissoes"];
+                if (!Criptografia.IsMD5(adminModel.senha))
+                    adminModel.senha = Criptografia.EncryptMD5(adminModel.senha);
+
                 adminAppService.Update(Mapper.Map<AdminModel, Admin>(adminModel));
                 return RedirectToAction("Index");
             }

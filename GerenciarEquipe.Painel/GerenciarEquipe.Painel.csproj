@@ -176,6 +176,8 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\LojaController.cs" />
     <Compile Include="Controllers\MetaController.cs" />
+    <Compile Include="Controllers\RankController.cs" />
+    <Compile Include="Controllers\RelatorioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -495,6 +497,8 @@
     <Content Include="Views\Erro\Index.cshtml" />
     <Content Include="Views\Erro\Desautorizado.cshtml" />
     <Content Include="Views\Formulario\Index.cshtml" />
+    <Content Include="Views\Rank\Index.cshtml" />
+    <Content Include="Views\Relatorio\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

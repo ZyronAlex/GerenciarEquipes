@@ -30,6 +30,10 @@ namespace GerenciarEquipe.Painel.Models
         [Display(Name = "Permissões")]
         public string permissoes { get; set; }
 
+        [Display(Name = "Loja")]
+        [ScaffoldColumn(false)]
+        public long id_loja { get; set; }
+
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Data Cadastro")]
@@ -41,7 +45,11 @@ namespace GerenciarEquipe.Painel.Models
         [Display(Name = "Data Ultima Alteração")]
         [ScaffoldColumn(false)]
         public DateTime update_at { set; get; }
-        
+
+        [Display(Name = "Loja")]
+        [ScaffoldColumn(false)]
+        public virtual LojaModel loja { get; set; }
+
         public virtual ICollection<FuncionarioModel> funcionarios { get; set; }
         public virtual ICollection<AmbitoModel> ambitos { get; set; }
         public virtual ICollection<InquiridoModel> inquiridos { get; set; }

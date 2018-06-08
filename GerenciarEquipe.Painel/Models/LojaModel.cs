@@ -12,6 +12,9 @@ namespace GerenciarEquipe.Painel.Models
         public LojaModel()
         {
             funcionarios = new HashSet<FuncionarioModel>();
+            cargos = new HashSet<CargoModel>();
+            indicadores = new HashSet<IndicadorModel>();
+            metas = new HashSet<MetaModel>();
         }
 
         [Key]
@@ -45,5 +48,8 @@ namespace GerenciarEquipe.Painel.Models
         public DateTime update_at { set; get; }
 
         public ICollection<FuncionarioModel> funcionarios { get; set; }
+        public ICollection<CargoModel> cargos { get; set; }
+        public ICollection<IndicadorModel> indicadores { get; set; }
+        public ICollection<MetaModel> metas { get; set; }
     }
 }

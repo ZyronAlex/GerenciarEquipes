@@ -25,8 +25,10 @@ namespace GerenciarEquipe.Domain.Entities
         public string grupo { get; set; }
         public int? peso { get; set; }
         public long id_indicador { get; set; }
+        public long id_loja { get; set; }
         public DateTime create_at { set; get; }
         public DateTime update_at { set; get; }
+        public virtual Loja loja { get; set; }
         public virtual Indicador indicador { get; set; }
         public virtual ICollection<Ambito> ambitos { get; set; }
         public virtual ICollection<Inquirido> inquiridos { get; set; }

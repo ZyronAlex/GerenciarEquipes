@@ -11,6 +11,10 @@ namespace GerenciarEquipe.Infra.Data.EntityConfig
 
             Property(i => i.nome)
               .IsRequired();
+
+            HasRequired(i => i.loja)
+               .WithMany(l => l.indicadores)
+               .HasForeignKey(i => i.id_loja);
         }
     }
 }

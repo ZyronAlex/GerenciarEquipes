@@ -32,13 +32,13 @@
             <div class="card">
                 <header class="auth-header">
                     <h1 class="auth-title">
-                        <div class="logo">
+                        <span class="logo">
                             <span class="l l1"></span>
                             <span class="l l2"></span>
                             <span class="l l3"></span>
                             <span class="l l4"></span>
                             <span class="l l5"></span>
-                        </div> @System.Configuration.ConfigurationManager.AppSettings["APP_NAME"]
+                        </span> @System.Configuration.ConfigurationManager.AppSettings["APP_NAME"]
                     </h1>
                 </header>
                 <div class="auth-content">
@@ -49,20 +49,20 @@
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             <div class="form-group">
                                 @Html.LabelFor(model => model.email)
-                                @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control underlined", @placeholder = "Seu E-mail", @type = "E-mail", @required = "true"} })
+                                @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control underlined", @placeholder = "Seu E-mail", @type = "E-mail", @required = "true" } })
                                 @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-group">
                                 @Html.LabelFor(model => model.senha)
-                                @Html.EditorFor(model => model.senha, new { htmlAttributes = new { @class = "form-control underlined", @placeholder = "Seu Senha", @type = "password", @required = "true"} })
+                                @Html.EditorFor(model => model.senha, new { htmlAttributes = new { @class = "form-control underlined", @placeholder = "Seu Senha", @type = "password", @required = "true" } })
                                 @Html.ValidationMessageFor(model => model.senha, "", new { @class = "text-danger" })
                             </div>
-                            <div class="form-group">
-                                @if (ViewBag.Mensagem != null)
-                                {
-                                    <span class="fa fa-times form-control-feedback has-error">@ViewBag.Mensagem</span>
-                                }
-                            </div>
+                            @if (ViewBag.Mensagem != null)
+                            {
+                                <div class="form-group has-error has-feedback">
+                                    <span class="fa fa-times form-control-feedback has-error has-feedback"> @ViewBag.Mensagem</span>
+                                </div>
+                            }
                             <div class="form-group"> <button type="submit" class="btn btn-block btn-primary">Login</button> </div>
                         </form>
                     }

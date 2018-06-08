@@ -53,6 +53,17 @@
                             <span>@Html.DisplayNameFor(model => model.grupo)</span>
                         </div>
                     </div>
+                    @{
+                        var Usuario = (GerenciarEquipe.Painel.Models.UsuarioModel)Session["usuario"];
+                        if (Usuario is GerenciarEquipe.Painel.Models.AdminModel)
+                        {
+                            <div class="item-col item-col-header item-col-author">
+                                <div>
+                                    <span> @Html.DisplayNameFor(model => model.loja)</span>
+                                </div>
+                            </div>
+                        }
+                    }
                     <div class="item-col item-col-header fixed item-col-actions-dropdown"></div>
                 </div>
             </li>
@@ -64,39 +75,50 @@
                         <div class="item-col pull-left item-col-title">
                             <div class="item-heading"> @Html.DisplayNameFor(model => model.descicao)</div>
                             <div>
-                                    <h4 class="item-title">@Html.DisplayFor(model => item.descicao)</h4>
+                                <h4 class="item-title">@Html.DisplayFor(model => item.descicao)</h4>
                             </div>
                         </div>
                         <div class="item-col pull-left item-col-sales">
                             <div class="item-heading"> @Html.DisplayNameFor(model => model.objetivo)</div>
                             <div>
-                                    <h4 class="item-title">@Html.DisplayFor(model => item.objetivo)</h4>
+                                <h4 class="item-title">@Html.DisplayFor(model => item.objetivo)</h4>
                             </div>
                         </div>
                         <div class="item-col pull-left item-col-category">
                             <div class="item-heading"> @Html.DisplayNameFor(model => model.unidade)</div>
                             <div>
-                                    <h4 class="item-title">@Html.DisplayFor(model => item.unidade)</h4>
+                                <h4 class="item-title">@Html.DisplayFor(model => item.unidade)</h4>
                             </div>
                         </div>
                         <div class="item-col item-col-title">
                             <div class="item-heading"> @Html.DisplayNameFor(model => model.referencia)</div>
                             <div>
-                                    <h4 class="item-title">@Html.DisplayFor(model => item.referencia)</h4>
+                                <h4 class="item-title">@Html.DisplayFor(model => item.referencia)</h4>
                             </div>
                         </div>
                         <div class="item-col pull-left item-col-title">
                             <div class="item-heading"> @Html.DisplayNameFor(model => model.fonte)</div>
                             <div>
-                                    <h4 class="item-title">@Html.DisplayFor(model => item.fonte)</h4>
+                                <h4 class="item-title">@Html.DisplayFor(model => item.fonte)</h4>
                             </div>
                         </div>
                         <div class="item-col pull-left item-col-title">
                             <div class="item-heading"> @Html.DisplayNameFor(model => model.grupo)</div>
                             <div>
-                                    <h4 class="item-title">@Html.DisplayFor(model => item.grupo)</h4>
+                                <h4 class="item-title">@Html.DisplayFor(model => item.grupo)</h4>
                             </div>
-                        </div>
+                        </div> 
+                        @if (Usuario is GerenciarEquipe.Painel.Models.AdminModel)
+                        {
+                            <div class="item-col fixed pull-left item-col-author">
+                                <div class="item-heading"> @Html.DisplayNameFor(model => model.loja)</div>
+                                <div>
+                                    <a href="" class="">
+                                        <h4 class="item-title">@Html.DisplayFor(model => item.loja.nome)</h4>
+                                    </a>
+                                </div>
+                            </div>
+                        }
                         <div class="item-col fixed item-col-actions-dropdown">
                             <div class="item-actions-dropdown">
                                 <a class="item-actions-toggle-btn">

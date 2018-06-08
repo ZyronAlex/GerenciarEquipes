@@ -1,4 +1,5 @@
 ﻿using GerenciarEquipe.Domain.Entities;
+using System.Collections.Generic;
 
 namespace GerenciarEquipe.Domain.Interfaces.Services
 {
@@ -7,5 +8,7 @@ namespace GerenciarEquipe.Domain.Interfaces.Services
         bool Login(Funcionario funcionario);
 
         Funcionario GetByEmail(string email);
+
+        ICollection<Funcionario> GetAllByLoja(long id_loja);
     }
 }

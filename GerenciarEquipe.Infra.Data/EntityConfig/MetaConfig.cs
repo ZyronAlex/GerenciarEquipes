@@ -22,6 +22,10 @@ namespace GerenciarEquipe.Infra.Data.EntityConfig
                  .WithMany(i => i.metas)
                  .HasForeignKey(m => m.id_indicador);
 
+            HasRequired(m => m.loja)
+               .WithMany(l => l.metas)
+               .HasForeignKey(m => m.id_loja);
+
         }
     }
 }

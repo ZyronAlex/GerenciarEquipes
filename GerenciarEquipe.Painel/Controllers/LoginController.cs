@@ -2,6 +2,7 @@
 using GerenciarEquipe.Application.Interfaces;
 using GerenciarEquipe.Domain.Entities;
 using GerenciarEquipe.Painel.Models;
+using GerenciarEquipe.Services;
 using System;
 using System.Web;
 using System.Web.Mvc;
@@ -29,6 +30,7 @@ namespace GerenciarEquipe.Painel.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 UsuarioModel usuarioModel = Mapper.Map<Usuario, UsuarioModel>(usuarioAppService.GetByEmail(User.Identity.Name));
+                usuarioModel.senha = null;
                 Session["Usuario"] = usuarioModel;
                 if (usuarioModel is FuncionarioModel)
                     return RedirectToNextAuthorizAction(((FuncionarioModel)usuarioModel).cargo.permissoes);
@@ -41,6 +43,7 @@ namespace GerenciarEquipe.Painel.Controllers
         [HttpPost]
         public ActionResult index([Bind(Include = "Email,Senha")] LoginModel loginModel)
         {
+            loginModel.senha = Criptografia.EncryptMD5(loginModel.senha);
             if (adminAppService.Login(Mapper.Map<AdminModel, Admin>(new AdminModel(loginModel))))
             {
                 AdminModel adminModel = Mapper.Map<Admin, AdminModel>(adminAppService.GetByEmail(loginModel.email));

@@ -31,7 +31,13 @@ namespace GerenciarEquipe.Painel.Controllers
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult Index()
         {
-            return View(Mapper.Map<ICollection<Funcionario>, ICollection<FuncionarioModel>>(funcionarioAppService.Getall()));
+            UsuarioModel usuarioModel = (UsuarioModel)Session["Usuario"];
+            if (usuarioModel is AdminModel)
+                return View(Mapper.Map<ICollection<Funcionario>, ICollection<FuncionarioModel>>(funcionarioAppService.Getall()));
+            if (usuarioModel is FuncionarioModel)
+                return View(Mapper.Map<ICollection<Funcionario>, ICollection<FuncionarioModel>>(funcionarioAppService.GetAllByLoja(((FuncionarioModel)usuarioModel).id_loja)));
+            else
+                return View(new List<Funcionario>());            
         }
 
         // GET: Equipe/Details/5
@@ -53,8 +59,20 @@ namespace GerenciarEquipe.Painel.Controllers
         public ActionResult Create()
         {
             ViewBag.Cargo = new SelectList(Mapper.Map<ICollection<Cargo>, ICollection<CargoModel>>(cargoAppService.Getall()), "id", "nome");
-            ViewBag.Loja = new SelectList(Mapper.Map<ICollection<Loja>, ICollection<LojaModel>>(lojaAppService.Getall()), "id", "nome");
-            return View();
+            UsuarioModel usuarioModel = (UsuarioModel)Session["Usuario"];
+            if (usuarioModel is FuncionarioModel)
+            {
+                FuncionarioModel funcionarioModel = new FuncionarioModel
+                {
+                    id_loja = ((FuncionarioModel)usuarioModel).id_loja
+                };
+                return View(funcionarioModel);
+            }
+            else
+            {
+                ViewBag.Loja = new MultiSelectList(Mapper.Map<ICollection<Loja>, ICollection<LojaModel>>(lojaAppService.Getall()), "id", "nome");
+                return View();
+            }
         }
 
         // POST: Equipe/Create
@@ -62,7 +80,7 @@ namespace GerenciarEquipe.Painel.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,nome,email,senha,ativo,fotoFile,matricula,nascimento,genero,cidade,estado,turno,id_cargo,id_loja")] FuncionarioModel funcionarioModel)
+        public ActionResult Create([Bind(Include = "id,nome,email,senha,ativo,foto,fotoFile,matricula,nascimento,genero,cidade,estado,turno,id_cargo,id_loja")] FuncionarioModel funcionarioModel)
         {
             if (ModelState.IsValid)
             {
@@ -80,14 +98,17 @@ namespace GerenciarEquipe.Painel.Controllers
                     funcionarioModel.fotoFile.SaveAs(savedFileName);
                     funcionarioModel.foto = GetBaseUrl() + "FuncionarioFotos/" + fileName;
                 }
-
+                if (!Criptografia.IsMD5(funcionarioModel.senha))
+                    funcionarioModel.senha = Criptografia.EncryptMD5(funcionarioModel.senha);
                 funcionarioAppService.Add(Mapper.Map<FuncionarioModel, Funcionario>(funcionarioModel));
                 return RedirectToAction("Index");
 
             }
 
             ViewBag.Cargo = new SelectList(Mapper.Map<ICollection<Cargo>, ICollection<CargoModel>>(cargoAppService.Getall()), "id", "nome");
-            ViewBag.Loja = new SelectList(Mapper.Map<ICollection<Loja>, ICollection<LojaModel>>(lojaAppService.Getall()), "id", "nome");
+            UsuarioModel usuarioModel = (UsuarioModel)Session["Usuario"];
+            if (usuarioModel is AdminModel)
+                ViewBag.Loja = new MultiSelectList(Mapper.Map<ICollection<Loja>, ICollection<LojaModel>>(lojaAppService.Getall()), "id", "nome");
             return View(funcionarioModel);
         }
 
@@ -105,7 +126,9 @@ namespace GerenciarEquipe.Painel.Controllers
             }
 
             ViewBag.Cargo = new SelectList(Mapper.Map<ICollection<Cargo>, ICollection<CargoModel>>(cargoAppService.Getall()), "id", "nome");
-            ViewBag.Loja = new SelectList(Mapper.Map<ICollection<Loja>, ICollection<LojaModel>>(lojaAppService.Getall()), "id", "nome");
+            UsuarioModel usuarioModel = (UsuarioModel)Session["Usuario"];
+            if (usuarioModel is AdminModel)
+                ViewBag.Loja = new MultiSelectList(Mapper.Map<ICollection<Loja>, ICollection<LojaModel>>(lojaAppService.Getall()), "id", "nome");
             return View(funcionarioModel);
         }
 
@@ -114,7 +137,7 @@ namespace GerenciarEquipe.Painel.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,nome,email,senha,ativo,fotoFile,matricula,nascimento,genero,cidade,estado,turno,id_cargo,id_loja")] FuncionarioModel funcionarioModel)
+        public ActionResult Edit([Bind(Include = "id,nome,email,senha,ativo,foto,fotoFile,matricula,nascimento,genero,cidade,estado,turno,id_cargo,id_loja")] FuncionarioModel funcionarioModel)
         {
             if (ModelState.IsValid)
             {
@@ -141,12 +164,16 @@ namespace GerenciarEquipe.Painel.Controllers
                     funcionarioModel.fotoFile.SaveAs(savedFileName);
                     funcionarioModel.foto = GetBaseUrl() + "FuncionarioFotos/" + fileName;
                 }
+                if (!Criptografia.IsMD5(funcionarioModel.senha))
+                    funcionarioModel.senha = Criptografia.EncryptMD5(funcionarioModel.senha);
 
                 funcionarioAppService.Update(Mapper.Map<FuncionarioModel, Funcionario>(funcionarioModel));
                 return RedirectToAction("Index");
             }
             ViewBag.Cargo = new SelectList(Mapper.Map<ICollection<Cargo>, ICollection<CargoModel>>(cargoAppService.Getall()), "id", "nome");
-            ViewBag.Loja = new SelectList(Mapper.Map<ICollection<Loja>, ICollection<LojaModel>>(lojaAppService.Getall()), "id", "nome");
+            UsuarioModel usuarioModel = (UsuarioModel)Session["Usuario"];
+            if (usuarioModel is AdminModel)
+                ViewBag.Loja = new MultiSelectList(Mapper.Map<ICollection<Loja>, ICollection<LojaModel>>(lojaAppService.Getall()), "id", "nome");
             return View(funcionarioModel);
         }
 

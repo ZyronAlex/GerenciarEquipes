@@ -18,16 +18,25 @@ namespace GerenciarEquipe.Painel.Controllers
     public class IndicadorController : Controller
     {
         private readonly IIndicadorAppService indicadorAppService;
-        public IndicadorController(IIndicadorAppService indicadorAppService)
+        private readonly ILojaAppService lojaAppService;
+
+        public IndicadorController(IIndicadorAppService indicadorAppService, ILojaAppService lojaAppService)
         {
             this.indicadorAppService = indicadorAppService;
+            this.lojaAppService = lojaAppService;
         }
 
         // GET: Indicador
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult Index()
         {
-            return View(Mapper.Map<ICollection<Indicador>, ICollection<IndicadorModel>>(indicadorAppService.Getall()));
+            UsuarioModel usuarioModel = (UsuarioModel)Session["Usuario"];
+            if (usuarioModel is AdminModel)
+                return View(Mapper.Map<ICollection<Indicador>, ICollection<IndicadorModel>>(indicadorAppService.Getall()));
+            if (usuarioModel is FuncionarioModel)
+                return View(Mapper.Map<ICollection<Indicador>, ICollection<IndicadorModel>>(indicadorAppService.GetAllByLoja(((FuncionarioModel)usuarioModel).id_loja)));
+            else
+                return View(new List<IndicadorModel>());            
         }
 
         // GET: Indicador/Details/5
@@ -48,7 +57,20 @@ namespace GerenciarEquipe.Painel.Controllers
         // GET: Indicador/Create
         public ActionResult Create()
         {
-            return View();
+            UsuarioModel usuarioModel = (UsuarioModel)Session["Usuario"];
+            if (usuarioModel is FuncionarioModel)
+            {
+                IndicadorModel indicadorModel = new IndicadorModel
+                {
+                    id_loja = ((FuncionarioModel)usuarioModel).id_loja
+                };
+                return View(indicadorModel);
+            }
+            else
+            {
+                ViewBag.Loja = new MultiSelectList(Mapper.Map<ICollection<Loja>, ICollection<LojaModel>>(lojaAppService.Getall()), "id", "nome");
+                return View();
+            }
         }
 
         // POST: Indicador/Create
@@ -56,7 +78,7 @@ namespace GerenciarEquipe.Painel.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,nome,indicativa,create_at,update_at")] IndicadorModel indicadorModel)
+        public ActionResult Create([Bind(Include = "id,nome,indicativa,id_loja,create_at,update_at")] IndicadorModel indicadorModel)
         {
             if (ModelState.IsValid)
             {
@@ -64,6 +86,9 @@ namespace GerenciarEquipe.Painel.Controllers
                 return RedirectToAction("Index");
             }
 
+            UsuarioModel usuarioModel = (UsuarioModel)Session["Usuario"];
+            if (usuarioModel is AdminModel)
+                ViewBag.Loja = new MultiSelectList(Mapper.Map<ICollection<Loja>, ICollection<LojaModel>>(lojaAppService.Getall()), "id", "nome");
             return View(indicadorModel);
         }
 
@@ -79,6 +104,10 @@ namespace GerenciarEquipe.Painel.Controllers
             {
                 return HttpNotFound();
             }
+
+            UsuarioModel usuarioModel = (UsuarioModel)Session["Usuario"];
+            if (usuarioModel is AdminModel)
+                ViewBag.Loja = new MultiSelectList(Mapper.Map<ICollection<Loja>, ICollection<LojaModel>>(lojaAppService.Getall()), "id", "nome");
             return View(indicadorModel);
         }
 
@@ -87,13 +116,17 @@ namespace GerenciarEquipe.Painel.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,nome,indicativa,create_at,update_at")] IndicadorModel indicadorModel)
+        public ActionResult Edit([Bind(Include = "id,nome,indicativa,id_loja,create_at,update_at")] IndicadorModel indicadorModel)
         {
             if (ModelState.IsValid)
             {
                 indicadorAppService.Update(Mapper.Map<IndicadorModel, Indicador>(indicadorModel));
                 return RedirectToAction("Index");
             }
+
+            UsuarioModel usuarioModel = (UsuarioModel)Session["Usuario"];
+            if (usuarioModel is AdminModel)
+                ViewBag.Loja = new MultiSelectList(Mapper.Map<ICollection<Loja>, ICollection<LojaModel>>(lojaAppService.Getall()), "id", "nome");
             return View(indicadorModel);
         }
 

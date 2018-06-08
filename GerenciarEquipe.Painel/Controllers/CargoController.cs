@@ -20,16 +20,25 @@ namespace GerenciarEquipe.Painel.Controllers
     public class CargoController : Controller
     {
         private readonly ICargoAppService cargoAppService;
-        public CargoController(ICargoAppService cargoAppService)
+        private readonly ILojaAppService lojaAppService;
+
+        public CargoController(ICargoAppService cargoAppService, ILojaAppService lojaAppService)
         {
             this.cargoAppService = cargoAppService;
+            this.lojaAppService = lojaAppService;
         }
 
         // GET: Cargo
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult Index()
         {
-            return View(Mapper.Map<ICollection<Cargo>, ICollection<CargoModel>>(cargoAppService.Getall()));
+            UsuarioModel usuarioModel = (UsuarioModel)Session["Usuario"];
+            if (usuarioModel is AdminModel)
+                return View(Mapper.Map<ICollection<Cargo>, ICollection<CargoModel>>(cargoAppService.Getall()));
+            if (usuarioModel is FuncionarioModel)
+                return View(Mapper.Map<ICollection<Cargo>, ICollection<CargoModel>>(cargoAppService.GetAllByLoja(((FuncionarioModel)usuarioModel).id_loja)));
+            else
+                return View(new List<CargoModel>());
         }
 
         // GET: Cargo/Details/5
@@ -56,9 +65,22 @@ namespace GerenciarEquipe.Painel.Controllers
                    {
                        Text = EnumHelper<Permisoes>.GetDisplayValue(x),
                        Value = x.ToString()
-                   }).Where(p => p.Value != Permisoes.Admin.ToString());
-                
-            return View();
+                   }).Where(p => p.Value != Permisoes.Admin.ToString() && p.Value != Permisoes.Store.ToString());
+            UsuarioModel usuarioModel = (UsuarioModel)Session["Usuario"];
+            if(usuarioModel is FuncionarioModel)
+            {
+                CargoModel cargoModel = new CargoModel
+                {
+                    id_loja = ((FuncionarioModel)usuarioModel).id_loja
+                };
+                return View(cargoModel);
+            }
+            else
+            {
+
+                ViewBag.Loja = new MultiSelectList(Mapper.Map<ICollection<Loja>, ICollection<LojaModel>>(lojaAppService.Getall()), "id", "nome");
+                return View();
+            }
         }
 
         // POST: Cargo/Create
@@ -66,7 +88,7 @@ namespace GerenciarEquipe.Painel.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,nome,descicao,permissoes")] CargoModel cargoModel)
+        public ActionResult Create([Bind(Include = "id,nome,descicao,permissoes,id_loja")] CargoModel cargoModel)
         {
             if (ModelState.IsValid)
             {
@@ -81,7 +103,10 @@ namespace GerenciarEquipe.Painel.Controllers
                        Text = EnumHelper<Permisoes>.GetDisplayValue(x),
                        Value = x.ToString(),
                        Selected = Request["permissoes"].Split(',').Contains(x.ToString())
-                   }).Where(p => p.Value != Permisoes.Admin.ToString());
+                   }).Where(p => p.Value != Permisoes.Admin.ToString() &&  p.Value != Permisoes.Store.ToString());
+            UsuarioModel usuarioModel = (UsuarioModel)Session["Usuario"];
+            if (usuarioModel is AdminModel)
+                ViewBag.Loja = new MultiSelectList(Mapper.Map<ICollection<Loja>, ICollection<LojaModel>>(lojaAppService.Getall()), "id", "nome");
             return View(cargoModel);
         }
 
@@ -104,7 +129,10 @@ namespace GerenciarEquipe.Painel.Controllers
                       Text = EnumHelper<Permisoes>.GetDisplayValue(x),
                       Value = x.ToString(),
                       Selected = cargoModel.permissoes.Split(',').Contains(x.ToString())
-                  }).Where(p => p.Value != Permisoes.Admin.ToString());
+                  }).Where(p => p.Value != Permisoes.Admin.ToString() && p.Value != Permisoes.Store.ToString());
+            UsuarioModel usuarioModel = (UsuarioModel)Session["Usuario"];
+            if (usuarioModel is AdminModel)
+                ViewBag.Loja = new MultiSelectList(Mapper.Map<ICollection<Loja>, ICollection<LojaModel>>(lojaAppService.Getall()), "id", "nome");
             return View(cargoModel);
         }
 
@@ -113,7 +141,7 @@ namespace GerenciarEquipe.Painel.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,nome,descicao,permissoes")] CargoModel cargoModel)
+        public ActionResult Edit([Bind(Include = "id,nome,descicao,permissoes,id_loja")] CargoModel cargoModel)
         {
             if (ModelState.IsValid)
             {
@@ -128,7 +156,10 @@ namespace GerenciarEquipe.Painel.Controllers
                        Text = EnumHelper<Permisoes>.GetDisplayValue(x),
                        Value = x.ToString(),
                        Selected = Request["permissoes"].Split(',').Contains(x.ToString())
-                   }).Where(p => p.Value != Permisoes.Admin.ToString());
+                   }).Where(p => p.Value != Permisoes.Admin.ToString() && p.Value != Permisoes.Store.ToString());
+            UsuarioModel usuarioModel = (UsuarioModel)Session["Usuario"];
+            if (usuarioModel is AdminModel)
+                ViewBag.Loja = new MultiSelectList(Mapper.Map<ICollection<Loja>, ICollection<LojaModel>>(lojaAppService.Getall()), "id", "nome");
             return View(cargoModel);
         }
 

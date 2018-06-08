@@ -2,6 +2,7 @@
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace GerenciarEquipe.Services
 {
@@ -88,6 +89,31 @@ namespace GerenciarEquipe.Services
             }
 
             return strSaida.ToString();
+        }
+
+        // Verify a hash if is a MD5
+        public static bool IsMD5(string texto)
+        {
+            return Regex.IsMatch(texto, "[0-9a-f]{32}");
+        }
+
+        // Verify a hash against a string.
+        static bool VerifyMd5(string input, string hash)
+        {
+            // Hash the input.
+            string hashOfInput = EncryptMD5(input);
+
+            // Create a StringComparer an compare the hashes.
+            StringComparer comparer = StringComparer.OrdinalIgnoreCase;
+
+            if (0 == comparer.Compare(hashOfInput, hash))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

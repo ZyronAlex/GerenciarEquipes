@@ -1,6 +1,7 @@
 ﻿using GerenciarEquipe.Domain.Entities;
 using GerenciarEquipe.Domain.Interfaces.Repositories;
 using GerenciarEquipe.Domain.Interfaces.Services;
+using System.Collections.Generic;
 
 namespace GerenciarEquipe.Domain.Services
 {
@@ -10,6 +11,11 @@ namespace GerenciarEquipe.Domain.Services
         public CargoService(ICargoRepository cargoRepository) : base(cargoRepository)
         {
             this.cargoRepository = cargoRepository;
+        }
+
+        public ICollection<Cargo> GetAllByLoja(long id_loja)
+        {
+            return cargoRepository.GetAllByLoja(id_loja);
         }
     }
 }

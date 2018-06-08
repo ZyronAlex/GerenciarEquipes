@@ -33,6 +33,17 @@
                             <span> @Html.DisplayNameFor(model => model.indicativa)</span>
                         </div>
                     </div>
+                    @{
+                        var Usuario = (GerenciarEquipe.Painel.Models.UsuarioModel)Session["usuario"];
+                        if (Usuario is GerenciarEquipe.Painel.Models.AdminModel)
+                        {
+                            <div class="item-col item-col-header item-col-title">
+                                <div>
+                                    <span> @Html.DisplayNameFor(model => model.loja)</span>
+                                </div>
+                            </div>
+                        }
+                    }
                     <div class="item-col item-col-header fixed item-col-actions-dropdown"></div>
                 </div>
             </li>
@@ -57,6 +68,17 @@
                                 </a>
                             </div>
                         </div>
+                        @if (Usuario is GerenciarEquipe.Painel.Models.AdminModel)
+                        {
+                            <div class="item-col fixed pull-left item-col-title">
+                                <div class="item-heading"> @Html.DisplayNameFor(model => model.loja)</div>
+                                <div>
+                                    <a href="" class="">
+                                        <h4 class="item-title">@Html.DisplayFor(model => item.loja.nome)</h4>
+                                    </a>
+                                </div>
+                            </div>
+                        }
                         <div class="item-col fixed item-col-actions-dropdown">
                             <div class="item-actions-dropdown">
                                 <a class="item-actions-toggle-btn">

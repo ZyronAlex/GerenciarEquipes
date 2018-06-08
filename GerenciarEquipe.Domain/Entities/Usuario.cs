@@ -19,7 +19,7 @@ namespace GerenciarEquipe.Domain.Entities
 
         public bool Login(Usuario usuario)
         {
-            if ((string.IsNullOrEmpty(usuario.email) && string.IsNullOrEmpty(usuario.senha)) || this.ativo)
+            if ((string.IsNullOrEmpty(usuario.email) && string.IsNullOrEmpty(usuario.senha)) || !this.ativo)
                 return false;
             else
                 return usuario.email.ToUpper().Trim().Equals(this.email.ToUpper().Trim()) && usuario.senha.Equals(this.senha);

@@ -18,8 +18,10 @@ namespace GerenciarEquipe.Domain.Entities
         public string nome { get; set; }
         public string descicao { get; set; }
         public string permissoes { get; set; }
+        public long id_loja { get; set; }
         public DateTime create_at { get; set; }
         public DateTime update_at { get; set; }
+        public virtual Loja loja { get; set; }
         public virtual ICollection<Funcionario> funcionarios { get; set; }
         public virtual ICollection<Ambito> ambitos { get; set; }
         public virtual ICollection<Inquirido> inquiridos { get; set; }
