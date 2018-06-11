@@ -27,7 +27,7 @@ namespace GerenciarEquipe.Painel.Controllers
         }
 
         // GET: Indicador
-        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+        //[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult Index()
         {
             UsuarioModel usuarioModel = (UsuarioModel)Session["Usuario"];

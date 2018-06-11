@@ -26,7 +26,7 @@ namespace GerenciarEquipe.Painel.Controllers
         }
 
         // GET: Admin
-        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+        //[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult Index()
         {
             return View(Mapper.Map<ICollection<Admin>, ICollection<AdminModel>>(adminAppService.Getall()));

@@ -24,7 +24,7 @@ namespace GerenciarEquipe.Painel.Controllers
         }
 
         // GET: Loja
-        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+        //[OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult Index()
         {
             return View(Mapper.Map<ICollection<Loja>, ICollection<LojaModel>>(lojaAppService.Getall()));

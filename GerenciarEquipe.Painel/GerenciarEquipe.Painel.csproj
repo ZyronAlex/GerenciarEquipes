@@ -193,8 +193,10 @@
     <Compile Include="Models\MetaModel.cs" />
     <Compile Include="Models\Permisoes.cs" />
     <Compile Include="Models\RankModel.cs" />
+    <Compile Include="Models\Referencia.cs" />
     <Compile Include="Models\RespostaModel.cs" />
     <Compile Include="Models\Turno.cs" />
+    <Compile Include="Models\Unidade.cs" />
     <Compile Include="Models\UsuarioModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -499,6 +501,7 @@
     <Content Include="Views\Formulario\Index.cshtml" />
     <Content Include="Views\Rank\Index.cshtml" />
     <Content Include="Views\Relatorio\Index.cshtml" />
+    <Content Include="Views\Formulario\Responder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

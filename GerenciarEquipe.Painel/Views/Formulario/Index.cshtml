@@ -1,12 +1,147 @@
-﻿@{
-    ViewBag.Title = "Formulario";
+﻿@model IEnumerable<GerenciarEquipe.Painel.Models.InquiridoModel>
+
+@{
+    ViewBag.Title = "Formulário";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<article class="content">
+
+<article class="content items-list-page">
     <div class="title-search-block">
-        <h2>Formulario</h2>
+        <div class="title-block">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3 class="title">
+                        Formulário
+                    </h3>
+                    <p class="title-description"> Lista de Metas </p>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="card items">
-        Em desenvolvimento
+        <ul class="item-list striped tabela">
+            <li class="item item-list-header ">
+                <div class="item-row">
+                    <div class="item-col item-col-header item-col-title">
+                        <div>
+                            <span> @Html.DisplayNameFor(model => model.meta.descicao)</span>
+                        </div>
+                    </div>
+                    <div class="item-col item-col-header item-col-sales">
+                        <div>
+                            <span> @Html.DisplayNameFor(model => model.meta.objetivo)</span>
+                        </div>
+                    </div>
+                    <div class="item-col item-col-header item-col-category">
+                        <div>
+                            <span> @Html.DisplayNameFor(model => model.meta.unidade)</span>
+                        </div>
+                    </div>
+                    <div class="item-col item-col-header item-col-title">
+                        <div>
+                            <span>@Html.DisplayNameFor(model => model.meta.referencia)</span>
+                        </div>
+                    </div>
+                    <div class="item-col item-col-header item-col-title">
+                        <div>
+                            <span>@Html.DisplayNameFor(model => model.meta.fonte)</span>
+                        </div>
+                    </div>
+                    <div class="item-col item-col-header item-col-title">
+                        <div>
+                            <span>@Html.DisplayNameFor(model => model.meta.grupo)</span>
+                        </div>
+                    </div>
+                    @{
+                        var Usuario = (GerenciarEquipe.Painel.Models.UsuarioModel)Session["usuario"];
+                        if (Usuario is GerenciarEquipe.Painel.Models.AdminModel)
+                        {
+                            <div class="item-col item-col-header item-col-author">
+                                <div>
+                                    <span> @Html.DisplayNameFor(model => model.meta.loja)</span>
+                                </div>
+                            </div>
+                        }
+                    }
+                    <div class="item-col item-col-header fixed item-col-actions-dropdown"></div>
+                </div>
+            </li>
+
+            @foreach (var item in Model)
+            {
+                <li class='item'>
+                    <div class='item-row'>
+                        <div class="item-col pull-left item-col-title">
+                            <div class="item-heading"> @Html.DisplayNameFor(model => model.meta.descicao)</div>
+                            <div>
+                                <h4 class="item-title">@Html.DisplayFor(model => item.meta.descicao)</h4>
+                            </div>
+                        </div>
+                        <div class="item-col pull-left item-col-sales">
+                            <div class="item-heading"> @Html.DisplayNameFor(model => model.meta.objetivo)</div>
+                            <div>
+                                <h4 class="item-title">@Html.DisplayFor(model => item.meta.objetivo)</h4>
+                            </div>
+                        </div>
+                        <div class="item-col pull-left item-col-category">
+                            <div class="item-heading"> @Html.DisplayNameFor(model => model.meta.unidade)</div>
+                            <div>
+                                <h4 class="item-title">@Html.DisplayFor(model => item.meta.unidade)</h4>
+                            </div>
+                        </div>
+                        <div class="item-col item-col-title">
+                            <div class="item-heading"> @Html.DisplayNameFor(model => model.meta.referencia)</div>
+                            <div>
+                                <h4 class="item-title">@Html.DisplayFor(model => item.meta.referencia)</h4>
+                            </div>
+                        </div>
+                        <div class="item-col pull-left item-col-title">
+                            <div class="item-heading"> @Html.DisplayNameFor(model => model.meta.fonte)</div>
+                            <div>
+                                <h4 class="item-title">@Html.DisplayFor(model => item.meta.fonte)</h4>
+                            </div>
+                        </div>
+                        <div class="item-col pull-left item-col-title">
+                            <div class="item-heading"> @Html.DisplayNameFor(model => model.meta.grupo)</div>
+                            <div>
+                                <h4 class="item-title">@Html.DisplayFor(model => item.meta.grupo)</h4>
+                            </div>
+                        </div>
+                        @if (Usuario is GerenciarEquipe.Painel.Models.AdminModel)
+                        {
+                            <div class="item-col fixed pull-left item-col-author">
+                                <div class="item-heading"> @Html.DisplayNameFor(model => model.meta.loja)</div>
+                                <div>
+                                    <a href="" class="">
+                                        <h4 class="item-title">@Html.DisplayFor(model => item.meta.loja.nome)</h4>
+                                    </a>
+                                </div>
+                            </div>
+                        }
+                        <div class="item-col fixed item-col-actions-dropdown">
+                            <div class="item-actions-dropdown">
+                                <a class="item-actions-toggle-btn">
+                                    <span class="inactive">
+                                        <i class="fa fa-cog"></i>
+                                    </span>
+                                    <span class="active">
+                                        <i class="fa fa-chevron-circle-right"></i>
+                                    </span>
+                                </a>
+                                <div class="item-actions-block">
+                                    <ul class="item-actions-list">                                        
+                                        <li>
+                                            <a class="edit" href="@Url.Action("Responder", new { id_meta = item.meta.id })">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            }
+        </ul>
     </div>
 </article>

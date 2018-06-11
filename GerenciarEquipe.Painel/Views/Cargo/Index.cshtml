@@ -52,30 +52,24 @@
             {
                 <li class='item'>
                     <div class='item-row'>
-                        <div class="item-col fixed pull-left item-col-title">
+                        <div class="item-col pull-left item-col-title">
                             <div class="item-heading"> @Html.DisplayNameFor(model => model.nome)</div>
                             <div>
-                                <a href="" class="">
-                                    <h4 class="item-title">@Html.DisplayFor(model => item.nome)</h4>
-                                </a>
+                                <h4 class="item-title">@Html.DisplayFor(model => item.nome)</h4>
                             </div>
                         </div>
-                        <div class="item-col fixed pull-left item-col-title">
+                        <div class="item-col  pull-left item-col-title">
                             <div class="item-heading"> @Html.DisplayNameFor(model => model.descicao)</div>
                             <div>
-                                <a href="" class="">
-                                    <h4 class="item-title">@Html.DisplayFor(model => item.descicao)</h4>
-                                </a>
+                                <h4 class="item-title">@Html.DisplayFor(model => item.descicao)</h4>
                             </div>
                         </div>
                         @if (Usuario is GerenciarEquipe.Painel.Models.AdminModel)
                         {
-                            <div class="item-col fixed pull-left item-col-title">
+                            <div class="item-col  pull-left item-col-title">
                                 <div class="item-heading"> @Html.DisplayNameFor(model => model.loja)</div>
                                 <div>
-                                    <a href="" class="">
-                                        <h4 class="item-title">@Html.DisplayFor(model => item.loja.nome)</h4>
-                                    </a>
+                                    <h4 class="item-title">@Html.DisplayFor(model => item.loja.nome)</h4>
                                 </div>
                             </div>
                         }

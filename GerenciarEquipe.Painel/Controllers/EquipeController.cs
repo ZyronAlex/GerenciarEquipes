@@ -28,7 +28,6 @@ namespace GerenciarEquipe.Painel.Controllers
         }
 
         // GET: Equipe
-        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult Index()
         {
             UsuarioModel usuarioModel = (UsuarioModel)Session["Usuario"];
@@ -37,7 +36,7 @@ namespace GerenciarEquipe.Painel.Controllers
             if (usuarioModel is FuncionarioModel)
                 return View(Mapper.Map<ICollection<Funcionario>, ICollection<FuncionarioModel>>(funcionarioAppService.GetAllByLoja(((FuncionarioModel)usuarioModel).id_loja)));
             else
-                return View(new List<Funcionario>());            
+                return View(new List<FuncionarioModel>());            
         }
 
         // GET: Equipe/Details/5

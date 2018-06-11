@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GerenciarEquipe.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -40,8 +41,10 @@ namespace GerenciarEquipe.Painel.Models
         [ScaffoldColumn(false)]
         public DateTime update_at { set; get; }
 
+        [Display(Name = "Funcionario")]
         public virtual FuncionarioModel funcionario { get; set; }
 
+        [Display(Name = "Meta")]
         public virtual MetaModel meta { get; set; }
     }
 }
