@@ -49,6 +49,9 @@ namespace GerenciarEquipe.Painel.Models
         [Display(Name = "Grupo")]
         public string grupo { get; set; }
 
+        [Display(Name = "Respondida por Terceiros")]
+        public bool terceiros { get; set; }
+
         [Display(Name = "Peso")]
         public int? peso { get; set; }
 

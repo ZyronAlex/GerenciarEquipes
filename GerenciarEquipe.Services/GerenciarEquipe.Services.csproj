@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Criptografia.cs" />
     <Compile Include="CustomAuthorize.cs" />
+    <Compile Include="DiasUteisdoMes.cs" />
     <Compile Include="EnumHelper.cs" />
     <Compile Include="GetUrlBase.cs" />
     <Compile Include="MvcHtmlHelpers.cs" />

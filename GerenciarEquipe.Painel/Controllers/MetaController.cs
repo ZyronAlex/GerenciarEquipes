@@ -100,16 +100,20 @@ namespace GerenciarEquipe.Painel.Controllers
                 metaAppService.Add(meta);
                 foreach (var item in metaModel.cargoAmbitos)
                 {
-                    Ambito ambito = new Ambito();
-                    ambito.id_cargo = item;
-                    ambito.id_meta = meta.id;
+                    Ambito ambito = new Ambito
+                    {
+                        id_cargo = item,
+                        id_meta = meta.id
+                    };
                     ambitoAppService.AddOrUpdate(ambito);
                 }
                 foreach (var item in metaModel.cargoInquiridos)
                 {
-                    Inquirido inquirido = new Inquirido();
-                    inquirido.id_cargo = item;
-                    inquirido.id_meta = meta.id;
+                    Inquirido inquirido = new Inquirido
+                    {
+                        id_cargo = item,
+                        id_meta = meta.id
+                    };
                     inquiridoAppService.AddOrUpdate(inquirido);
                 }
                 return RedirectToAction("Index");
@@ -162,7 +166,9 @@ namespace GerenciarEquipe.Painel.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+
+                metaModel.objetivo_parcial = metaModel.objetivo / metaModel.ambitos.ForEach(x => x.cargo.funcionarios.Count());
+                metaModel.objetivo_parcial_dia = int.Parse(metaModel.objetivo_parcial)/DiasMes.diasUteis(DateTime.Now);
                 metaAppService.Update(Mapper.Map<MetaModel, Meta>(metaModel));
 
                 foreach (var item in ambitoAppService.GetByIdMeta(metaModel.id))
@@ -171,7 +177,7 @@ namespace GerenciarEquipe.Painel.Controllers
                         ambitoAppService.Remove(item);
                 }
 
-                foreach (var item in inquiridoAppService.GetByIdMeta(metaModel.id))
+                foreach (var item in inquiridoAppService.GetByIdMeta(metaModel.id)) 
                 {
                     if (!metaModel.cargoInquiridos.Contains(item.id_cargo))
                         inquiridoAppService.Remove(item);
@@ -179,17 +185,21 @@ namespace GerenciarEquipe.Painel.Controllers
 
                 foreach (var item in metaModel.cargoAmbitos)
                 {
-                    Ambito ambito = new Ambito();
-                    ambito.id_cargo = item;
-                    ambito.id_meta = metaModel.id;
+                    Ambito ambito = new Ambito
+                    {
+                        id_cargo = item,
+                        id_meta = metaModel.id
+                    };
                     ambitoAppService.AddIfNotExists(ambito, a => a.id_cargo == ambito.id_cargo && a.id_meta == metaModel.id);
                 }
 
                 foreach (var item in metaModel.cargoInquiridos)
                 {
-                    Inquirido inquirido = new Inquirido();
-                    inquirido.id_cargo = item;
-                    inquirido.id_meta = metaModel.id;
+                    Inquirido inquirido = new Inquirido
+                    {
+                        id_cargo = item,
+                        id_meta = metaModel.id
+                    };
                     inquiridoAppService.AddIfNotExists(inquirido, i => i.id_cargo == inquirido.id_cargo && i.id_meta == metaModel.id);
                 }
 
