@@ -96,6 +96,12 @@ namespace GerenciarEquipe.Painel.Controllers
         {
             if (ModelState.IsValid)
             {
+                var funcionarios = 0;
+                metaModel.cargoAmbitos.ForEach(x => funcionarios += cargoAppService.GetById(x).funcionarios.Count());
+                metaModel.objetivo_parcial = (float.Parse(metaModel.objetivo) / funcionarios != 0 ? funcionarios : 1).ToString();
+                metaModel.objetivo_parcial_dia = (float.Parse(metaModel.objetivo_parcial) / DiasMes.diasUteis(DateTime.Now)).ToString();
+
+                metaAppService.Update(Mapper.Map<MetaModel, Meta>(metaModel));
                 Meta meta = Mapper.Map<MetaModel, Meta>(metaModel);
                 metaAppService.Add(meta);
                 foreach (var item in metaModel.cargoAmbitos)
@@ -166,9 +172,14 @@ namespace GerenciarEquipe.Painel.Controllers
         {
             if (ModelState.IsValid)
             {
-
-                metaModel.objetivo_parcial = metaModel.objetivo / metaModel.ambitos.ForEach(x => x.cargo.funcionarios.Count());
-                metaModel.objetivo_parcial_dia = int.Parse(metaModel.objetivo_parcial)/DiasMes.diasUteis(DateTime.Now);
+                var funcionarios = 1;
+                foreach (var item in metaModel.ambitos)
+                {
+                    funcionarios += item.cargo.funcionarios.Count();
+                }
+                //.ToList().ForEach(x => );
+                metaModel.objetivo_parcial =  (float.Parse(metaModel.objetivo) / (funcionarios != 0 ? funcionarios : 1)).ToString();
+                metaModel.objetivo_parcial_dia = (float.Parse(metaModel.objetivo_parcial)/DiasMes.diasUteis(DateTime.Now)).ToString();
                 metaAppService.Update(Mapper.Map<MetaModel, Meta>(metaModel));
 
                 foreach (var item in ambitoAppService.GetByIdMeta(metaModel.id))

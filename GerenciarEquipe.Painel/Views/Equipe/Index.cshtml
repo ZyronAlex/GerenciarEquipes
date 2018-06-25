@@ -45,6 +45,11 @@
                     </div>
                     <div class="item-col item-col-header item-col-author">
                         <div>
+                            <span> @Html.DisplayNameFor(model => model.cargo.nome)</span>
+                        </div>
+                    </div>
+                    <div class="item-col item-col-header item-col-author">
+                        <div>
                             <span>@Html.DisplayNameFor(model => model.turno)</span>
                         </div>
                     </div>
@@ -91,6 +96,12 @@
                             <div class="item-heading"> @Html.DisplayNameFor(model => model.matricula)</div>
                             <div class="no-overflow">
                                 @Html.DisplayFor(model => item.matricula)
+                            </div>
+                        </div> 
+                        <div class="item-col item-col-author">
+                            <div class="item-heading"> @Html.DisplayNameFor(model => model.cargo.nome)</div>
+                            <div class="no-overflow">
+                                @Html.DisplayFor(model => item.cargo.nome)
                             </div>
                         </div>
                         <div class="item-col item-col-author">

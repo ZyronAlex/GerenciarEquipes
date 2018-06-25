@@ -64,12 +64,12 @@ namespace GerenciarEquipe.Painel.Controllers
                             create_at = DateTime.Now
                         };
                         respostas.Add(resposta);
-                    }                    
-                
-               
-                return View(PaginatedList<RespostaModel>.Create(respostas, pageIndex ?? 1, 1));
+                    }
+
+
+                return View(PaginatedList<RespostaModel>.Create(respostas, pageIndex ?? 1, 1, 5));
             }
-            return View(PaginatedList<RespostaModel>.Create(new List<RespostaModel>(), pageIndex ?? 1, 1));
+            return View(PaginatedList<RespostaModel>.Create(new List<RespostaModel>(), pageIndex ?? 1, 1, 5));
         }
     }
 }
