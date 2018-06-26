@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
 using GerenciarEquipe.Application.Interfaces;
 using GerenciarEquipe.Domain.Entities;
+using GerenciarEquipe.Painel.Enums;
 using GerenciarEquipe.Painel.Models;
 using GerenciarEquipe.Services;
 

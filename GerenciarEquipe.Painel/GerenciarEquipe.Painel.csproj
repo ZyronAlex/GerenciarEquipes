@@ -178,11 +178,12 @@
     <Compile Include="Controllers\MetaController.cs" />
     <Compile Include="Controllers\RankController.cs" />
     <Compile Include="Controllers\RelatorioController.cs" />
+    <Compile Include="Enums\Grupo.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AdminModel.cs" />
-    <Compile Include="Models\Genero.cs" />
+    <Compile Include="Enums\Genero.cs" />
     <Compile Include="Models\InquiridoModel.cs" />
     <Compile Include="Models\AmbitoModel.cs" />
     <Compile Include="Models\CargoModel.cs" />
@@ -191,12 +192,12 @@
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\LojaModel.cs" />
     <Compile Include="Models\MetaModel.cs" />
-    <Compile Include="Models\Permisoes.cs" />
+    <Compile Include="Enums\Permisoes.cs" />
     <Compile Include="Models\RankModel.cs" />
-    <Compile Include="Models\Referencia.cs" />
+    <Compile Include="Enums\Referencia.cs" />
     <Compile Include="Models\RespostaModel.cs" />
-    <Compile Include="Models\Turno.cs" />
-    <Compile Include="Models\Unidade.cs" />
+    <Compile Include="Enums\Turno.cs" />
+    <Compile Include="Enums\Unidade.cs" />
     <Compile Include="Models\UsuarioModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

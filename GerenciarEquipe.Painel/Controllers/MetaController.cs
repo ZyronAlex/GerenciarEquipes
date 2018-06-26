@@ -92,13 +92,13 @@ namespace GerenciarEquipe.Painel.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,descicao,objetivo,objetivo_parcial,objetivo_parcial_dia,unidade,referencia,fonte,grupo,peso,id_indicador,id_loja,cargoAmbitos,cargoInquiridos")] MetaModel metaModel)
+        public ActionResult Create([Bind(Include = "id,descicao,objetivo,objetivo_parcial,objetivo_parcial_dia,unidade,referencia,fonte,grupo,peso,terceiros,id_indicador,id_loja,cargoAmbitos,cargoInquiridos")] MetaModel metaModel)
         {
             if (ModelState.IsValid)
             {
                 var funcionarios = 0;
                 metaModel.cargoAmbitos.ForEach(x => funcionarios += cargoAppService.GetById(x).funcionarios.Count());
-                metaModel.objetivo_parcial = (float.Parse(metaModel.objetivo) / funcionarios != 0 ? funcionarios : 1).ToString();
+                metaModel.objetivo_parcial = (float.Parse(metaModel.objetivo) / (funcionarios != 0 ? funcionarios : 1)).ToString();
                 metaModel.objetivo_parcial_dia = (float.Parse(metaModel.objetivo_parcial) / DiasMes.diasUteis(DateTime.Now)).ToString();
 
                 metaAppService.Update(Mapper.Map<MetaModel, Meta>(metaModel));
@@ -168,16 +168,12 @@ namespace GerenciarEquipe.Painel.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,descicao,objetivo,objetivo_parcial,objetivo_parcial_dia,unidade,referencia,fonte,grupo,peso,id_indicador,id_loja,cargoAmbitos,cargoInquiridos")] MetaModel metaModel)
+        public ActionResult Edit([Bind(Include = "id,descicao,objetivo,objetivo_parcial,objetivo_parcial_dia,unidade,referencia,fonte,grupo,peso,terceiros,id_indicador,id_loja,cargoAmbitos,cargoInquiridos")] MetaModel metaModel)
         {
             if (ModelState.IsValid)
             {
-                var funcionarios = 1;
-                foreach (var item in metaModel.ambitos)
-                {
-                    funcionarios += item.cargo.funcionarios.Count();
-                }
-                //.ToList().ForEach(x => );
+                var funcionarios = 0;
+                metaModel.cargoAmbitos.ForEach(x => funcionarios += cargoAppService.GetById(x).funcionarios.Count());
                 metaModel.objetivo_parcial =  (float.Parse(metaModel.objetivo) / (funcionarios != 0 ? funcionarios : 1)).ToString();
                 metaModel.objetivo_parcial_dia = (float.Parse(metaModel.objetivo_parcial)/DiasMes.diasUteis(DateTime.Now)).ToString();
                 metaAppService.Update(Mapper.Map<MetaModel, Meta>(metaModel));

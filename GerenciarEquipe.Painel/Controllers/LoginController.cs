@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using GerenciarEquipe.Application.Interfaces;
 using GerenciarEquipe.Domain.Entities;
+using GerenciarEquipe.Painel.Enums;
 using GerenciarEquipe.Painel.Models;
 using GerenciarEquipe.Services;
 using System;

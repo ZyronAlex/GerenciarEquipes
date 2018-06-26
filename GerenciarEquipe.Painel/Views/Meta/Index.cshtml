@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<GerenciarEquipe.Painel.Models.MetaModel>
-
+@using GerenciarEquipe.Painel.Enums;
+@using GerenciarEquipe.Services;
 @{
     ViewBag.Title = "Meta";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -33,6 +34,16 @@
                             <span> @Html.DisplayNameFor(model => model.objetivo)</span>
                         </div>
                     </div>
+                    <div class="item-col item-col-header item-col-sales">
+                        <div>
+                            <span> @Html.DisplayNameFor(model => model.objetivo_parcial)</span>
+                        </div>
+                    </div>
+                    <div class="item-col item-col-header item-col-sales">
+                        <div>
+                            <span> @Html.DisplayNameFor(model => model.objetivo_parcial_dia)</span>
+                        </div>
+                    </div>
                     <div class="item-col item-col-header item-col-category">
                         <div>
                             <span> @Html.DisplayNameFor(model => model.unidade)</span>
@@ -41,16 +52,6 @@
                     <div class="item-col item-col-header item-col-title">
                         <div>
                             <span>@Html.DisplayNameFor(model => model.referencia)</span>
-                        </div>
-                    </div>
-                    <div class="item-col item-col-header item-col-title">
-                        <div>
-                            <span>@Html.DisplayNameFor(model => model.fonte)</span>
-                        </div>
-                    </div>
-                    <div class="item-col item-col-header item-col-title">
-                        <div>
-                            <span>@Html.DisplayNameFor(model => model.grupo)</span>
                         </div>
                     </div>
                     @{
@@ -81,33 +82,39 @@
                         <div class="item-col pull-left item-col-sales">
                             <div class="item-heading"> @Html.DisplayNameFor(model => model.objetivo)</div>
                             <div>
-                                <h4 class="item-title">@Html.DisplayFor(model => item.objetivo)</h4>
+                                @Html.DisplayFor(model => item.objetivo)
+                            </div>
+                        </div>
+                        <div class="item-col pull-left item-col-sales">
+                            <div class="item-heading "> @Html.DisplayNameFor(model => model.objetivo_parcial)</div>
+                            <div class="no-overflow">
+                                @Html.DisplayFor(model => item.objetivo_parcial)
+                            </div>
+                        </div>
+                        <div class="item-col pull-left item-col-sales">
+                            <div class="item-heading"> @Html.DisplayNameFor(model => model.objetivo_parcial_dia)</div>
+                            <div class="no-overflow">
+                                @Html.DisplayFor(model => item.objetivo_parcial_dia)
                             </div>
                         </div>
                         <div class="item-col pull-left item-col-category">
                             <div class="item-heading"> @Html.DisplayNameFor(model => model.unidade)</div>
                             <div>
-                                <h4 class="item-title">@Html.DisplayFor(model => item.unidade)</h4>
+                                @Html.DisplayFor(model => item.unidade)
                             </div>
                         </div>
                         <div class="item-col item-col-title">
                             <div class="item-heading"> @Html.DisplayNameFor(model => model.referencia)</div>
                             <div>
-                                <h4 class="item-title">@Html.DisplayFor(model => item.referencia)</h4>
+                                <h4 class="item-title">  
+                                    @{
+                                        string displayvalue =  EnumHelper<Referencia>.GetDisplayValue((Referencia)item.referencia);
+                                        
+                                        @displayvalue
+                                    }
+                                </h4>
                             </div>
                         </div>
-                        <div class="item-col pull-left item-col-title">
-                            <div class="item-heading"> @Html.DisplayNameFor(model => model.fonte)</div>
-                            <div>
-                                <h4 class="item-title">@Html.DisplayFor(model => item.fonte)</h4>
-                            </div>
-                        </div>
-                        <div class="item-col pull-left item-col-title">
-                            <div class="item-heading"> @Html.DisplayNameFor(model => model.grupo)</div>
-                            <div>
-                                <h4 class="item-title">@Html.DisplayFor(model => item.grupo)</h4>
-                            </div>
-                        </div> 
                         @if (Usuario is GerenciarEquipe.Painel.Models.AdminModel)
                         {
                             <div class="item-col fixed pull-left item-col-author">

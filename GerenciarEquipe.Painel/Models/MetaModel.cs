@@ -1,9 +1,7 @@
-﻿using System;
+﻿using GerenciarEquipe.Painel.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace GerenciarEquipe.Painel.Models
@@ -38,18 +36,18 @@ namespace GerenciarEquipe.Painel.Models
         public string objetivo_parcial_dia { get; set; }
 
         [Display(Name = "Unidade")]
-        public string unidade { get; set; }
+        public Unidade? unidade { get; set; }
 
         [Display(Name = "Referencia")]
-        public string referencia { get; set; }
+        public Referencia? referencia { get; set; }
 
         [Display(Name = "Fonte")]
         public string fonte { get; set; }
 
         [Display(Name = "Grupo")]
-        public string grupo { get; set; }
+        public Grupo? grupo { get; set; }
 
-        [Display(Name = "Respondida por Terceiros")]
+        [Display(Name = "Respondida por Terceiros ?")]
         public bool terceiros { get; set; }
 
         [Display(Name = "Peso")]

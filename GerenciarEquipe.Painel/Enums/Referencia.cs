@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace GerenciarEquipe.Painel.Models
+namespace GerenciarEquipe.Painel.Enums
 {
     public enum Referencia
     {

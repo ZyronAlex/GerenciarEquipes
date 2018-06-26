@@ -43,7 +43,7 @@
                 <div class="form-group row">
                     @Html.LabelFor(model => model.unidade, htmlAttributes: new { @class = "control-label col-md-2 text-xs-right" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.unidade, new { htmlAttributes = new { @class = "form-control box" } })
+                        @Html.EnumDropDownListFor(model => model.unidade, "Selecione a Unidade ", new { @class = "form-control box" })
                         @Html.ValidationMessageFor(model => model.unidade, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                 <div class="form-group row">
                     @Html.LabelFor(model => model.referencia, htmlAttributes: new { @class = "control-label col-md-2 text-xs-right" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.referencia, new { htmlAttributes = new { @class = "form-control box" } })
+                        @Html.EnumDropDownListFor(model => model.referencia, "Selecione a Referencia", new { @class = "form-control box" })
                         @Html.ValidationMessageFor(model => model.referencia, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -67,7 +67,7 @@
                 <div class="form-group row">
                     @Html.LabelFor(model => model.grupo, htmlAttributes: new { @class = "control-label col-md-2 text-xs-right" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.grupo, new { htmlAttributes = new { @class = "form-control box" } })
+                        @Html.EnumDropDownListFor(model => model.grupo, "Selecione o Grupo", new { @class = "form-control box" })
                         @Html.ValidationMessageFor(model => model.grupo, "", new { @class = "text-danger" })
                     </div>
                 </div>

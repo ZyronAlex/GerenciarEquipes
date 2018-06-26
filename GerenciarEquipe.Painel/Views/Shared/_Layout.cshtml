@@ -107,7 +107,7 @@
                         <ul class="sidebar-menu metismenu" id="sidebar-menu">
                             @{var currentpage = @HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString(); }
 
-                            @if (Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Models.Permisoes.Dash.ToString()) || Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Models.Permisoes.Admin.ToString()))
+                            @if (Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Enums.Permisoes.Dash.ToString()) || Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Enums.Permisoes.Admin.ToString()))
                             {
                                 <li @if (currentpage.Equals("Home")) { Write("class=active"); }>
                                     <a href="@Url.Action("Index", "Home")">
@@ -115,7 +115,7 @@
                                     </a>
                                 </li>
                             }
-                            @if (Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Models.Permisoes.Equip.ToString()) || Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Models.Permisoes.Admin.ToString()))
+                            @if (Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Enums.Permisoes.Equip.ToString()) || Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Enums.Permisoes.Admin.ToString()))
                             {
                                 <li @if (currentpage.Equals("Equipe")) { Write("class=active"); }>
                                     <a href="@Url.Action("Index", "Equipe")">
@@ -123,7 +123,7 @@
                                     </a>
                                 </li>
                             }
-                            @if (Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Models.Permisoes.Office.ToString()) || Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Models.Permisoes.Admin.ToString()))
+                            @if (Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Enums.Permisoes.Office.ToString()) || Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Enums.Permisoes.Admin.ToString()))
                             {
                                 <li @if (currentpage.Equals("Cargo")) { Write("class=active"); }>
                                     <a href="@Url.Action("Index", "Cargo")">
@@ -131,7 +131,7 @@
                                     </a>
                                 </li>
                             }
-                            @if (Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Models.Permisoes.Store.ToString()) || Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Models.Permisoes.Admin.ToString()))
+                            @if (Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Enums.Permisoes.Store.ToString()) || Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Enums.Permisoes.Admin.ToString()))
                             {
                                 <li @if (currentpage.Equals("Loja")) { Write("class=active"); }>
                                     <a href="@Url.Action("Index", "Loja")">
@@ -139,7 +139,7 @@
                                     </a>
                                 </li>
                             }
-                            @if (Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Models.Permisoes.Index.ToString()) || Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Models.Permisoes.Admin.ToString()))
+                            @if (Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Enums.Permisoes.Index.ToString()) || Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Enums.Permisoes.Admin.ToString()))
                             {
                                 <li @if (currentpage.Equals("Indicador")) { Write("class=active"); }>
                                     <a href="@Url.Action("Index", "Indicador")">
@@ -147,7 +147,7 @@
                                     </a>
                                 </li>
                             }
-                            @if (Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Models.Permisoes.Goal.ToString()) || Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Models.Permisoes.Admin.ToString()))
+                            @if (Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Enums.Permisoes.Goal.ToString()) || Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Enums.Permisoes.Admin.ToString()))
                             {
                                 <li @if (currentpage.Equals("Meta")) { Write("class=active"); }>
                                     <a href="@Url.Action("Index", "Meta")">
@@ -155,7 +155,7 @@
                                     </a>
                                 </li>
                             }
-                            @if (Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Models.Permisoes.Admin.ToString()) || Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Models.Permisoes.Admin.ToString()))
+                            @if (Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Enums.Permisoes.Admin.ToString()) || Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Enums.Permisoes.Admin.ToString()))
                             {
                                 <li @if (currentpage.Equals("Admin")) { Write("class=active"); }>
                                     <a href="@Url.Action("Index", "Admin")">
@@ -163,7 +163,7 @@
                                     </a>
                                 </li>
                             }
-                            @if (Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Models.Permisoes.Report.ToString()) || Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Models.Permisoes.Admin.ToString()))
+                            @if (Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Enums.Permisoes.Report.ToString()) || Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Enums.Permisoes.Admin.ToString()))
                             {
                                 <li @if (currentpage.Equals("Relatorio")) { Write("class=active"); }>
                                     <a href="@Url.Action("Index", "Relatorio")">
@@ -171,7 +171,7 @@
                                     </a>
                                 </li>
                             }
-                            @if (Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Models.Permisoes.Rank.ToString()) || Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Models.Permisoes.Admin.ToString()))
+                            @if (Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Enums.Permisoes.Rank.ToString()) || Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Enums.Permisoes.Admin.ToString()))
                             {
                                 <li @if (currentpage.Equals("Rank")) { Write("class=active"); }>
                                     <a href="@Url.Action("Index", "Rank")">
@@ -179,7 +179,7 @@
                                     </a>
                                 </li>
                             }
-                            @if (Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Models.Permisoes.Forms.ToString()) || Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Models.Permisoes.Admin.ToString()))
+                            @if (Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Enums.Permisoes.Forms.ToString()) || Permissoes.Split(',').Contains(GerenciarEquipe.Painel.Enums.Permisoes.Admin.ToString()))
                             {
                                 <li @if (currentpage.Equals("Formulario")) { Write("class=open active"); }>
                                     <a href="@Url.Action("Index", "Formulario")">
