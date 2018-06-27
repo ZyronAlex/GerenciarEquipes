@@ -45,9 +45,9 @@ namespace GerenciarEquipe.Painel.Controllers
             if (usuarioModel is AdminModel)
                 return View(Mapper.Map<ICollection<Meta>, ICollection<MetaModel>>(metaAppService.Getall()));
             if (usuarioModel is FuncionarioModel)
-                return View(Mapper.Map<ICollection<Meta>, ICollection<MetaModel>>(metaAppService.GetAllByLoja(((FuncionarioModel) usuarioModel).id_loja)));
+                return View(Mapper.Map<ICollection<Meta>, ICollection<MetaModel>>(metaAppService.GetAllByLoja(((FuncionarioModel)usuarioModel).id_loja)));
             else
-                return View(new List<MetaModel>());          
+                return View(new List<MetaModel>());
         }
 
         // GET: Meta/Details/5
@@ -130,7 +130,7 @@ namespace GerenciarEquipe.Painel.Controllers
             UsuarioModel usuarioModel = (UsuarioModel)Session["Usuario"];
             if (usuarioModel is AdminModel)
                 ViewBag.Loja = new MultiSelectList(Mapper.Map<ICollection<Loja>, ICollection<LojaModel>>(lojaAppService.Getall()), "id", "nome");
-                
+
             return View(metaModel);
         }
 
@@ -174,8 +174,8 @@ namespace GerenciarEquipe.Painel.Controllers
             {
                 var funcionarios = 0;
                 metaModel.cargoAmbitos.ForEach(x => funcionarios += cargoAppService.GetById(x).funcionarios.Count());
-                metaModel.objetivo_parcial =  (float.Parse(metaModel.objetivo) / (funcionarios != 0 ? funcionarios : 1)).ToString();
-                metaModel.objetivo_parcial_dia = (float.Parse(metaModel.objetivo_parcial)/DiasMes.diasUteis(DateTime.Now)).ToString();
+                metaModel.objetivo_parcial = (float.Parse(metaModel.objetivo) / (funcionarios != 0 ? funcionarios : 1)).ToString();
+                metaModel.objetivo_parcial_dia = (float.Parse(metaModel.objetivo_parcial) / DiasMes.diasUteis(DateTime.Now)).ToString();
                 metaAppService.Update(Mapper.Map<MetaModel, Meta>(metaModel));
 
                 foreach (var item in ambitoAppService.GetByIdMeta(metaModel.id))
@@ -184,7 +184,7 @@ namespace GerenciarEquipe.Painel.Controllers
                         ambitoAppService.Remove(item);
                 }
 
-                foreach (var item in inquiridoAppService.GetByIdMeta(metaModel.id)) 
+                foreach (var item in inquiridoAppService.GetByIdMeta(metaModel.id))
                 {
                     if (!metaModel.cargoInquiridos.Contains(item.id_cargo))
                         inquiridoAppService.Remove(item);
@@ -210,7 +210,7 @@ namespace GerenciarEquipe.Painel.Controllers
                     inquiridoAppService.AddIfNotExists(inquirido, i => i.id_cargo == inquirido.id_cargo && i.id_meta == metaModel.id);
                 }
 
-                
+
 
                 return RedirectToAction("Index");
             }
@@ -247,6 +247,34 @@ namespace GerenciarEquipe.Painel.Controllers
             metaAppService.Remove(metaAppService.GetById(id));
             return RedirectToAction("Index");
         }
+
+        // GET: Meta/Edit/5
+        public ActionResult Peso()
+        {
+            UsuarioModel usuarioModel = (UsuarioModel)Session["Usuario"];
+            return View(Mapper.Map<ICollection<Meta>, ICollection<MetaModel>>(metaAppService.GetAllByLoja(((FuncionarioModel)usuarioModel).id_loja)));
+        }
+
+        // POST: Meta/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Peso([Bind(Include = "id,peso")]IEnumerable<MetaModel> metasModel)
+        {
+            if (ModelState.IsValid)
+            {
+                foreach (var item in metasModel)
+                {
+                    var meta = metaAppService.GetById(item.id);
+                    meta.peso = item.peso;
+                    //metaAppService.Update(meta);
+                }
+                return RedirectToAction("Index");
+            }
+            return View(metasModel);
+        }
+
 
         protected override void Dispose(bool disposing)
         {

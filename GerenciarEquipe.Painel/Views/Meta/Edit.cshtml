@@ -92,13 +92,19 @@
                 </div>
 
                 <div class="form-group row">
+                    @Html.LabelFor(model => model.terceiros, htmlAttributes: new { @class = "control-label text-xs-right" })
+                    <div class="col-md-10">
+                        @Html.CheckBoxFor(model => model.terceiros,new { @class = "form-check-input checkbox" })
+                        @Html.ValidationMessageFor(model => model.id_indicador, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
                     <div class="col-md-2">
                         @Html.LabelFor(model => model.cargoAmbitos, htmlAttributes: new { @class = "control-label text-xs-right" })
                         <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="@Html.DisplayNameFor(model => model.cargoAmbitos)" data-content="@ViewData.ModelMetadata.Properties.Where(m => m.PropertyName == "cargoAmbitos").FirstOrDefault().Description"><i class="fa  fa-align-right fa-question-circle"></i></a>
                     </div>
                     <div class="col-md-10">
-                        @*@Html.ListBox("cargoAmbitos", (MultiSelectList)ViewBag.Cargo, new { @class = "form-control box" })*@
-
                         @foreach (var item in ViewBag.CargoAmbitos)
                         {
                             <div class="form-check form-check-inline col-md-3">

@@ -17,6 +17,15 @@
                     </h3>
                     <p class="title-description"> Lista de Metas </p>
                 </div>
+                <div class="col-md-6">
+                    @{ 
+                        var Usuario = (GerenciarEquipe.Painel.Models.UsuarioModel)Session["usuario"];
+                        if (Model.ToList().Sum(x => x.peso) != 1 && Usuario is GerenciarEquipe.Painel.Models.FuncionarioModel)
+                        {
+                           <label class="pull-right btn btn-d btn-danger rounded-s"><i class="fa fa-warning "></i> Ajuste os Pesos</label>
+                        }
+                    }
+                </div>
             </div>
         </div>
     </div>
@@ -49,13 +58,12 @@
                             <span> @Html.DisplayNameFor(model => model.unidade)</span>
                         </div>
                     </div>
-                    <div class="item-col item-col-header item-col-title">
+                    <div class="item-col item-col-header item-col-author">
                         <div>
                             <span>@Html.DisplayNameFor(model => model.referencia)</span>
                         </div>
                     </div>
                     @{
-                        var Usuario = (GerenciarEquipe.Painel.Models.UsuarioModel)Session["usuario"];
                         if (Usuario is GerenciarEquipe.Painel.Models.AdminModel)
                         {
                             <div class="item-col item-col-header item-col-author">
@@ -103,16 +111,12 @@
                                 @Html.DisplayFor(model => item.unidade)
                             </div>
                         </div>
-                        <div class="item-col item-col-title">
+                        <div class="item-col item-col-author">
                             <div class="item-heading"> @Html.DisplayNameFor(model => model.referencia)</div>
                             <div>
-                                <h4 class="item-title">  
-                                    @{
-                                        string displayvalue =  EnumHelper<Referencia>.GetDisplayValue((Referencia)item.referencia);
-                                        
-                                        @displayvalue
-                                    }
-                                </h4>
+                                @{
+                                    @Html.Label(EnumHelper<Referencia>.GetDisplayValue((Referencia)item.referencia));
+                                }
                             </div>
                         </div>
                         @if (Usuario is GerenciarEquipe.Painel.Models.AdminModel)

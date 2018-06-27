@@ -51,13 +51,16 @@ namespace GerenciarEquipe.Painel.Models
         public bool terceiros { get; set; }
 
         [Display(Name = "Peso")]
+        [Range(0.01, 1, ErrorMessage ="Valor deve estar entre {1} á {2}")]
         public int? peso { get; set; }
 
         [Display(Name = "Indicador")]
+        [Required(ErrorMessage = "Selecione um Indicador")]
         [ScaffoldColumn(false)]
         public long id_indicador { get; set; }
 
         [Display(Name = "Loja")]
+        [Required(ErrorMessage = "Selecione uma Loja")]
         [ScaffoldColumn(false)]
         public long id_loja { get; set; }
 
