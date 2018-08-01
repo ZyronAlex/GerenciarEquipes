@@ -26,32 +26,7 @@
                         <div>
                             <span> @Html.DisplayNameFor(model => model.meta.descicao)</span>
                         </div>
-                    </div>
-                    <div class="item-col item-col-header item-col-sales">
-                        <div>
-                            <span> @Html.DisplayNameFor(model => model.meta.objetivo)</span>
-                        </div>
-                    </div>
-                    <div class="item-col item-col-header item-col-category">
-                        <div>
-                            <span> @Html.DisplayNameFor(model => model.meta.unidade)</span>
-                        </div>
-                    </div>
-                    <div class="item-col item-col-header item-col-title">
-                        <div>
-                            <span>@Html.DisplayNameFor(model => model.meta.referencia)</span>
-                        </div>
-                    </div>
-                    <div class="item-col item-col-header item-col-title">
-                        <div>
-                            <span>@Html.DisplayNameFor(model => model.meta.fonte)</span>
-                        </div>
-                    </div>
-                    <div class="item-col item-col-header item-col-title">
-                        <div>
-                            <span>@Html.DisplayNameFor(model => model.meta.grupo)</span>
-                        </div>
-                    </div>
+                    </div>                   
                     @{
                         var Usuario = (GerenciarEquipe.Painel.Models.UsuarioModel)Session["usuario"];
                         if (Usuario is GerenciarEquipe.Painel.Models.AdminModel)
@@ -76,37 +51,7 @@
                             <div>
                                 <h4 class="item-title">@Html.DisplayFor(model => item.meta.descicao)</h4>
                             </div>
-                        </div>
-                        <div class="item-col pull-left item-col-sales">
-                            <div class="item-heading"> @Html.DisplayNameFor(model => model.meta.objetivo)</div>
-                            <div>
-                                <h4 class="item-title">@Html.DisplayFor(model => item.meta.objetivo)</h4>
-                            </div>
-                        </div>
-                        <div class="item-col pull-left item-col-category">
-                            <div class="item-heading"> @Html.DisplayNameFor(model => model.meta.unidade)</div>
-                            <div>
-                                <h4 class="item-title">@Html.DisplayFor(model => item.meta.unidade)</h4>
-                            </div>
-                        </div>
-                        <div class="item-col item-col-title">
-                            <div class="item-heading"> @Html.DisplayNameFor(model => model.meta.referencia)</div>
-                            <div>
-                                <h4 class="item-title">@Html.DisplayFor(model => item.meta.referencia)</h4>
-                            </div>
-                        </div>
-                        <div class="item-col pull-left item-col-title">
-                            <div class="item-heading"> @Html.DisplayNameFor(model => model.meta.fonte)</div>
-                            <div>
-                                <h4 class="item-title">@Html.DisplayFor(model => item.meta.fonte)</h4>
-                            </div>
-                        </div>
-                        <div class="item-col pull-left item-col-title">
-                            <div class="item-heading"> @Html.DisplayNameFor(model => model.meta.grupo)</div>
-                            <div>
-                                <h4 class="item-title">@Html.DisplayFor(model => item.meta.grupo)</h4>
-                            </div>
-                        </div>
+                        </div>                        
                         @if (Usuario is GerenciarEquipe.Painel.Models.AdminModel)
                         {
                             <div class="item-col fixed pull-left item-col-author">

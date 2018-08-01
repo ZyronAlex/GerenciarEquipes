@@ -21,6 +21,7 @@ namespace GerenciarEquipe.Services
             PageIndex = pageIndex;
             PageSize = pageSize;
             MaxSizeRange = maxSizeRange;
+            RangePage = new List<int>();
 
             TotalPages = (int)Math.Ceiling(count / (double)pageSize);
             TotalRecords = count; 

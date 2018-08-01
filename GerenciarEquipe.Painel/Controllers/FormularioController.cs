@@ -42,32 +42,56 @@ namespace GerenciarEquipe.Painel.Controllers
                 return View(new List<InquiridoModel>());
         }
 
-        public ActionResult Responder(long? id_meta, int? pageIndex)
+        public ActionResult Responder(long? id_meta, int? pageIndex, RespostaModel respostaModel)
         {
+            UsuarioModel usuarioModel = (UsuarioModel)Session["Usuario"];
+
             if (id_meta != null)
             {
-                List<AmbitoModel> ambitos = Mapper.Map<ICollection<Ambito>, ICollection<AmbitoModel>>(ambitoAppService.GetByIdMeta(id_meta)).ToList();
+                MetaModel metaModel = Mapper.Map<Meta, MetaModel>(metaAppService.GetById(id_meta));
                 List<RespostaModel> respostas = new List<RespostaModel>();
-                List<CargoModel> cargos = new List<CargoModel>();
-                foreach (var ambito in ambitos)
-                    cargos.Add(ambito.cargo);
-                foreach (var cargo in cargos)
-                    foreach (var funcionario in cargo.funcionarios)
-                    {
-                        RespostaModel resposta = new RespostaModel
+
+                if (respostaModel.resultado != null)
+                {
+                    respostaAppService.Add(Mapper.Map<RespostaModel, Resposta>(respostaModel));
+                }
+                if (metaModel.terceiros)
+                {
+                    List<AmbitoModel> ambitos = Mapper.Map<ICollection<Ambito>, ICollection<AmbitoModel>>(ambitoAppService.GetByIdMeta(id_meta)).ToList();
+                    List<CargoModel> cargos = new List<CargoModel>();
+
+                    foreach (var ambito in ambitos)
+                        cargos.Add(ambito.cargo);
+                    foreach (var cargo in cargos)
+                        foreach (var funcionario in cargo.funcionarios)
                         {
-                            autor = 0,
-                            id_funcionario = funcionario.id,
-                            id_meta = (long)id_meta,
-                            funcionario = funcionario,
-                            meta = Mapper.Map<Meta, MetaModel>(metaAppService.GetById(id_meta)),
-                            create_at = DateTime.Now
-                        };
-                        respostas.Add(resposta);
-                    }
+                            respostas.Add(new RespostaModel
+                            {
+                                autor = usuarioModel.id,
+                                id_funcionario = funcionario.id,
+                                id_meta = (long)id_meta,
+                                funcionario = funcionario,
+                                meta = metaModel,
+                                create_at = DateTime.Now
+                            });
+                        }
 
 
-                return View(PaginatedList<RespostaModel>.Create(respostas, pageIndex ?? 1, 1, 5));
+                    return View(PaginatedList<RespostaModel>.Create(respostas, pageIndex ?? 1, 1, 5));
+                }
+                else if (!metaModel.terceiros && respostaModel.resultado == null)
+                {
+                    respostas.Add(new RespostaModel
+                    {
+                        autor = usuarioModel.id,
+                        id_funcionario = usuarioModel.id,
+                        id_meta = (long)id_meta,
+                        funcionario = Mapper.Map<UsuarioModel, FuncionarioModel>(usuarioModel),
+                        meta = metaModel,
+                        create_at = DateTime.Now
+                    });
+                    return View(PaginatedList<RespostaModel>.Create(respostas, pageIndex ?? 1, 1, 5));
+                }
             }
             return View(PaginatedList<RespostaModel>.Create(new List<RespostaModel>(), pageIndex ?? 1, 1, 5));
         }

@@ -48,7 +48,12 @@ namespace GerenciarEquipe.Painel.Models
         public Grupo? grupo { get; set; }
 
         [Display(Name = "Respondida por Terceiros ?")]
+        [Required]
         public bool terceiros { get; set; }
+
+        [Display(Name = "A resposta precisar ser Justificada ?")]
+        [Required]
+        public bool justifica { get; set; }
 
         [Display(Name = "Peso")]
         [Range(0.01, 1, ErrorMessage ="Valor deve estar entre {1} á {2}")]

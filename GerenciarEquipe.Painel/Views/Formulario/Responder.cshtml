@@ -71,7 +71,7 @@
                             @{
                                 var buttonName = !Model.HasNextPage ? "salvar" : "Next";
                             }
-                            @Html.ActionLink(buttonName, "Responder", "Formulario",new { respostaModel = item, id_meta = item.id_meta, pageIndex = Model.PageIndex + 1 }, new { @type = "submit", @class = "btn btn-primary" })
+                            @Html.ActionLink(buttonName, "Responder", "Formulario", new { respostaModel = item, id_meta = item.id_meta, pageIndex = Model.PageIndex + 1 }, new { @type = "submit", @class = "btn btn-primary" })
                         </div>
                     </div>
                 </div>

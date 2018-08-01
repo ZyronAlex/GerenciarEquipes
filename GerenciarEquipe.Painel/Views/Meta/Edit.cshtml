@@ -92,10 +92,32 @@
                 </div>
 
                 <div class="form-group row">
-                    @Html.LabelFor(model => model.terceiros, htmlAttributes: new { @class = "control-label text-xs-right" })
+                    <div class="col-md-2">
+                        @Html.LabelFor(model => model.terceiros, htmlAttributes: new { @class = "control-label text-xs-right" })
+                    </div>
                     <div class="col-md-10">
-                        @Html.CheckBoxFor(model => model.terceiros,new { @class = "form-check-input checkbox" })
-                        @Html.ValidationMessageFor(model => model.id_indicador, "", new { @class = "text-danger" })
+                        <div class="form-check form-check-inline col-md-3">
+                            <label>
+                                <input type="checkbox" id="terceiros" name="terceiros" value="@Model.terceiros" class="form-check-input checkbox" @if (Model.terceiros) { Write("checked=checked"); }>
+                                <span class="form-check-label" for="terceiros"></span>
+                            </label>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.terceiros, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-2">
+                        @Html.LabelFor(model => model.justifica, htmlAttributes: new { @class = "control-label text-xs-right" })
+                    </div>
+                    <div class="col-md-10">
+                        <div class="form-check form-check-inline col-md-3">
+                            <label>
+                                <input type="checkbox" id="justifica" name="justifica" value="@Model.justifica" class="form-check-input checkbox" @if (Model.justifica) { Write("checked=checked"); }>
+                                <span class="form-check-label" for="justifica"></span>
+                            </label>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.justifica, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
@@ -109,8 +131,8 @@
                         {
                             <div class="form-check form-check-inline col-md-3">
                                 <label>
-                                    <input type="checkbox" id="@item.Value" name="cargoAmbitos" value="@item.Value" class="form-check-input checkbox" @if (item.Selected) { Write("checked=checked"); }>
-                                    <span class="form-check-label" for="@item.Value"> @item.Text</span>
+                                    <input type="checkbox" id="@item.Text" name="cargoAmbitos" value="@item.Value" class="form-check-input checkbox" @if (item.Selected) { Write("checked=checked"); }>
+                                    <span class="form-check-label" for="@item.Text"> @item.Text</span>
                                 </label>
                             </div>
                         }
@@ -129,8 +151,8 @@
                         {
                             <div class="form-check form-check-inline col-md-3">
                                 <label>
-                                    <input type="checkbox" id="@item.Value" name="cargoInquiridos" value="@item.Value" class="form-check-input checkbox" @if (item.Selected) { Write("checked=checked"); }>
-                                    <span class="form-check-label" for="@item.Value"> @item.Text</span>
+                                    <input type="checkbox" id="@item.Text" name="cargoInquiridos" value="@item.Value" class="form-check-input checkbox" @if (item.Selected) { Write("checked=checked"); }>
+                                    <span class="form-check-label" for="@item.Text"> @item.Text</span>
                                 </label>
                             </div>
                         }

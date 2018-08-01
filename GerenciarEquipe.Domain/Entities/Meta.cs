@@ -24,6 +24,7 @@ namespace GerenciarEquipe.Domain.Entities
         public string fonte { get; set; }
         public string grupo { get; set; }
         public bool terceiros { get; set; }
+        public bool justifica { get; set; }
         public int? peso { get; set; }
         public long id_indicador { get; set; }
         public long id_loja { get; set; }
