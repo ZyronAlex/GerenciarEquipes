@@ -77,7 +77,7 @@ namespace GerenciarEquipe.Painel.Controllers
                         }
 
 
-                    return View(PaginatedList<RespostaModel>.Create(respostas, pageIndex ?? 1, 1, 5));
+                    return View(PaginatedList<RespostaModel>.Create(respostas, pageIndex ?? 0, 1, 5));
                 }
                 else if (!metaModel.terceiros && respostaModel.resultado == null)
                 {
@@ -90,10 +90,10 @@ namespace GerenciarEquipe.Painel.Controllers
                         meta = metaModel,
                         create_at = DateTime.Now
                     });
-                    return View(PaginatedList<RespostaModel>.Create(respostas, pageIndex ?? 1, 1, 5));
+                    return View(PaginatedList<RespostaModel>.Create(respostas, pageIndex ?? 0, 1, 5));
                 }
             }
-            return View(PaginatedList<RespostaModel>.Create(new List<RespostaModel>(), pageIndex ?? 1, 1, 5));
+            return View(PaginatedList<RespostaModel>.Create(new List<RespostaModel>(), pageIndex ?? 0, 1, 5));
         }
     }
 }

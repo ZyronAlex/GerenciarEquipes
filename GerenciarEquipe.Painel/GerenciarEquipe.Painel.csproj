@@ -178,6 +178,7 @@
     <Compile Include="Controllers\MetaController.cs" />
     <Compile Include="Controllers\RankController.cs" />
     <Compile Include="Controllers\RelatorioController.cs" />
+    <Compile Include="Enums\TipoMeta.cs" />
     <Compile Include="Enums\Grupo.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

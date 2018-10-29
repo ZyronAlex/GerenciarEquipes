@@ -52,7 +52,7 @@ namespace GerenciarEquipe.Services
         {
             get
             {
-                return (PageIndex > 1);
+                return (PageIndex > 0);
             }
         }
 
@@ -60,7 +60,7 @@ namespace GerenciarEquipe.Services
         {
             get
             {
-                return (PageIndex < TotalPages);
+                return (PageIndex < TotalPages-1);
             }
         }
 

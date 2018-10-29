@@ -19,6 +19,7 @@ namespace GerenciarEquipe.Domain.Entities
         public string objetivo { get; set; }
         public string objetivo_parcial { get; set; }
         public string objetivo_parcial_dia { get; set; }
+        public string tipo_meta { get; set; }
         public string unidade { get; set; }
         public string referencia { get; set; }
         public string fonte { get; set; }

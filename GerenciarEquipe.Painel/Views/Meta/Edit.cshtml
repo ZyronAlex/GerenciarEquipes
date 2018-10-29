@@ -60,6 +60,17 @@
                 </div>
 
                 <div class="form-group row">
+                    <div class="col-md-2 ">
+                    @Html.LabelFor(model => model.tipo_meta, htmlAttributes: new { @class = "control-label text-xs-right" })
+                    <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="@Html.DisplayNameFor(model => model.tipo_meta)" data-content="@ViewData.ModelMetadata.Properties.Where(m => m.PropertyName == "tipo_meta").FirstOrDefault().Description , @ViewData.ModelMetadata.Properties.Where(m => m.PropertyName == "tipo_meta").LastOrDefault().Description"><i class="fa  fa-align-right fa-question-circle"></i></a>
+                    </div>
+                    <div class="col-md-10">
+                        @Html.EnumDropDownListFor(model => model.tipo_meta, "Selecione o Tipo da Meta", new { @class = "form-control box" })
+                        @Html.ValidationMessageFor(model => model.tipo_meta, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
                     @Html.LabelFor(model => model.fonte, htmlAttributes: new { @class = "control-label col-md-2 text-xs-right" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.fonte, new { htmlAttributes = new { @class = "form-control box" } })
@@ -74,7 +85,6 @@
                         @Html.ValidationMessageFor(model => model.grupo, "", new { @class = "text-danger" })
                     </div>
                 </div>
-
                 <div class="form-group row">
                     @Html.LabelFor(model => model.peso, htmlAttributes: new { @class = "control-label col-md-2 text-xs-right" })
                     <div class="col-md-10">
@@ -82,7 +92,6 @@
                         @Html.ValidationMessageFor(model => model.peso, "", new { @class = "text-danger" })
                     </div>
                 </div>
-
                 <div class="form-group row">
                     @Html.LabelFor(model => model.id_indicador, htmlAttributes: new { @class = "control-label col-md-2 text-xs-right" })
                     <div class="col-md-10">
@@ -98,7 +107,7 @@
                     <div class="col-md-10">
                         <div class="form-check form-check-inline col-md-3">
                             <label>
-                                <input type="checkbox" id="terceiros" name="terceiros" value="@Model.terceiros" class="form-check-input checkbox" @if (Model.terceiros) { Write("checked=checked"); }>
+                                <input type="checkbox" id="terceiros" name="terceiros" value="true" class="form-check-input checkbox" @if (Model.terceiros) { Write("checked=checked"); }>
                                 <span class="form-check-label" for="terceiros"></span>
                             </label>
                         </div>
@@ -113,7 +122,7 @@
                     <div class="col-md-10">
                         <div class="form-check form-check-inline col-md-3">
                             <label>
-                                <input type="checkbox" id="justifica" name="justifica" value="@Model.justifica" class="form-check-input checkbox" @if (Model.justifica) { Write("checked=checked"); }>
+                                <input type="checkbox" id="justifica" name="justifica" value="true" class="form-check-input checkbox" @if (Model.justifica) { Write("checked=checked"); }>
                                 <span class="form-check-label" for="justifica"></span>
                             </label>
                         </div>

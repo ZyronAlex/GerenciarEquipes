@@ -35,6 +35,9 @@ namespace GerenciarEquipe.Painel.Models
         [Display(Name = "Objetivo Parcial Diário")]
         public string objetivo_parcial_dia { get; set; }
 
+        [Display(Name = "Tipo de Meta")]
+        public TipoMeta? tipo_meta { get; set; }
+
         [Display(Name = "Unidade")]
         public Unidade? unidade { get; set; }
 
@@ -56,7 +59,7 @@ namespace GerenciarEquipe.Painel.Models
         public bool justifica { get; set; }
 
         [Display(Name = "Peso")]
-        [Range(0.01, 1, ErrorMessage ="Valor deve estar entre {1} á {2}")]
+        [Range(1, 100, ErrorMessage ="Valor deve estar entre {1} á {2}")]
         public int? peso { get; set; }
 
         [Display(Name = "Indicador")]
@@ -80,6 +83,7 @@ namespace GerenciarEquipe.Painel.Models
         [Display(Name = "Data Ultima Alteração")]
         [ScaffoldColumn(false)]
         public DateTime update_at { set; get; }
+
 
         [Display(Name = "Indicador")]
         [ScaffoldColumn(false)]

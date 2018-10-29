@@ -92,7 +92,7 @@ namespace GerenciarEquipe.Painel.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,descicao,objetivo,objetivo_parcial,objetivo_parcial_dia,unidade,referencia,fonte,grupo,peso,terceiros,id_indicador,id_loja,cargoAmbitos,cargoInquiridos")] MetaModel metaModel)
+        public ActionResult Create([Bind(Include = "id,descicao,objetivo,objetivo_parcial,objetivo_parcial_dia,unidade,referencia,tipo_meta,fonte,grupo,peso,terceiros,justifica,id_indicador,id_loja,cargoAmbitos,cargoInquiridos")] MetaModel metaModel)
         {
             if (ModelState.IsValid)
             {
@@ -168,7 +168,7 @@ namespace GerenciarEquipe.Painel.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,descicao,objetivo,objetivo_parcial,objetivo_parcial_dia,unidade,referencia,fonte,grupo,peso,terceiros,id_indicador,id_loja,cargoAmbitos,cargoInquiridos")] MetaModel metaModel)
+        public ActionResult Edit([Bind(Include = "id,descicao,objetivo,objetivo_parcial,objetivo_parcial_dia,unidade,referencia,tipo_meta,fonte,grupo,peso,terceiros,justifica,id_indicador,id_loja,cargoAmbitos,cargoInquiridos")] MetaModel metaModel)
         {
             if (ModelState.IsValid)
             {

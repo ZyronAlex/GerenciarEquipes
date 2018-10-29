@@ -63,6 +63,11 @@
                             <span>@Html.DisplayNameFor(model => model.referencia)</span>
                         </div>
                     </div>
+                    <div class="item-col item-col-header item-col-author">
+                        <div>
+                            <span>@Html.DisplayNameFor(model => model.tipo_meta)</span>
+                        </div>
+                    </div>
                     @{
                         if (Usuario is GerenciarEquipe.Painel.Models.AdminModel)
                         {
@@ -116,6 +121,14 @@
                             <div>
                                 @{
                                     @Html.Label(EnumHelper<Referencia>.GetDisplayValue((Referencia)item.referencia));
+                                }
+                            </div>
+                        </div>
+                        <div class="item-col item-col-author">
+                            <div class="item-heading"> @Html.DisplayNameFor(model => model.referencia)</div>
+                            <div>
+                                @{
+                                    @Html.Label(EnumHelper<TipoMeta>.GetDisplayValue((TipoMeta)item.tipo_meta));
                                 }
                             </div>
                         </div>
